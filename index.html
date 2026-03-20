@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>William Kang (Ching Wei Kang) - Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
+    <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <header class="topbar">
+        <span class="brand">Ching-Wei Kang</span>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#work">Work</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="top-actions">
+            <a href="https://github.com/WilliamK112" class="btn btn-sm btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-sm btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <section id="hero" class="hero">
+            <p class="eyebrow">Portfolio</p>
+            <h1>Ching<span class="name-sep">-</span>Wei Kang <span>Software Engineer</span></h1>
+            <p class="lead">Data Science student at UW-Madison (Class of 2027), building practical AI + developer tools. Focused on open-source AI tooling, local LLM usability and benchmarking, and product-focused engineering.</p>
+            <div class="hero-visuals">
+                <figure class="portrait-frame">
+                    <button class="profile-flip-card" type="button" data-flip-card aria-pressed="false" aria-label="Flip to view personal information">
+                        <div class="profile-flip-inner">
+                            <div class="profile-flip-face profile-flip-front">
+                                <img src="assets/William_Kang-9c2f39ca-aa59-4956-8969-b7e0fa9d303a.png" alt="Portrait of Ching-Wei Kang in a black suit">
+                                <span class="profile-flip-hint">Click to flip</span>
+                            </div>
+                            <div class="profile-flip-face profile-flip-back">
+                                <strong class="profile-mini-title">Personal Snapshot</strong>
+                                <span class="profile-mini-line">Ching-Wei (William) Kang</span>
+                                <span class="profile-mini-line">Junior, UW-Madison</span>
+                                <span class="profile-mini-line">BS Computer Science + Data Science</span>
+                                <span class="profile-mini-line">Expected graduation: May 2027</span>
+                                <span class="profile-mini-line">GPA: 3.91</span>
+                                <span class="profile-mini-line">Focus: AI, backend, and data systems</span>
+                                <a class="profile-mini-link" href="https://www.instagram.com/williamkangcw/" target="_blank" rel="noopener noreferrer">Instagram: @williamkangcw</a>
+                            </div>
+                        </div>
+                    </button>
+                </figure>
+                <figure class="uw-logo-showcase" aria-label="University of Wisconsin-Madison logo">
+                    <button class="uw-flip-card" id="uw-flip-card" type="button" data-flip-card aria-pressed="false" aria-label="Flip to view UW-Madison CS highlights">
+                        <div class="uw-flip-inner">
+                            <div class="uw-flip-face uw-flip-front">
+                                <div class="uw-logo-glow" aria-hidden="true"></div>
+                                <img src="assets/wisconsin_logo_transparent_only_W_white-dc13339c-e36a-4f86-85ca-242fa3512993.png" alt="University of Wisconsin-Madison logo">
+                                <span class="uw-flip-hint">Click to flip</span>
+                            </div>
+                            <div class="uw-flip-face uw-flip-back">
+                                <strong class="uw-mini-title">UW-Madison CS Edge</strong>
+                                <span class="uw-mini-standing">I am a junior undergraduate at UW-Madison.</span>
+                                <span class="uw-mini-ranks">
+                                    <span>#16 Overall CS</span>
+                                    <span>#9 Public CS</span>
+                                    <span>#6 Systems</span>
+                                    <span>#15 Programming Languages</span>
+                                    <span>#23 Artificial Intelligence</span>
+                                </span>
+                                <span class="uw-mini-points">
+                                    <span>Strong systems depth + research culture.</span>
+                                    <span>Practical engineering execution with rigorous CS training.</span>
+                                </span>
+                                <a class="uw-mini-source" href="https://news.wisc.edu/uw-rises-to-36th-overall-12th-among-publics-in-u-s-news-rankings/" target="_blank" rel="noopener noreferrer">U.S. News + UW CS + CSRankings (UW source)</a>
+                            </div>
+                        </div>
+                    </button>
+                </figure>
+            </div>
+            <div class="hero-cta">
+                <a href="https://github.com/WilliamK112" class="btn" target="_blank" rel="noopener noreferrer">View GitHub</a>
+                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://calendly.com/ckang53-wisc/30min" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Get in Touch</a>
+                <a href="https://linktr.ee/WilliamKangCW" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" title="more general work">More General Work</a>
+            </div>
+        </section>
+
+        <section id="about" class="grid-2">
+            <article class="card">
+                <h2>Recruiter Snapshot</h2>
+                <div class="recruiter-snapshot">
+                    <ul>
+                        <li><span>Education</span><strong>Junior, BS CS + Data Science (2027)</strong></li>
+                        <li><span>Focus</span><strong>AI · Full-Stack · Data</strong></li>
+                        <li><span>Tech</span><strong>TypeScript · Python · Node.js</strong></li>
+                        <li><span>Work Auth (US)</span><strong>Yes</strong></li>
+                        <li><span>Sponsorship</span><strong>Yes (future)</strong></li>
+                    </ul>
+                </div>
+            </article>
+            <div>
+                <article class="card">
+                    <h2>Education</h2>
+                    <p>Bachelor of Science in Computer Science and Data Science, University of Wisconsin-Madison. GPA: 3.91. Expected graduation: May 2027.</p>
+                </article>
+                <div class="stats">
+                    <div>
+                        <p class="big">6+</p>
+                        <p class="label">Featured Projects</p>
+                    </div>
+                    <div>
+                        <p class="big">11+</p>
+                        <p class="label">Months Experience</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <h2>Experience and Focus</h2>
+            <ul class="timeline">
+                <li>
+                    <h3>Full-Stack and AI</h3>
+                    <p>Led full-stack delivery with Next.js/TypeScript/Node.js/PostgreSQL as project lead. Built AI-assisted document processing workflows and LLM-integrated product features.</p>
+                </li>
+                <li>
+                    <h3>Data Pipelines</h3>
+                    <p>Built Python data ingestion pipelines (BeautifulSoup/Requests/Pandas) and processed 50,000+ records.</p>
+                </li>
+                <li>
+                    <h3>Open-Source Tooling</h3>
+                    <p>Shipping practical AI + developer tools. Local LLM usability, benchmarking, and product-focused engineering.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="work">
+            <h2>Work Experience</h2>
+            <p class="section-note">From <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <ul class="timeline">
+                <li>
+                    <h3>Maintenance Technician · University of Wisconsin-Madison</h3>
+                    <p>May 2025 - Aug 2025 · 3 months · Madison, WI</p>
+                </li>
+                <li>
+                    <h3>Research Assistant · China Association for Science and Technology</h3>
+                    <p>Dec 2024 - Feb 2025 · 2 months</p>
+                    <p>Assisted in a national-level research project examining talent allocation mechanisms for key strategic technologies, with data collection, comparative policy analysis, and report drafting support.</p>
+                </li>
+                <li>
+                    <h3>Data Collection and Entry · The Marcus Harris Foundation</h3>
+                    <p>Oct 2024 - Dec 2024 · 2 months · United States</p>
+                    <p>Built Python automation for IRS nonprofit data collection and processed large volumes into a structured grants database.</p>
+                </li>
+                <li>
+                    <h3>Data Analyst and Automation Intern · Springer Capital</h3>
+                    <p>Aug 2024 - Oct 2024 · 2 months · Chicago, IL</p>
+                    <p>Collected and analyzed data using Excel, SQL, and Python, then delivered process improvements through automation and reporting.</p>
+                </li>
+                <li>
+                    <h3>Data Analyst · Chihuo Inc</h3>
+                    <p>Jun 2024 - Sep 2024 · 3 months</p>
+                    <p>Conducted North American Asian dining market research and delivered data-backed insights using Python and Excel.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">ClawWork-personal</a></h3>
+                    <p>Production-oriented AI coworker platform for benchmarking, economic tracking, and paper-trading operations.</p>
+                    <p class="project-date">Last updated: 2026-03-19 10:10 UTC</p>
+                    <div class="project-links">
+                        <a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">llm-fit</a></h3>
+                    <p><strong class="impact">Can my laptop run this model?</strong> Instant local LLM fit and speed estimator with runnable command suggestions.</p>
+                    <p class="project-date">Last updated: 2026-03-18 04:22 UTC</p>
+                    <div class="project-links">
+                        <a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">D&amp;D Voice Adventure</a></h3>
+                    <p>Production-style Gemini Live Agent demo with turn-based storytelling, dynamic visuals, and multimodal gameplay.</p>
+                    <p class="project-date">Last updated: 2026-03-16 16:44 UTC</p>
+                    <div class="project-links">
+                        <a href="https://dungeons-and-dragons-adventure-voic.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                        <a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">prompttrace</a></h3>
+                    <p>Black-box trace recorder for LLM calls with metrics for cost, latency, reliability, and failures.</p>
+                    <p class="project-date">Last updated: 2026-03-16 15:33 UTC</p>
+                    <div class="project-links">
+                        <a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">multi-agent-openclaw</a></h3>
+                    <p>Desktop-first multi-agent orchestration workspace for research and writing pipelines.</p>
+                    <p class="project-date">Last updated: 2026-03-14 07:55 UTC</p>
+                    <div class="project-links">
+                        <a href="https://multi-agent-openclaw-amber.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                        <a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+                <article>
+                    <h3><a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">TrustRent</a></h3>
+                    <p>AI-assisted lease analysis and inspection-report workflow for renters and property managers.</p>
+                    <p class="project-date">Last updated: 2026-03-10 08:50 UTC</p>
+                    <div class="project-links">
+                        <a href="https://madhacks2025-trustrent.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                        <a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </article>
+            </div>
+            <div class="pill-row">
+                <span>TypeScript</span>
+                <span>JavaScript</span>
+                <span>Python</span>
+                <span>Node.js</span>
+                <span>React</span>
+                <span>Vercel</span>
+            </div>
+            <p class="section-note">Always building. Always shipping.</p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact</h2>
+            <div class="contact-actions">
+                <a href="https://github.com/WilliamK112" class="btn" target="_blank" rel="noopener noreferrer">GitHub @WilliamK112</a>
+                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+            <article class="card message-board">
+                <h3>Leave a Message</h3>
+                <p>If you want to connect, send me a quick message here.</p>
+                <form class="message-form" novalidate>
+                    <label for="sender-email">Your Email</label>
+                    <input id="sender-email" name="email" type="email" placeholder="you@example.com" required>
+                    <label for="sender-message">Message</label>
+                    <textarea id="sender-message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+                    <button type="submit" class="btn">Send</button>
+                    <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </article>
+            <article class="card meeting-card">
+                <h3>Schedule a Meeting</h3>
+                <p>Book a 30-minute meeting directly on my calendar.</p>
+                <div class="meeting-actions">
+                    <a href="https://calendly.com/ckang53-wisc/30min" class="btn" target="_blank" rel="noopener noreferrer">Schedule Meeting</a>
+                </div>
+            </article>
+            <div class="footer-links">
+                <span>·</span>
+                <a href="https://github.com/WilliamK112" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <span>·</span>
+                <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ching-Wei Kang</p>
+    </footer>
+</body>
+</html>
