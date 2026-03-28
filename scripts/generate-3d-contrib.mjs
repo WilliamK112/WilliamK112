@@ -60,17 +60,24 @@ for (let x = 0; x < cols; x += 1) {
   }
 }
 
+const positiveCounts = grid.flat().filter((v) => v > 0).sort((a, b) => a - b);
+const p95Count =
+  positiveCounts.length > 0
+    ? positiveCounts[Math.max(0, Math.floor(positiveCounts.length * 0.95) - 1)]
+    : 1;
 const maxCount = Math.max(1, ...grid.flat());
+
 const sx = 12;
 const sy = 7;
 const ox = 100;
 const oy = 118;
-const minH = 1;
+const minH = 7;
 const maxH = 52;
 
 function barHeight(count) {
   if (count <= 0) return 0;
-  const n = Math.log1p(count) / Math.log1p(maxCount);
+  const compressed = Math.min(count, p95Count);
+  const n = Math.log1p(compressed) / Math.log1p(Math.max(1, p95Count));
   return Math.round(minH + n * (maxH - minH));
 }
 
