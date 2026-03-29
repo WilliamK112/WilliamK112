@@ -48,37 +48,51 @@ if (!Array.isArray(weeks) || weeks.length === 0) {
   process.exit(1);
 }
 
-const recentWeeks = weeks.slice(-28);
+const recentWeeks = weeks.slice(-53); // full GitHub calendar year-ish view
 const rows = 7;
 const cols = recentWeeks.length;
 
 const grid = Array.from({ length: rows }, () => Array(cols).fill(0));
+const levelGrid = Array.from({ length: rows }, () => Array(cols).fill("NONE"));
+
 for (let x = 0; x < cols; x += 1) {
   const days = recentWeeks[x]?.contributionDays ?? [];
   for (let y = 0; y < Math.min(rows, days.length); y += 1) {
-    grid[y][x] = days[y]?.contributionCount ?? 0;
+    const day = days[y] ?? {};
+    grid[y][x] = day.contributionCount ?? 0;
+    levelGrid[y][x] = day.contributionLevel ?? "NONE";
   }
 }
 
-const positiveCounts = grid.flat().filter((v) => v > 0).sort((a, b) => a - b);
-const p95Count =
-  positiveCounts.length > 0
-    ? positiveCounts[Math.max(0, Math.floor(positiveCounts.length * 0.95) - 1)]
-    : 1;
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 12;
-const sy = 7;
-const ox = 100;
-const oy = 118;
-const minH = 7;
-const maxH = 52;
+const sx = 8; // tighter tile spacing to feel like calendar blocks
+const sy = 5;
+const ox = 180;
+const oy = 130;
+const minActiveH = 10;
+const maxH = 74;
 
-function barHeight(count) {
-  if (count <= 0) return 0;
-  const compressed = Math.min(count, p95Count);
-  const n = Math.log1p(compressed) / Math.log1p(Math.max(1, p95Count));
-  return Math.round(minH + n * (maxH - minH));
+function levelScore(level) {
+  switch (level) {
+    case "FOURTH_QUARTILE":
+      return 4;
+    case "THIRD_QUARTILE":
+      return 3;
+    case "SECOND_QUARTILE":
+      return 2;
+    case "FIRST_QUARTILE":
+      return 1;
+    default:
+      return 0;
+  }
+}
+
+function barHeight(count, level) {
+  if (count <= 0) return 2; // keep empty-day tile visible as real block
+  const n = Math.sqrt(count / maxCount);
+  const levelBoost = levelScore(level) * 4;
+  return Math.round(minActiveH + n * (maxH - minActiveH) + levelBoost);
 }
 
 function esc(s) {
@@ -118,27 +132,27 @@ function cube(x, y, h, active, delay) {
 }
 
 const svg = [];
-svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260">`);
+svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300">`);
 svg.push(`  <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#061433"/>
-      <stop offset="100%" stop-color="#0b224d"/>
+      <stop offset="0%" stop-color="#05122f"/>
+      <stop offset="100%" stop-color="#0c224f"/>
     </linearGradient>
     <linearGradient id="topFace" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#6cc1ff"/>
-      <stop offset="60%" stop-color="#3478ff"/>
-      <stop offset="100%" stop-color="#f0c66d"/>
+      <stop offset="0%" stop-color="#73c6ff"/>
+      <stop offset="58%" stop-color="#2f73ff"/>
+      <stop offset="100%" stop-color="#f0cb75"/>
     </linearGradient>
     <linearGradient id="leftFace" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2d67e8"/>
-      <stop offset="100%" stop-color="#173a7c"/>
+      <stop offset="0%" stop-color="#2b64e3"/>
+      <stop offset="100%" stop-color="#173a78"/>
     </linearGradient>
     <linearGradient id="rightFace" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f0c66d"/>
+      <stop offset="0%" stop-color="#f0cb75"/>
       <stop offset="100%" stop-color="#8a6a2e"/>
     </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="2.2" result="b"/>
+      <feGaussianBlur stdDeviation="1.8" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>`);
@@ -146,16 +160,15 @@ svg.push(`  <defs>
 svg.push(`  <style>
     .title{font:700 18px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#d9e7ff}
     .sub{font:500 12px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#97b4ee}
-    .tile{opacity:.97}
-    .base .top{fill:#1b3266}.base .left{fill:#13264f}.base .right{fill:#244d8b}
+    .base .top{fill:#1a315f}.base .left{fill:#14274d}.base .right{fill:#244a84}
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
-    .active{filter:url(#glow);animation:float 3.0s ease-in-out infinite;transform-origin:center;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+    .active{filter:url(#glow);animation:float 2.8s ease-in-out infinite;transform-origin:center;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
   </style>`);
 
-svg.push(`  <rect x="0" y="0" width="960" height="260" fill="url(#bg)" rx="16"/>`);
+svg.push(`  <rect x="0" y="0" width="960" height="300" fill="url(#bg)" rx="16"/>`);
 svg.push(`  <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>`);
-svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} GitHub contributions · max day: ${maxCount}</text>`);
+svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} · max day: ${maxCount} · 53-week view</text>`);
 
 for (let s = 0; s <= cols + rows - 2; s += 1) {
   for (let y = 0; y < rows; y += 1) {
@@ -163,11 +176,12 @@ for (let s = 0; s <= cols + rows - 2; s += 1) {
     if (x < 0 || x >= cols) continue;
 
     const count = grid[y][x];
-    const h = barHeight(count);
+    const level = levelGrid[y][x];
+    const h = barHeight(count, level);
     const bx = ox + (x - y) * sx;
     const by = oy + (x + y) * sy;
-    const active = h > 0;
-    const delay = ((x + y) % 12) * 0.12;
+    const active = count > 0;
+    const delay = ((x + y) % 14) * 0.08;
     svg.push(cube(bx, by, h, active, delay));
   }
 }
