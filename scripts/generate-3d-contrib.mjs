@@ -68,12 +68,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 5; // tighter
+const sx = 4; // tighter
 const sy = 3;
-const ox = 360; // centered for 720 width
-const oy = 60;
-const minActiveH = 5;
-const maxH = 32;
+const ox = 420; // right-shifted for balanced fill
+const oy = 55;
+const minActiveH = 4;
+const maxH = 28;
 
 function levelScore(level) {
   switch (level) {
