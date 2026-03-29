@@ -19,15 +19,21 @@ Name: William Kang (Ching-Wei Kang)
 Role: CS + Data Science student @ UW-Madison (Class of 2027)  
 Focus: [AI systems](https://github.com/WilliamK112?tab=repositories), [developer tools](https://github.com/WilliamK112?tab=repositories), and [product engineering](https://github.com/WilliamK112?tab=repositories)  
 Now building: [OpenClaw workflows](https://github.com/openclaw/openclaw), [LLM tooling](https://github.com/WilliamK112?tab=repositories), and [practical automation](https://github.com/WilliamK112?tab=repositories)  
-Contact: [ckang53@wisc.edu](mailto:ckang53@wisc.edu)
+Contact: [ckang53@wisc.edu](mailto:ckang53@wisc.edu)  
+
+<p>
+  <img src="https://img.shields.io/badge/AI_SYSTEMS-00E5FF?style=for-the-badge&logoColor=001B2E" />
+  <img src="https://img.shields.io/badge/DEV_TOOLS-00E5FF?style=for-the-badge&logoColor=001B2E" />
+  <img src="https://img.shields.io/badge/AUTOMATION-00E5FF?style=for-the-badge&logoColor=001B2E" />
+</p>
 
 ### 665 contributions in the last year
 
 **🛠️ [Stack](https://github.com/WilliamK112?tab=repositories)**  
-[AI/ML](https://github.com/WilliamK112?tab=repositories): Python · PyTorch · OpenAI  
-[Backend](https://github.com/WilliamK112?tab=repositories): Node.js · Go · PostgreSQL  
-[Frontend](https://github.com/WilliamK112?tab=repositories): React · Next.js · TypeScript  
-[Infra](https://github.com/WilliamK112?tab=repositories): Docker · AWS · GitHub Actions
+[![AI/ML](https://img.shields.io/badge/AI%2FML-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) Python · PyTorch · OpenAI  
+[![Backend](https://img.shields.io/badge/Backend-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) Node.js · Go · PostgreSQL  
+[![Frontend](https://img.shields.io/badge/Frontend-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) React · Next.js · TypeScript  
+[![Infra](https://img.shields.io/badge/Infra-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) Docker · AWS · GitHub Actions
 
 **🚀 Featured**  
 [D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) · Next.js/OpenAI  
