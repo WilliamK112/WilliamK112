@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="227" height="140" viewBox="-7 0 173 113" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#041536"/>
-      <stop offset="55%" stop-color="#072a63"/>
-      <stop offset="100%" stop-color="#0b3b8f"/>
+      <stop offset="0%" stop-color="#03112b"/>
+      <stop offset="55%" stop-color="#062353"/>
+      <stop offset="100%" stop-color="#0a3278"/>
     </linearGradient>
     <linearGradient id="topFace" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#73c6ff"/>
@@ -15,8 +15,8 @@
       <stop offset="100%" stop-color="#173a78"/>
     </linearGradient>
     <linearGradient id="rightFace" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f0cb75"/>
-      <stop offset="100%" stop-color="#8a6a2e"/>
+      <stop offset="0%" stop-color="#ffd98a"/>
+      <stop offset="100%" stop-color="#9a6d1f"/>
     </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
       <feGaussianBlur stdDeviation="1" result="b"/>
@@ -33,7 +33,7 @@
   <rect x="-30" y="-10" width="270" height="190" fill="none" rx="6"/>
   <text class="sub" x="4" y="16">665 contributions in the last year</text>
 
-  <g id="board" transform="translate(7,31) rotate(0.3,95,58) scale(1.38,1.38)">
+  <g id="board" transform="translate(21,27) rotate(0.4,95,58) scale(1.14,1.14)">
   <g class="active tile" style="animation-delay:0.00s">
     <polygon class="left" points="1.0,-5.0 5.0,-4.0 5.0,24.0 1.0,23.0"/>
     <polygon class="right" points="9.0,-5.0 5.0,-4.0 5.0,24.0 9.0,23.0"/>

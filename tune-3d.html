@@ -41,6 +41,7 @@
         <div class="row"><label>scaleX</label><input id="sx" type="range" min="0.2" max="3" step="0.01" value="1"><span id="sxv">1.00</span></div>
         <div class="row"><label>scaleY</label><input id="sy" type="range" min="0.2" max="3" step="0.01" value="1.85"><span id="syv">1.85</span></div>
         <div class="row"><label>rotate</label><input id="rot" type="range" min="-45" max="45" step="0.1" value="0"><span id="rotv">0.0°</span></div>
+        <div class="row"><label>barAngle</label><input id="barAngle" type="range" min="-20" max="20" step="0.1" value="0"><span id="barAnglev">0.0°</span></div>
       <div class="buttons" style="margin-top:8px;">
         <button id="boardSmaller" type="button">Board -</button>
         <button id="boardLarger" type="button">Board +</button>
@@ -74,8 +75,8 @@
   </div>
 
   <script>
-    const defaults = { tx:7, ty:31, sx:1.38, sy:1.38, rot:0.3, vbx:-7, vby:0, vbw:173, vbh:113 };
-    const ids = ["tx","ty","sx","sy","rot","vbx","vby","vbw","vbh"];
+    const defaults = { tx:21, ty:27, sx:1.14, sy:1.14, rot:0.4, barAngle:0, vbx:-7, vby:0, vbw:173, vbh:113 };
+    const ids = ["tx","ty","sx","sy","rot","barAngle","vbx","vby","vbw","vbh"];
     const state = { ...defaults };
     const fmt = (n,d=2)=>Number(n).toFixed(d).replace(/\.00$/,'');
 
@@ -121,7 +122,7 @@
         document.getElementById(id).value = v;
         const node = document.getElementById(id+'v');
         if (!node) return;
-        node.textContent = id==='rot' ? `${fmt(v,1)}°` : (id==='sx'||id==='sy' ? fmt(v,2) : fmt(v,0));
+        node.textContent = (id==='rot' || id==='barAngle') ? `${fmt(v,1)}°` : (id==='sx'||id==='sy' ? fmt(v,2) : fmt(v,0));
       });
 
       document.getElementById('out').value =
@@ -182,3 +183,4 @@
   </script>
 </body>
 </html>
+>
