@@ -197,9 +197,9 @@
   </g>
 
   <g class="active tile" style="animation-delay:0.48s">
-    <polygon class="left" points="124.0,141.0 132.0,146.0 132.0,170.0 124.0,165.0"/>
-    <polygon class="right" points="140.0,141.0 132.0,146.0 132.0,170.0 140.0,165.0"/>
-    <polygon class="top" points="132.0,136.0 140.0,141.0 132.0,146.0 124.0,141.0"/>
+    <polygon class="left" points="124.0,139.0 132.0,144.0 132.0,170.0 124.0,165.0"/>
+    <polygon class="right" points="140.0,139.0 132.0,144.0 132.0,170.0 140.0,165.0"/>
+    <polygon class="top" points="132.0,134.0 140.0,139.0 132.0,144.0 124.0,139.0"/>
   </g>
 
   <g class="base tile">
