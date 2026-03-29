@@ -1,7 +1,5 @@
 # William Kang (Ching-Wei Kang)
 
-<sub>Design guideline: <a href="./PROFILE_GUIDELINES.md">PROFILE_GUIDELINES.md</a></sub>
-
 **CS + Data Science @ UW-Madison (2027)** · Building robust systems, AI/ML, seamless UX
 
 <p align="center">
