@@ -136,10 +136,6 @@ function cube(x, y, h, active, delay) {
 const svg = [];
 svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="560" height="140" viewBox="0 0 560 140">`);
 svg.push(`  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#05122f"/>
-      <stop offset="100%" stop-color="#0c224f"/>
-    </linearGradient>
     <linearGradient id="topFace" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#73c6ff"/>
       <stop offset="58%" stop-color="#2f73ff"/>
@@ -168,7 +164,7 @@ svg.push(`  <style>
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
   </style>`);
 
-svg.push(`  <rect x="0" y="0" width="560" height="140" fill="url(#bg)" rx="10"/>`);
+svg.push(`  <rect x="0" y="0" width="560" height="140" fill="none"/>`);
 svg.push(`  <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>`);
 svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} · max day: ${maxCount} · 53-week view</text>`);
 
