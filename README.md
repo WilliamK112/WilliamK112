@@ -16,13 +16,47 @@
 
 <table>
 <tr>
-<td width="62%" valign="top">
-<a href="./assets/blue-gold-3d-contrib-v4.png"><img src="./assets/blue-gold-3d-contrib-v4.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop, white background)" /></a>
+<td width="44%" valign="top">
+
+<table>
+<tr><td bgcolor="#0B1F4A" valign="top">
+<p align="center"><strong><sub><font color="#DCE8FF">3D ACTIVITY ACCENT</font></sub></strong></p>
+<p align="center"><a href="./assets/blue-gold-3d-contrib-v2.png"><img src="./assets/blue-gold-3d-contrib-v2.png" width="92%" alt="3D Activity Accent" /></a></p>
+<p align="center"><sub><font color="#DCE8FF">650 contributions in the last year</font></sub></p>
+</td></tr>
+</table>
+
 </td>
-<td width="38%" valign="top">
-<p><strong>650 contributions in the last year</strong></p>
-<p><strong>🛠️ Stack</strong><br>AI/ML: Python · PyTorch · OpenAI<br>Backend: Node.js · Go · PostgreSQL<br>Frontend: React · Next.js · TypeScript<br>Infra: Docker · AWS · GitHub Actions</p>
-<p><strong>🚀 Featured</strong><br><a href="https://dungeons-and-dragons-adventure-voic.vercel.app">D&D Voice Adventure</a> · Next.js/OpenAI<br><a href="https://github.com/WilliamK112/prompttrace">prompttrace</a> · TS/Python<br><a href="https://madhacks2025-trustrent.vercel.app">TrustRent</a> · Next.js/PostgreSQL<br><a href="https://github.com/WilliamK112/ClawWork-personal">ClawWork-personal</a> · OpenAI/Node.js<br><a href="https://github.com/WilliamK112/llm-fit">llm-fit</a> · Python/Ollama</p>
+<td width="56%" valign="top">
+
+<table>
+<tr><td valign="top">
+<strong>🛠️ Stack</strong><br>
+AI/ML — Python · PyTorch · OpenAI<br>
+Backend — Node.js · Go · PostgreSQL<br>
+Frontend — React · Next.js · TypeScript<br>
+Infra — Docker · AWS · GitHub Actions
+</td></tr>
+</table>
+
+<table>
+<tr><td valign="top">
+<strong>🚀 Featured Work</strong><br>
+<a href="https://dungeons-and-dragons-adventure-voic.vercel.app">D&D Voice Adventure</a> — AI voice gameplay<br>
+<a href="https://github.com/WilliamK112/prompttrace">prompttrace</a> — LLM tracing & debugging<br>
+<a href="https://madhacks2025-trustrent.vercel.app">TrustRent</a> — tenant trust scoring<br>
+<a href="https://github.com/WilliamK112/ClawWork-personal">ClawWork-personal</a> — AI workflow automation<br>
+<a href="https://github.com/WilliamK112/llm-fit">llm-fit</a> — local LLM benchmarks
+</td></tr>
+</table>
+
+<table>
+<tr><td valign="top">
+<strong>📌 Focus Now</strong><br>
+Building reliable AI systems, fast product loops, and practical automation that ships.
+</td></tr>
+</table>
+
 </td>
 </tr>
 </table>
