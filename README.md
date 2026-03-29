@@ -14,18 +14,24 @@
 
 ---
 
-<table>
-<tr>
-<td width="62%" valign="top">
-<a href="./assets/blue-gold-3d-contrib-v12.png"><img src="./assets/blue-gold-3d-contrib-v12.png" width="100%" alt="665 contributions in the last year (transparent background)" /></a>
-</td>
-<td width="38%" valign="top">
-<p><strong>650 contributions in the last year</strong></p>
-<p><strong>🛠️ Stack</strong><br>AI/ML: Python · PyTorch · OpenAI<br>Backend: Node.js · Go · PostgreSQL<br>Frontend: React · Next.js · TypeScript<br>Infra: Docker · AWS · GitHub Actions</p>
-<p><strong>🚀 Featured</strong><br><a href="https://dungeons-and-dragons-adventure-voic.vercel.app">D&D Voice Adventure</a> · Next.js/OpenAI<br><a href="https://github.com/WilliamK112/prompttrace">prompttrace</a> · TS/Python<br><a href="https://madhacks2025-trustrent.vercel.app">TrustRent</a> · Next.js/PostgreSQL<br><a href="https://github.com/WilliamK112/ClawWork-personal">ClawWork-personal</a> · OpenAI/Node.js<br><a href="https://github.com/WilliamK112/llm-fit">llm-fit</a> · Python/Ollama</p>
-</td>
-</tr>
-</table>
+<img align="left" width="62%" src="./assets/blue-gold-3d-contrib-v12.png" alt="665 contributions in the last year (transparent background)" />
+
+### 665 contributions in the last year
+
+**🛠️ Stack**  
+AI/ML: Python · PyTorch · OpenAI  
+Backend: Node.js · Go · PostgreSQL  
+Frontend: React · Next.js · TypeScript  
+Infra: Docker · AWS · GitHub Actions
+
+**🚀 Featured**  
+[D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) · Next.js/OpenAI  
+[prompttrace](https://github.com/WilliamK112/prompttrace) · TS/Python  
+[TrustRent](https://madhacks2025-trustrent.vercel.app) · Next.js/PostgreSQL  
+[ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) · OpenAI/Node.js  
+[llm-fit](https://github.com/WilliamK112/llm-fit) · Python/Ollama
+
+<br clear="left"/>
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
