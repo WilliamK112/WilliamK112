@@ -67,11 +67,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-// Tight packing to fit 53 weeks in ~220px width
+// Layout tuned for "full-board fit" (no crop) inside one dark-blue hero card
+// Keep a dedicated title band, then place full 53-week board below it.
 const cellW = 4;
-const cellH = 2;
-const startX = 5;
-const startY = 25;
+const cellH = 1;
+const startX = 34; // prevents left-face clipping at y=6
+const startY = 52; // preserves clear title/subtitle area (no overlap)
 
 function levelScore(level) {
   switch (level) {
@@ -126,8 +127,8 @@ function cube(x, y, h, active, delay) {
   </g>`;
 }
 
-const svgWidth = cols * cellW + startX + 10;
-const svgHeight = 50;
+const svgWidth = 280;
+const svgHeight = 150;
 
 const svg = [];
 svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">`);
