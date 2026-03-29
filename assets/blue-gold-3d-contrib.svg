@@ -31,7 +31,7 @@
   </style>
   <rect x="-30" y="-10" width="270" height="190" fill="#ffffff" rx="6"/>
   <text class="title" x="4" y="10">3D Activity</text>
-  <text class="sub" x="4" y="18">53w · max 230</text>
+  <text class="sub" x="4" y="18">650 contributions in the last year</text>
 
   <g id="board" transform="translate(0,16) scale(1,1.85)">
   <g class="active tile" style="animation-delay:0.00s">

@@ -17,24 +17,24 @@
 <table>
   <tr>
     <td width="62%" valign="top">
-      <a href="./assets/blue-gold-3d-contrib-v3.png">
-        <img src="./assets/blue-gold-3d-contrib-v3.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop, white background)" />
+      <a href="./assets/blue-gold-3d-contrib-v4.png">
+        <img src="./assets/blue-gold-3d-contrib-v4.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop, white background)" />
       </a>
     </td>
     <td width="38%" valign="top">
 
-### 🛠️ Stack
-- **AI/ML:** Python · PyTorch · OpenAI
-- **Backend:** Node.js · Go · PostgreSQL
-- **Frontend:** React · Next.js · TypeScript
-- **Infra:** Docker · AWS · GitHub Actions
-
-### 🚀 Featured Projects
-- [D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) — AI voice D&D (Next.js · OpenAI · Web Speech)
-- [prompttrace](https://github.com/WilliamK112/prompttrace) — LLM tracing/debugging (TypeScript · Python)
-- [TrustRent](https://madhacks2025-trustrent.vercel.app) — Tenant trust scoring (Next.js · PostgreSQL)
-- [ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) — AI workflow automation (OpenAI · Node.js)
-- [llm-fit](https://github.com/WilliamK112/llm-fit) — Local LLM benchmarking (Python · Ollama)
+<p><strong>650 contributions in the last year</strong></p>
+<p><strong>🛠️ Stack</strong><br>
+AI/ML: Python · PyTorch · OpenAI<br>
+Backend: Node.js · Go · PostgreSQL<br>
+Frontend: React · Next.js · TypeScript<br>
+Infra: Docker · AWS · GitHub Actions</p>
+<p><strong>🚀 Featured</strong><br>
+<a href="https://dungeons-and-dragons-adventure-voic.vercel.app">D&D Voice Adventure</a> · Next.js/OpenAI<br>
+<a href="https://github.com/WilliamK112/prompttrace">prompttrace</a> · TS/Python<br>
+<a href="https://madhacks2025-trustrent.vercel.app">TrustRent</a> · Next.js/PostgreSQL<br>
+<a href="https://github.com/WilliamK112/ClawWork-personal">ClawWork-personal</a> · OpenAI/Node.js<br>
+<a href="https://github.com/WilliamK112/llm-fit">llm-fit</a> · Python/Ollama</p>
 
     </td>
   </tr>
