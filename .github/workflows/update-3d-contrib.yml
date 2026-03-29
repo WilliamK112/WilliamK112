@@ -3,7 +3,8 @@ name: Update 3D Contribution Banner
 on:
   workflow_dispatch:
   schedule:
-    - cron: "15 */6 * * *"
+    # Daily at 08:15 America/Chicago (13:15 UTC; may shift with DST)
+    - cron: "15 13 * * *"
 
 permissions:
   contents: write
