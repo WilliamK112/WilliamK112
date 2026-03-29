@@ -68,12 +68,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 9; // wider spacing
-const sy = 6;
-const ox = 60; // left-aligned
+const sx = 12;
+const sy = 5;
+const ox = 155;
 const oy = 75;
-const minActiveH = 10;
-const maxH = 75; // taller towers
+const minActiveH = 2;
+const maxH = 60;
 
 function levelScore(level) {
   switch (level) {
