@@ -25,12 +25,6 @@ Contact: [ckang53@wisc.edu](mailto:ckang53@wisc.edu)
 [![Frontend](https://img.shields.io/badge/Frontend-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) React · Next.js · TypeScript  
 [![Infra](https://img.shields.io/badge/Infra-00E5FF?style=flat-square)](https://github.com/WilliamK112?tab=repositories) Docker · AWS · GitHub Actions
 
-**🚀 Featured**  
-[D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) · Next.js/OpenAI  
-[prompttrace](https://github.com/WilliamK112/prompttrace) · TS/Python  
-[TrustRent](https://madhacks2025-trustrent.vercel.app) · Next.js/PostgreSQL  
-[ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) · OpenAI/Node.js  
-
 <br clear="left"/>
 
 ---
