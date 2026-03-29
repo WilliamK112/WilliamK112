@@ -68,12 +68,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 8; // tighter tile spacing to feel like calendar blocks
-const sy = 5;
-const ox = 180;
-const oy = 130;
-const minActiveH = 10;
-const maxH = 74;
+const sx = 6; // tighter tile spacing
+const sy = 4;
+const ox = 120;
+const oy = 80;
+const minActiveH = 6;
+const maxH = 42;
 
 function levelScore(level) {
   switch (level) {
@@ -134,7 +134,7 @@ function cube(x, y, h, active, delay) {
 }
 
 const svg = [];
-svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="960" height="300" viewBox="0 0 960 300">`);
+svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="640" height="180" viewBox="0 0 640 180">`);
 svg.push(`  <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#05122f"/>
