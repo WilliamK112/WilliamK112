@@ -15,8 +15,8 @@
 ---
 
 <p align="center">
-  <a href="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib.svg" target="_blank">
-    <img src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib.svg" width="100%" alt="3D Activity (full 53-week board, fit-no-crop)" />
+  <a href="./assets/blue-gold-3d-contrib.svg">
+    <img src="./assets/blue-gold-3d-contrib.svg" width="100%" alt="3D Activity (full 53-week board, fit-no-crop)" />
   </a>
 </p>
 
