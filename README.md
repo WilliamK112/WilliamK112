@@ -5,7 +5,9 @@
 Hi there! I'm William Kang, a developer passionate about building robust systems, leveraging AI/ML, and crafting seamless user experiences.
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib.svg" width="100%" alt="Blue Gold 3D Contribution Grid" />
+  <a href="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib.svg" target="_blank">
+    <img src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib.svg" width="92%" alt="Blue Gold 3D Contribution Grid" />
+  </a>
 </div>
 
 ## Currently Working On
