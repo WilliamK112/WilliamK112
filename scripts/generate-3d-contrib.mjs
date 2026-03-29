@@ -48,8 +48,7 @@ if (!Array.isArray(weeks) || weeks.length === 0) {
   process.exit(1);
 }
 
-const recentWeeks = weeks.slice(-53); // full GitHub calendar year-ish view
-// Reverse so most recent weeks are at the bottom (right side), not top
+const recentWeeks = weeks.slice(-53);
 recentWeeks.reverse();
 const rows = 7;
 const cols = recentWeeks.length;
@@ -68,33 +67,27 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 6;
-const sy = 3;
-const ox = 20;
-const oy = 60;
-const minActiveH = 4;
-const maxH = 25;
+// Tight packing to fit 53 weeks in ~220px width
+const cellW = 4;
+const cellH = 2;
+const startX = 5;
+const startY = 25;
 
 function levelScore(level) {
   switch (level) {
-    case "FOURTH_QUARTILE":
-      return 4;
-    case "THIRD_QUARTILE":
-      return 3;
-    case "SECOND_QUARTILE":
-      return 2;
-    case "FIRST_QUARTILE":
-      return 1;
-    default:
-      return 0;
+    case "FOURTH_QUARTILE": return 4;
+    case "THIRD_QUARTILE": return 3;
+    case "SECOND_QUARTILE": return 2;
+    case "FIRST_QUARTILE": return 1;
+    default: return 0;
   }
 }
 
 function barHeight(count, level) {
-  if (count <= 0) return 2; // keep empty-day tile visible as real block
+  if (count <= 0) return 2;
   const n = Math.sqrt(count / maxCount);
-  const levelBoost = levelScore(level) * 4;
-  return Math.round(minActiveH + n * (maxH - minActiveH) + levelBoost);
+  const levelBoost = levelScore(level) * 3;
+  return Math.round(2 + n * 14 + levelBoost);
 }
 
 function esc(s) {
@@ -104,21 +97,21 @@ function esc(s) {
 function cube(x, y, h, active, delay) {
   const top = [
     [x, y - h],
-    [x + sx, y - h + sy],
-    [x, y - h + 2 * sy],
-    [x - sx, y - h + sy],
+    [x + cellW, y - h + cellH],
+    [x, y - h + 2 * cellH],
+    [x - cellW, y - h + cellH],
   ];
   const left = [
-    [x - sx, y - h + sy],
-    [x, y - h + 2 * sy],
-    [x, y + 2 * sy],
-    [x - sx, y + sy],
+    [x - cellW, y - h + cellH],
+    [x, y - h + 2 * cellH],
+    [x, y + 2 * cellH],
+    [x - cellW, y + cellH],
   ];
   const right = [
-    [x + sx, y - h + sy],
-    [x, y - h + 2 * sy],
-    [x, y + 2 * sy],
-    [x + sx, y + sy],
+    [x + cellW, y - h + cellH],
+    [x, y - h + 2 * cellH],
+    [x, y + 2 * cellH],
+    [x + cellW, y + cellH],
   ];
 
   const cls = active ? "active tile" : "base tile";
@@ -133,8 +126,11 @@ function cube(x, y, h, active, delay) {
   </g>`;
 }
 
+const svgWidth = cols * cellW + startX + 10;
+const svgHeight = 50;
+
 const svg = [];
-svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="100" viewBox="0 0 900 100">`);
+svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${svgWidth}" height="${svgHeight}" viewBox="0 0 ${svgWidth} ${svgHeight}">`);
 svg.push(`  <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#05122f"/>
@@ -154,23 +150,22 @@ svg.push(`  <defs>
       <stop offset="100%" stop-color="#8a6a2e"/>
     </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="1.8" result="b"/>
+      <feGaussianBlur stdDeviation="1" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>`);
 
 svg.push(`  <style>
-    .title{font:700 18px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#d9e7ff}
-    .sub{font:500 12px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#97b4ee}
+    .title{font:700 10px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#d9e7ff}
+    .sub{font:500 8px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#97b4ee}
     .base .top{fill:#1a315f}.base .left{fill:#14274d}.base .right{fill:#244a84}
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
-    .active{filter:url(#glow);animation:float 2.8s ease-in-out infinite;transform-origin:center;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
+    .active{filter:url(#glow)}
   </style>`);
 
-svg.push(`  <rect x="0" y="0" width="900" height="100" fill="transparent"/>`);
-svg.push(`  <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>`);
-svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} · max day: ${maxCount} · 53-week view</text>`);
+svg.push(`  <rect x="0" y="0" width="${svgWidth}" height="${svgHeight}" fill="url(#bg)" rx="4"/>`);
+svg.push(`  <text class="title" x="4" y="10">3D Activity</text>`);
+svg.push(`  <text class="sub" x="4" y="18">53w · max ${maxCount}</text>`);
 
 for (let s = 0; s <= cols + rows - 2; s += 1) {
   for (let y = 0; y < rows; y += 1) {
@@ -180,10 +175,10 @@ for (let s = 0; s <= cols + rows - 2; s += 1) {
     const count = grid[y][x];
     const level = levelGrid[y][x];
     const h = barHeight(count, level);
-    const bx = ox + (x - y) * sx;
-    const by = oy + (x + y) * sy;
+    const bx = startX + (x - y) * cellW;
+    const by = startY + (x + y) * cellH;
     const active = count > 0;
-    const delay = ((x + y) % 14) * 0.08;
+    const delay = ((x + y) % 14) * 0.05;
     svg.push(cube(bx, by, h, active, delay));
   }
 }
