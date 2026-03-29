@@ -63,4 +63,14 @@ Building reliable AI systems, fast product loops, and practical automation that 
 
 ---
 
+<table>
+<tr><td valign="top">
+<strong>🐍 Contribution Animation</strong><br>
+<sub>GitHub-style activity snake (inspired by your reference)</sub><br><br>
+<img src="./assets/snake.svg" width="100%" alt="GitHub contribution snake animation" />
+</td></tr>
+</table>
+
+---
+
 <p align="center"><sub>⚡ Always building. Always shipping.</sub></p>
