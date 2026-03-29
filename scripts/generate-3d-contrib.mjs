@@ -68,7 +68,7 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 15;
+const sx = 13;
 const sy = 3;
 const ox = 122;
 const oy = 75;
