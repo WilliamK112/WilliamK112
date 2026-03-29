@@ -41,6 +41,10 @@
         <div class="row"><label>scaleX</label><input id="sx" type="range" min="0.2" max="3" step="0.01" value="1"><span id="sxv">1.00</span></div>
         <div class="row"><label>scaleY</label><input id="sy" type="range" min="0.2" max="3" step="0.01" value="1.85"><span id="syv">1.85</span></div>
         <div class="row"><label>rotate</label><input id="rot" type="range" min="-45" max="45" step="0.1" value="0"><span id="rotv">0.0°</span></div>
+      <div class="buttons" style="margin-top:8px;">
+        <button id="boardSmaller" type="button">Board -</button>
+        <button id="boardLarger" type="button">Board +</button>
+      </div>
       </div>
 
       <div class="group">
@@ -70,7 +74,7 @@
   </div>
 
   <script>
-    const defaults = { tx:0, ty:16, sx:1, sy:1.85, rot:0, vbx:-30, vby:-10, vbw:270, vbh:160 };
+    const defaults = { tx:25, ty:30, sx:1.65, sy:1.58, rot:-0.2, vbx:-7, vby:0, vbw:173, vbh:113 };
     const ids = ["tx","ty","sx","sy","rot","vbx","vby","vbw","vbh"];
     const state = { ...defaults };
     const fmt = (n,d=2)=>Number(n).toFixed(d).replace(/\.00$/,'');
@@ -123,6 +127,18 @@
       const btn = document.getElementById('copy');
       const prev = btn.textContent; btn.textContent = '已复制';
       setTimeout(()=>btn.textContent = prev, 900);
+    };
+
+    document.getElementById('boardLarger').onclick = () => {
+      state.sx = Math.min(3, +(state.sx + 0.08).toFixed(2));
+      state.sy = Math.min(3, +(state.sy + 0.08).toFixed(2));
+      apply();
+    };
+
+    document.getElementById('boardSmaller').onclick = () => {
+      state.sx = Math.max(0.2, +(state.sx - 0.08).toFixed(2));
+      state.sy = Math.max(0.2, +(state.sy - 0.08).toFixed(2));
+      apply();
     };
 
     // drag to pan board
