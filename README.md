@@ -17,8 +17,8 @@
 <table>
   <tr>
     <td width="62%" valign="top">
-      <a href="./assets/blue-gold-3d-contrib-v2.png">
-        <img src="./assets/blue-gold-3d-contrib-v2.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop)" />
+      <a href="./assets/blue-gold-3d-contrib-v3.png">
+        <img src="./assets/blue-gold-3d-contrib-v3.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop, white background)" />
       </a>
     </td>
     <td width="38%" valign="top">
