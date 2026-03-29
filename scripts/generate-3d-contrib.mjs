@@ -49,6 +49,8 @@ if (!Array.isArray(weeks) || weeks.length === 0) {
 }
 
 const recentWeeks = weeks.slice(-53); // full GitHub calendar year-ish view
+// Reverse so most recent weeks are at the bottom (right side), not top
+recentWeeks.reverse();
 const rows = 7;
 const cols = recentWeeks.length;
 
