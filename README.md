@@ -1,6 +1,6 @@
 # William Kang (Ching-Wei Kang)
 
-**CS + Data Science @ UW-Madison (2027)** · Building robust systems, AI/ML, seamless UX
+**CS + Data Science @ UW-Madison (2027)** · SWE / AI internship candidate building full-stack systems, LLM products, and developer tools
 
 <p align="center">
  <a href="https://www.linkedin.com/in/kcw2027/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white&logoWidth=16"></a>
@@ -15,8 +15,8 @@
 
 **👋 About Me**  
 CS + Data Science student @ UW-Madison (Class of May 2027)  
-Focus: AI systems, developer tools, and product engineering  
-Now building: OpenClaw workflows, LLM tooling, and practical automation  
+Focus: AI systems, backend, full-stack systems, developer tools, and product engineering  
+Looking for: Software Engineering, AI Engineering, LLM tooling, and applied ML internships
 Contact: [ckang53@wisc.edu](mailto:ckang53@wisc.edu)  
 
 **Stack**  
