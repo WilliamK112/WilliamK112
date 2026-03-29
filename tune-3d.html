@@ -97,10 +97,24 @@
 
     function apply() {
       if (!svgEl || !boardEl) return;
-      const {tx,ty,sx,sy,rot,vbx,vby,vbw,vbh} = state;
+      const {tx,ty,sx,sy,rot,barAngle,vbx,vby,vbw,vbh} = state;
       const cx = 95, cy = 58;
       boardEl.setAttribute('transform', `translate(${tx},${ty}) rotate(${rot},${cx},${cy}) scale(${sx},${sy})`);
       svgEl.setAttribute('viewBox', `${vbx} ${vby} ${vbw} ${vbh}`);
+
+      boardEl.querySelectorAll('g.tile').forEach((tile) => {
+        const base = tile.getAttribute('data-base-transform') ?? (tile.getAttribute('transform') || '');
+        tile.setAttribute('data-base-transform', base);
+        if (Math.abs(barAngle) < 0.001) {
+          if (base) tile.setAttribute('transform', base); else tile.removeAttribute('transform');
+          return;
+        }
+        const bb = tile.getBBox();
+        const tcx = bb.x + bb.width / 2;
+        const tcy = bb.y + bb.height / 2;
+        const rotateExpr = `rotate(${barAngle},${tcx.toFixed(2)},${tcy.toFixed(2)})`;
+        tile.setAttribute('transform', base ? `${base} ${rotateExpr}` : rotateExpr);
+      });
 
       ids.forEach(id => {
         const v = state[id];
