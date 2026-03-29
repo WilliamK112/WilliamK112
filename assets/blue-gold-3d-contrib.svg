@@ -23,10 +23,9 @@
     </filter>
   </defs>
   <style>
-    .title{font:700 10px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#8FB6FF}
-    .sub{font:500 8px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#8FB6FF}
-    .base{opacity:.86}
-    .base .top{fill:#23488F}.base .left{fill:#1B3872}.base .right{fill:#2A58AD}
+    .title{font:700 10px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#93C5FD}
+    .sub{font:500 8px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#93C5FD}
+    .base .top{fill:#1E3A8A}.base .left{fill:#1B367E}.base .right{fill:#2548A7}
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
     .active{filter:url(#glow)}
   </style>
