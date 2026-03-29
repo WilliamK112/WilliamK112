@@ -30,7 +30,7 @@
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
     .active{filter:url(#glow)}
   </style>
-  <rect x="-30" y="-10" width="270" height="190" fill="url(#bg)" rx="6"/>
+  <rect x="-30" y="-10" width="270" height="190" fill="none" rx="6"/>
   <text class="title" x="4" y="10">3D Activity</text>
   <text class="sub" x="4" y="18">650 contributions in the last year</text>
 
