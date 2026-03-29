@@ -32,12 +32,5 @@ AI/ML: Python · PyTorch · OpenAI
 Backend: Node.js · Go · PostgreSQL  
 Frontend: React · Next.js · TypeScript  
 Infra: Docker · AWS · GitHub Actions
-
-**🚀 Featured**  
-[D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) · Next.js/OpenAI  
-[prompttrace](https://github.com/WilliamK112/prompttrace) · TS/Python  
-[TrustRent](https://madhacks2025-trustrent.vercel.app) · Next.js/PostgreSQL  
-[ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) · OpenAI/Node.js  
-[llm-fit](https://github.com/WilliamK112/llm-fit) · Python/Ollama
 ---
 <p align="center"><sub>⚡ Always building. Always shipping.</sub></p>
