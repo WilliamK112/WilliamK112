@@ -22,6 +22,13 @@
   <img align="left" width="56%" alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
 </picture>
 
+**👋 About Me**  
+Name: William Kang (Ching-Wei Kang)  
+Role: CS + Data Science student @ UW-Madison (Class of 2027)  
+Focus: AI systems, developer tools, and product engineering  
+Now building: OpenClaw workflows, LLM tooling, and practical automation  
+Contact: ckang53@wisc.edu
+
 ### 665 contributions in the last year
 
 **🛠️ Stack**  
