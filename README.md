@@ -12,11 +12,7 @@
 
 <img align="left" width="56%" src="./assets/blue-gold-3d-contrib-v12.png" alt="665 contributions in the last year (transparent background)" />
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
-  <img align="left" width="56%" alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
-</picture>
+<img align="left" width="56%" alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
 
 **👋 About Me**  
 Name: William Kang (Ching-Wei Kang)  
