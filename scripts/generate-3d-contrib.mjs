@@ -68,12 +68,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 12;
-const sy = 5;
-const ox = 155;
+const sx = 15;
+const sy = 3;
+const ox = 122;
 const oy = 75;
-const minActiveH = 2;
-const maxH = 60;
+const minActiveH = 9;
+const maxH = 35;
 
 function levelScore(level) {
   switch (level) {
