@@ -29,10 +29,11 @@
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
     .active{filter:url(#glow)}
   </style>
-  <rect x="-30" y="-10" width="270" height="160" fill="url(#bg)" rx="6"/>
+  <rect x="-30" y="-10" width="270" height="190" fill="url(#bg)" rx="6"/>
   <text class="title" x="4" y="10">3D Activity</text>
   <text class="sub" x="4" y="18">53w · max 230</text>
 
+  <g id="board" transform="translate(0,16) scale(1,1.85)">
   <g class="active tile" style="animation-delay:0.00s">
     <polygon class="left" points="1.0,-5.0 5.0,-4.0 5.0,24.0 1.0,23.0"/>
     <polygon class="right" points="9.0,-5.0 5.0,-4.0 5.0,24.0 9.0,23.0"/>
@@ -2257,5 +2258,6 @@
     <polygon class="left" points="185.0,79.0 189.0,80.0 189.0,82.0 185.0,81.0"/>
     <polygon class="right" points="193.0,79.0 189.0,80.0 189.0,82.0 193.0,81.0"/>
     <polygon class="top" points="189.0,78.0 193.0,79.0 189.0,80.0 185.0,79.0"/>
+  </g>
   </g>
 </svg>
