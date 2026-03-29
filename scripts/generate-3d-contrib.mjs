@@ -168,7 +168,7 @@ svg.push(`  <style>
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
   </style>`);
 
-svg.push(`  <rect x="0" y="0" width="650" height="150" fill="url(#bg)" rx="8"/>`);
+svg.push(`  <rect x="0" y="0" width="650" height="150" fill="transparent"/>`);
 svg.push(`  <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>`);
 svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} · max day: ${maxCount} · 53-week view</text>`);
 

@@ -30,7 +30,7 @@
     .active{filter:url(#glow);animation:float 2.8s ease-in-out infinite;transform-origin:center;}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
   </style>
-  <rect x="0" y="0" width="650" height="150" fill="url(#bg)" rx="8"/>
+  <rect x="0" y="0" width="650" height="150" fill="transparent"/>
   <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>
   <text class="sub" x="28" y="54">Auto-generated from WilliamK112 · max day: 230 · 53-week view</text>
 
