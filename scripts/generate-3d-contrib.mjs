@@ -68,12 +68,12 @@ for (let x = 0; x < cols; x += 1) {
 
 const maxCount = Math.max(1, ...grid.flat());
 
-const sx = 8;
-const sy = 4;
-const ox = 30;
-const oy = 80;
-const minActiveH = 6;
-const maxH = 40;
+const sx = 6;
+const sy = 3;
+const ox = 20;
+const oy = 60;
+const minActiveH = 4;
+const maxH = 25;
 
 function levelScore(level) {
   switch (level) {
@@ -134,7 +134,7 @@ function cube(x, y, h, active, delay) {
 }
 
 const svg = [];
-svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="650" height="150" viewBox="0 0 650 150">`);
+svg.push(`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="100" viewBox="0 0 900 100">`);
 svg.push(`  <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#05122f"/>
@@ -168,7 +168,7 @@ svg.push(`  <style>
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.6px)}}
   </style>`);
 
-svg.push(`  <rect x="0" y="0" width="650" height="150" fill="transparent"/>`);
+svg.push(`  <rect x="0" y="0" width="900" height="100" fill="transparent"/>`);
 svg.push(`  <text class="title" x="28" y="34">3D Contributions · Live Data (Blue ↔ Gold)</text>`);
 svg.push(`  <text class="sub" x="28" y="54">Auto-generated from ${esc(username)} · max day: ${maxCount} · 53-week view</text>`);
 
