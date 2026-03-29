@@ -17,7 +17,7 @@
 <table>
 <tr>
 <td width="62%" valign="top">
-<a href="./assets/blue-gold-3d-contrib-v7.png"><img src="./assets/blue-gold-3d-contrib-v7.png" width="100%" alt="365 (transparent background)" /></a>
+<a href="./assets/blue-gold-3d-contrib-v8.png"><img src="./assets/blue-gold-3d-contrib-v8.png" width="100%" alt="665 contributions in the last year (transparent background)" /></a>
 </td>
 <td width="38%" valign="top">
 <p><strong>650 contributions in the last year</strong></p>

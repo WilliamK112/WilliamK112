@@ -80,11 +80,15 @@
     const stage = document.getElementById('stage');
 
     async function loadSvg() {
-      const txt = await fetch('./assets/blue-gold-3d-contrib.svg').then(r=>r.text());
-      host.innerHTML = txt;
-      svgEl = host.querySelector('svg');
-      boardEl = host.querySelector('#board');
-      apply();
+      try {
+        const txt = await fetch('./assets/blue-gold-3d-contrib.svg').then(r=>r.text());
+        host.innerHTML = txt;
+        svgEl = host.querySelector('svg');
+        boardEl = host.querySelector('#board');
+        apply();
+      } catch (e) {
+        host.innerHTML = '<div style="font-size:13px;color:#b91c1c;padding:16px;line-height:1.6">SVG 加载失败（通常是 file:// 直接打开导致）。<br>请用本地地址打开：<code>http://localhost:8000/tune-3d.html</code></div>';
+      }
     }
 
     function apply() {
