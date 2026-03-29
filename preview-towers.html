@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head  charset="UTF-8">
+  <title>3D Tower Size Editor</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1117; color: #c9d1d9; padding: 20px; text-align: center; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 18px; margin-bottom: 10px; }
+    .preview { background: #161b22; border-radius: 12px; padding: 20px; margin: 20px 0; display: inline-block; }
+    .controls { background: #21262d; border-radius: 8px; padding: 20px; display: inline-block; text-align: left; }
+    .control-group { margin-bottom: 15px; }
+    label { display: inline-block; width: 140px; font-size: 14px; }
+    input[type="range"] { width: 200px; cursor: pointer; vertical-align: middle; }
+    .value { font-weight: bold; color: #58a6ff; margin-left: 8px; }
+    .code { background: #0d1117; padding: 12px; border-radius: 6px; text-align: left; font-family: monospace; font-size: 12px; margin-top: 15px; white-space: pre; }
+    .note { font-size: 12px; color: #8b949e; margin-top: 10px; }
+    img { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 拖动调整 3D 塔的高度和密度</h1>
+    
+    <div class="preview">
+      <img id="previewImg" src="assets/blue-gold-3d-contrib.svg" alt="3D Preview">
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label>塔高 (maxH):</label>
+        <input type="range" id="maxH" min="20" max="100" value="55">
+        <span id="maxHVal" class="value">55</span>
+      </div>
+      <div class="control-group">
+        <label>最小高度 (minH):</label>
+        <input type="range" id="minH" min="2" max="20" value="8">
+        <span id="minHVal" class="value">8</span>
+      </div>
+      <div class="control-group">
+        <label>水平间距 (sx):</label>
+        <input type="range" id="sx" min="3" max="15" value="7">
+        <span id="sxVal" class="value">7</span>
+      </div>
+      <div class="control-group">
+        <label>垂直间距 (sy):</label>
+        <input type="range" id="sy" min="2" max="10" value="5">
+        <span id="syVal" class="value">5</span>
+      </div>
+      <div class="code" id="code">sx=7, sy=5, minActiveH=8, maxH=55</div>
+    </div>
+
+    <p class="note">调好后告诉我数值，我帮你更新到生成脚本</p>
+  </div>
+
+  <script>
+    const inputs = ['maxH', 'minH', 'sx', 'sy'];
+    const vals = {};
+    inputs.forEach(id => vals[id] = document.getElementById(id).value);
+    
+    function update() {
+      inputs.forEach(id => {
+        document.getElementById(id + 'Val').textContent = document.getElementById(id).value;
+        vals[id] = document.getElementById(id).value;
+      });
+      document.getElementById('code').textContent = 
+        'sx=' + vals.sx + ', sy=' + vals.sy + ', minActiveH=' + vals.minH + ', maxH=' + vals.maxH;
+    }
+    
+    inputs.forEach(id => document.getElementById(id).addEventListener('input', update));
+  </script>
+</body>
+</html>
