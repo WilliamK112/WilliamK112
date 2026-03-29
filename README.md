@@ -21,16 +21,26 @@
 **👋 About Me**  
 Name: William Kang (Ching-Wei Kang)  
 Role: CS + Data Science student @ UW-Madison (Class of 2027)  
-Focus: AI systems, developer tools, and product engineering  
-Now building: OpenClaw workflows, LLM tooling, and practical automation  
-Contact: ckang53@wisc.edu
+Focus: [AI systems](https://github.com/WilliamK112?tab=repositories), [developer tools](https://github.com/WilliamK112?tab=repositories), and [product engineering](https://github.com/WilliamK112?tab=repositories)  
+Now building: [OpenClaw workflows](https://github.com/openclaw/openclaw), [LLM tooling](https://github.com/WilliamK112?tab=repositories), and [practical automation](https://github.com/WilliamK112?tab=repositories)  
+Contact: [ckang53@wisc.edu](mailto:ckang53@wisc.edu)
 
 ### 665 contributions in the last year
 
-**🛠️ Stack**  
-AI/ML: Python · PyTorch · OpenAI  
-Backend: Node.js · Go · PostgreSQL  
-Frontend: React · Next.js · TypeScript  
-Infra: Docker · AWS · GitHub Actions
+**🛠️ [Stack](https://github.com/WilliamK112?tab=repositories)**  
+[AI/ML](https://github.com/WilliamK112?tab=repositories): Python · PyTorch · OpenAI  
+[Backend](https://github.com/WilliamK112?tab=repositories): Node.js · Go · PostgreSQL  
+[Frontend](https://github.com/WilliamK112?tab=repositories): React · Next.js · TypeScript  
+[Infra](https://github.com/WilliamK112?tab=repositories): Docker · AWS · GitHub Actions
+
+**🚀 Featured**  
+[D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) · Next.js/OpenAI  
+[prompttrace](https://github.com/WilliamK112/prompttrace) · TS/Python  
+[TrustRent](https://madhacks2025-trustrent.vercel.app) · Next.js/PostgreSQL  
+[ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) · OpenAI/Node.js  
+[llm-fit](https://github.com/WilliamK112/llm-fit) · Python/Ollama
+
+<br clear="left"/>
+
 ---
 <p align="center"><sub>⚡ Always building. Always shipping.</sub></p>
