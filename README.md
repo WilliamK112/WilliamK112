@@ -11,6 +11,7 @@
 <img align="left" width="56%" src="./assets/blue-gold-3d-contrib-v12.png" alt="665 contributions in the last year (transparent background)" />
 
 <img align="left" width="56%" alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
+<img align="left" width="56%" alt="" src="./assets/left-column-spacer.svg" />
 
 **👋 About Me**  
 CS + Data Science student @ UW-Madison (Class of May 2027)  
