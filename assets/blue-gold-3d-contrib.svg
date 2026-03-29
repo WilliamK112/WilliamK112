@@ -31,7 +31,7 @@
     .active{filter:url(#glow)}
   </style>
   <rect x="-30" y="-10" width="270" height="190" fill="none" rx="6"/>
-  <text class="sub" x="4" y="16">665 contributions in the last year</text>
+  <text class="sub" x="80" y="16" text-anchor="middle">665 contributions in the last year</text>
 
   <g id="board" transform="translate(21,27) rotate(0.4,95,58) scale(1.04,1.53)">
   <g class="active tile" style="animation-delay:0.00s">
