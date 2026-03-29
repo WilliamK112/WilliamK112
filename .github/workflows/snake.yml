@@ -23,6 +23,22 @@ jobs:
             output/github-contribution-grid-snake.svg
             output/github-contribution-grid-snake-dark.svg?palette=github-dark
 
+      - name: Apply brand palette (gold snake + blue grid)
+        run: |
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          styles = {
+            'output/github-contribution-grid-snake.svg': ':root{--cb:#1b1f230a;--cs:#f5c86b;--ce:#eef4ff;--c0:#eef4ff;--c1:#d6e8ff;--c2:#8bb8ff;--c3:#4f8dff;--c4:#1f5fd6}',
+            'output/github-contribution-grid-snake-dark.svg': ':root{--cb:#1b1f230a;--cs:#f5c86b;--ce:#0b1733;--c0:#0b1733;--c1:#153164;--c2:#1e4a95;--c3:#2f6ed1;--c4:#4b96ff}',
+          }
+          for file, root in styles.items():
+            p = Path(file)
+            s = p.read_text()
+            s = re.sub(r':root\{[^}]*\}', root, s, count=1)
+            p.write_text(s)
+          PY
+
       - name: Commit and push snake files
         uses: EndBug/add-and-commit@v9
         with:
