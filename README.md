@@ -17,7 +17,7 @@
 <table>
 <tr>
 <td width="62%" valign="top">
-<a href="./assets/blue-gold-3d-contrib-v4.png"><img src="./assets/blue-gold-3d-contrib-v4.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop, white background)" /></a>
+<a href="./assets/blue-gold-3d-contrib-v5.png"><img src="./assets/blue-gold-3d-contrib-v5.png" width="100%" alt="3D Activity (deep navy + electric blue + gold accents)" /></a>
 </td>
 <td width="38%" valign="top">
 <p><strong>650 contributions in the last year</strong></p>

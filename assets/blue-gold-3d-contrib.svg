@@ -1,8 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="227" height="140" viewBox="-30 -10 270 160" preserveAspectRatio="xMidYMid meet">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#05122f"/>
-      <stop offset="100%" stop-color="#0c224f"/>
+      <stop offset="0%" stop-color="#041536"/>
+      <stop offset="55%" stop-color="#072a63"/>
+      <stop offset="100%" stop-color="#0b3b8f"/>
     </linearGradient>
     <linearGradient id="topFace" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#73c6ff"/>
@@ -29,7 +30,7 @@
     .active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}
     .active{filter:url(#glow)}
   </style>
-  <rect x="-30" y="-10" width="270" height="190" fill="#ffffff" rx="6"/>
+  <rect x="-30" y="-10" width="270" height="190" fill="url(#bg)" rx="6"/>
   <text class="title" x="4" y="10">3D Activity</text>
   <text class="sub" x="4" y="18">650 contributions in the last year</text>
 
