@@ -39,8 +39,5 @@ Infra: Docker · AWS · GitHub Actions
 [TrustRent](https://madhacks2025-trustrent.vercel.app) · Next.js/PostgreSQL  
 [ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) · OpenAI/Node.js  
 [llm-fit](https://github.com/WilliamK112/llm-fit) · Python/Ollama
-
-<br clear="left"/>
-
 ---
 <p align="center"><sub>⚡ Always building. Always shipping.</sub></p>
