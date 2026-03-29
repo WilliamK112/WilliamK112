@@ -14,29 +14,31 @@
 
 ---
 
-<p align="center">
-  <a href="./assets/blue-gold-3d-contrib-v2.png">
-    <img src="./assets/blue-gold-3d-contrib-v2.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop)" />
-  </a>
-</p>
-
----
+<table>
+  <tr>
+    <td width="62%" valign="top">
+      <a href="./assets/blue-gold-3d-contrib-v2.png">
+        <img src="./assets/blue-gold-3d-contrib-v2.png" width="100%" alt="3D Activity (full 53-week board, fit-no-crop)" />
+      </a>
+    </td>
+    <td width="38%" valign="top">
 
 ### 🛠️ Stack
-
-| **AI/ML** | **Backend** | **Frontend** | **Infra** |
-|:--|:--|:--|:--|
-| Python • PyTorch • OpenAI | Node.js • Go • PostgreSQL | React • Next.js • TypeScript | Docker • AWS • GitHub Actions |
+- **AI/ML:** Python · PyTorch · OpenAI
+- **Backend:** Node.js · Go · PostgreSQL
+- **Frontend:** React · Next.js · TypeScript
+- **Infra:** Docker · AWS · GitHub Actions
 
 ### 🚀 Featured Projects
+- [D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) — AI voice D&D (Next.js · OpenAI · Web Speech)
+- [prompttrace](https://github.com/WilliamK112/prompttrace) — LLM tracing/debugging (TypeScript · Python)
+- [TrustRent](https://madhacks2025-trustrent.vercel.app) — Tenant trust scoring (Next.js · PostgreSQL)
+- [ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) — AI workflow automation (OpenAI · Node.js)
+- [llm-fit](https://github.com/WilliamK112/llm-fit) — Local LLM benchmarking (Python · Ollama)
 
-| Project | Description | Tech |
-|:--|:--|:--|
-| [D&D Voice Adventure](https://dungeons-and-dragons-adventure-voic.vercel.app) | AI voice-driven D&D experience | Next.js • OpenAI • Web Speech |
-| [prompttrace](https://github.com/WilliamK112/prompttrace) | LLM prompt tracing & debugging | TypeScript • Python |
-| [TrustRent](https://madhacks2025-trustrent.vercel.app) | Tenant trust scoring platform | Next.js • PostgreSQL |
-| [ClawWork-personal](https://github.com/WilliamK112/ClawWork-personal) | AI agent workflow automation | OpenAI • Node.js |
-| [llm-fit](https://github.com/WilliamK112/llm-fit) | Local LLM benchmarking suite | Python • Ollama |
+    </td>
+  </tr>
+</table>
 
 ---
 
