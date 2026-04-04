@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>3D Contrib Rotator</title>
+<title>3D Contrib Flip & Rotate</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body {
@@ -16,108 +16,131 @@
     color: #c9d1d9;
     gap: 20px;
   }
-  h2 { font-size: 1rem; font-weight: 500; color: #8b949e; }
+  h2 { font-size: 0.95rem; font-weight: 500; color: #8b949e; }
   #canvas {
     border-radius: 6px;
     border: 1px solid #30363d;
+    max-width: 100%;
   }
-  .controls {
+  .btn-row {
     display: flex;
-    align-items: center;
-    gap: 16px;
-    background: #161b22;
-    border: 1px solid #30363d;
-    padding: 10px 20px;
-    border-radius: 6px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
-  .controls label { font-size: 0.85rem; color: #8b949e; }
-  input[type=range] {
-    width: 260px;
-    accent-color: #2f73ff;
-  }
-  #angle-val {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #58a6ff;
-    min-width: 50px;
-    text-align: right;
-  }
-  .btn-row { display: flex; gap: 10px; }
   button {
-    padding: 6px 16px;
+    padding: 8px 18px;
     border-radius: 6px;
     border: 1px solid #30363d;
     font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  button:hover { opacity: 0.8; }
-  .btn-download {
-    background: #238636;
-    color: #fff;
-    border-color: #238636;
-  }
-  .btn-reset {
-    background: #21262d;
+    transition: all 0.15s;
     color: #c9d1d9;
+    background: #21262d;
   }
+  button:hover { background: #30363d; }
+  button.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    padding: 14px 24px;
+    border-radius: 8px;
+  }
+  .slider-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  label { font-size: 0.85rem; color: #8b949e; }
+  input[type=range] { width: 220px; accent-color: #58a6ff; }
+  #angle-val { font-size: 0.85rem; font-weight: 600; color: #58a6ff; min-width: 45px; text-align: right; }
+  .hint { font-size: 0.75rem; color: #484f58; text-align: center; }
 </style>
 </head>
 <body>
-<h2>3D Contribution Graph Rotator — GitHub Dark</h2>
+<h2>Flip &amp; Rotate — GitHub Dark</h2>
 <canvas id="canvas" width="840" height="450"></canvas>
 <div class="controls">
-  <label>Angle:</label>
-  <input type="range" id="slider" min="0" max="360" value="180" step="1">
-  <span id="angle-val">180°</span>
-  <button class="btn-reset" id="resetBtn">Reset</button>
-  <button class="btn-download" id="dlBtn">Download PNG</button>
+  <div class="btn-row">
+    <button id="flipHBtn">⇆ Horizontal Flip</button>
+    <button id="flipVBtn">⇅ Vertical Flip</button>
+    <button id="resetBtn">Reset All</button>
+    <button id="dlBtn" style="background:#238636;border-color:#238636;color:#fff;">Download PNG</button>
+  </div>
+  <div class="slider-row">
+    <label>Rotate:</label>
+    <input type="range" id="slider" min="0" max="360" value="0" step="1">
+    <span id="angle-val">0°</span>
+  </div>
+  <div class="hint">Horizontal flip: mirror left↔right &nbsp;|&nbsp; Rotate: free 0–360°</div>
 </div>
 
 <script>
 const slider = document.getElementById('slider');
 const angleVal = document.getElementById('angle-val');
+const flipHBtn = document.getElementById('flipHBtn');
+const flipVBtn = document.getElementById('flipVBtn');
 const resetBtn = document.getElementById('resetBtn');
 const dlBtn = document.getElementById('dlBtn');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
+let state = { hflip: false, vflip: false, angle: 0 };
+
 const img = new Image();
 img.crossOrigin = 'anonymous';
 img.src = 'https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib-v18.png?_=' + Date.now();
 
-img.onload = () => {
-  render(180);
-};
+img.onload = () => render();
+
+function render() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate(state.angle * Math.PI / 180);
+  ctx.scale(state.hflip ? -1 : 1, state.vflip ? -1 : 1);
+  ctx.drawImage(img, -img.width / 2, -img.height / 2);
+  ctx.restore();
+}
 
 slider.addEventListener('input', () => {
-  const deg = parseInt(slider.value);
-  angleVal.textContent = deg + '°';
-  render(deg);
+  state.angle = parseInt(slider.value);
+  angleVal.textContent = state.angle + '°';
+  render();
+});
+
+flipHBtn.addEventListener('click', () => {
+  state.hflip = !state.hflip;
+  flipHBtn.classList.toggle('active', state.hflip);
+  render();
+});
+
+flipVBtn.addEventListener('click', () => {
+  state.vflip = !state.vflip;
+  flipVBtn.classList.toggle('active', state.vflip);
+  render();
 });
 
 resetBtn.addEventListener('click', () => {
-  slider.value = 180;
-  angleVal.textContent = '180°';
-  render(180);
+  state = { hflip: false, vflip: false, angle: 0 };
+  slider.value = 0;
+  angleVal.textContent = '0°';
+  flipHBtn.classList.remove('active');
+  flipVBtn.classList.remove('active');
+  render();
 });
 
 dlBtn.addEventListener('click', () => {
   const a = document.createElement('a');
-  a.download = 'blue-gold-3d-contrib-rotated.png';
+  a.download = 'blue-gold-3d-contrib-adjusted.png';
   a.href = canvas.toDataURL('image/png');
   a.click();
 });
-
-function render(deg) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.save();
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate((deg - 180) * Math.PI / 180);
-  ctx.drawImage(img, -img.width / 2, -img.height / 2);
-  ctx.restore();
-}
 </script>
 </body>
 </html>
