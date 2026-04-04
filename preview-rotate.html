@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>3D Contrib Rotator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0e1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #d9e7ff;
+    gap: 20px;
+  }
+  h2 { font-size: 1.1rem; font-weight: 500; color: #97b4ee; }
+  #canvas {
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(0,100,255,0.2);
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.05);
+    padding: 12px 24px;
+    border-radius: 8px;
+  }
+  .controls label { font-size: 0.9rem; color: #97b4ee; }
+  input[type=range] {
+    width: 260px;
+    accent-color: #2f73ff;
+  }
+  #angle-val {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #73c6ff;
+    min-width: 50px;
+    text-align: right;
+  }
+  .btn-row { display: flex; gap: 12px; }
+  button {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  button:hover { opacity: 0.85; }
+  .btn-download {
+    background: #2f73ff;
+    color: #fff;
+  }
+  .btn-reset {
+    background: rgba(255,255,255,0.1);
+    color: #97b4ee;
+  }
+</style>
+</head>
+<body>
+<h2>3D Contribution Graph Rotator</h2>
+<canvas id="canvas" width="840" height="450"></canvas>
+<div class="controls">
+  <label>Angle:</label>
+  <input type="range" id="slider" min="0" max="360" value="180" step="1">
+  <span id="angle-val">180°</span>
+  <button class="btn-reset" id="resetBtn">Reset</button>
+  <button class="btn-download" id="dlBtn">Download PNG</button>
+</div>
+
+<script>
+const slider = document.getElementById('slider');
+const angleVal = document.getElementById('angle-val');
+const resetBtn = document.getElementById('resetBtn');
+const dlBtn = document.getElementById('dlBtn');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+const img = new Image();
+img.crossOrigin = 'anonymous';
+img.src = 'https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/assets/blue-gold-3d-contrib-v18.png?_=' + Date.now();
+
+img.onload = () => {
+  render(180);
+};
+
+slider.addEventListener('input', () => {
+  const deg = parseInt(slider.value);
+  angleVal.textContent = deg + '°';
+  render(deg);
+});
+
+resetBtn.addEventListener('click', () => {
+  slider.value = 180;
+  angleVal.textContent = '180°';
+  render(180);
+});
+
+dlBtn.addEventListener('click', () => {
+  const a = document.createElement('a');
+  a.download = 'blue-gold-3d-contrib-rotated.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+});
+
+function render(deg) {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.save();
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.rotate((deg - 180) * Math.PI / 180);
+  ctx.drawImage(img, -img.width / 2, -img.height / 2);
+  ctx.restore();
+}
+</script>
+</body>
+</html>
