@@ -33,94 +33,94 @@
   <text class="title" x="4" y="10">3D Activity</text>
   <text class="sub" x="4" y="18">53w · max 230</text>
 
-  <g class="base tile">
-    <polygon class="left" points="30.0,51.0 34.0,52.0 34.0,54.0 30.0,53.0"/>
-    <polygon class="right" points="38.0,51.0 34.0,52.0 34.0,54.0 38.0,53.0"/>
-    <polygon class="top" points="34.0,50.0 38.0,51.0 34.0,52.0 30.0,51.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.05s">
-    <polygon class="left" points="34.0,26.0 38.0,27.0 38.0,55.0 34.0,54.0"/>
-    <polygon class="right" points="42.0,26.0 38.0,27.0 38.0,55.0 42.0,54.0"/>
-    <polygon class="top" points="38.0,25.0 42.0,26.0 38.0,27.0 34.0,26.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.05s">
-    <polygon class="left" points="26.0,34.0 30.0,35.0 30.0,55.0 26.0,54.0"/>
-    <polygon class="right" points="34.0,34.0 30.0,35.0 30.0,55.0 34.0,54.0"/>
-    <polygon class="top" points="30.0,33.0 34.0,34.0 30.0,35.0 26.0,34.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.10s">
-    <polygon class="left" points="38.0,48.0 42.0,49.0 42.0,56.0 38.0,55.0"/>
-    <polygon class="right" points="46.0,48.0 42.0,49.0 42.0,56.0 46.0,55.0"/>
-    <polygon class="top" points="42.0,47.0 46.0,48.0 42.0,49.0 38.0,48.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.10s">
-    <polygon class="left" points="30.0,47.0 34.0,48.0 34.0,56.0 30.0,55.0"/>
-    <polygon class="right" points="38.0,47.0 34.0,48.0 34.0,56.0 38.0,55.0"/>
+  <g class="active tile" style="animation-delay:0.00s">
+    <polygon class="left" points="30.0,47.0 34.0,48.0 34.0,54.0 30.0,53.0"/>
+    <polygon class="right" points="38.0,47.0 34.0,48.0 34.0,54.0 38.0,53.0"/>
     <polygon class="top" points="34.0,46.0 38.0,47.0 34.0,48.0 30.0,47.0"/>
   </g>
 
-  <g class="active tile" style="animation-delay:0.10s">
-    <polygon class="left" points="22.0,49.0 26.0,50.0 26.0,56.0 22.0,55.0"/>
-    <polygon class="right" points="30.0,49.0 26.0,50.0 26.0,56.0 30.0,55.0"/>
-    <polygon class="top" points="26.0,48.0 30.0,49.0 26.0,50.0 22.0,49.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.15s">
-    <polygon class="left" points="42.0,40.0 46.0,41.0 46.0,57.0 42.0,56.0"/>
-    <polygon class="right" points="50.0,40.0 46.0,41.0 46.0,57.0 50.0,56.0"/>
-    <polygon class="top" points="46.0,39.0 50.0,40.0 46.0,41.0 42.0,40.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.15s">
-    <polygon class="left" points="34.0,41.0 38.0,42.0 38.0,57.0 34.0,56.0"/>
-    <polygon class="right" points="42.0,41.0 38.0,42.0 38.0,57.0 42.0,56.0"/>
-    <polygon class="top" points="38.0,40.0 42.0,41.0 38.0,42.0 34.0,41.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.15s">
-    <polygon class="left" points="26.0,49.0 30.0,50.0 30.0,57.0 26.0,56.0"/>
-    <polygon class="right" points="34.0,49.0 30.0,50.0 30.0,57.0 34.0,56.0"/>
-    <polygon class="top" points="30.0,48.0 34.0,49.0 30.0,50.0 26.0,49.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.15s">
-    <polygon class="left" points="18.0,41.0 22.0,42.0 22.0,57.0 18.0,56.0"/>
-    <polygon class="right" points="26.0,41.0 22.0,42.0 22.0,57.0 26.0,56.0"/>
-    <polygon class="top" points="22.0,40.0 26.0,41.0 22.0,42.0 18.0,41.0"/>
+  <g class="base tile">
+    <polygon class="left" points="34.0,52.0 38.0,53.0 38.0,55.0 34.0,54.0"/>
+    <polygon class="right" points="42.0,52.0 38.0,53.0 38.0,55.0 42.0,54.0"/>
+    <polygon class="top" points="38.0,51.0 42.0,52.0 38.0,53.0 34.0,52.0"/>
   </g>
 
   <g class="base tile">
-    <polygon class="left" points="46.0,55.0 50.0,56.0 50.0,58.0 46.0,57.0"/>
-    <polygon class="right" points="54.0,55.0 50.0,56.0 50.0,58.0 54.0,57.0"/>
-    <polygon class="top" points="50.0,54.0 54.0,55.0 50.0,56.0 46.0,55.0"/>
+    <polygon class="left" points="26.0,52.0 30.0,53.0 30.0,55.0 26.0,54.0"/>
+    <polygon class="right" points="34.0,52.0 30.0,53.0 30.0,55.0 34.0,54.0"/>
+    <polygon class="top" points="30.0,51.0 34.0,52.0 30.0,53.0 26.0,52.0"/>
+  </g>
+
+  <g class="active tile" style="animation-delay:0.10s">
+    <polygon class="left" points="38.0,27.0 42.0,28.0 42.0,56.0 38.0,55.0"/>
+    <polygon class="right" points="46.0,27.0 42.0,28.0 42.0,56.0 46.0,55.0"/>
+    <polygon class="top" points="42.0,26.0 46.0,27.0 42.0,28.0 38.0,27.0"/>
+  </g>
+
+  <g class="active tile" style="animation-delay:0.10s">
+    <polygon class="left" points="30.0,35.0 34.0,36.0 34.0,56.0 30.0,55.0"/>
+    <polygon class="right" points="38.0,35.0 34.0,36.0 34.0,56.0 38.0,55.0"/>
+    <polygon class="top" points="34.0,34.0 38.0,35.0 34.0,36.0 30.0,35.0"/>
+  </g>
+
+  <g class="base tile">
+    <polygon class="left" points="22.0,53.0 26.0,54.0 26.0,56.0 22.0,55.0"/>
+    <polygon class="right" points="30.0,53.0 26.0,54.0 26.0,56.0 30.0,55.0"/>
+    <polygon class="top" points="26.0,52.0 30.0,53.0 26.0,54.0 22.0,53.0"/>
+  </g>
+
+  <g class="active tile" style="animation-delay:0.15s">
+    <polygon class="left" points="42.0,49.0 46.0,50.0 46.0,57.0 42.0,56.0"/>
+    <polygon class="right" points="50.0,49.0 46.0,50.0 46.0,57.0 50.0,56.0"/>
+    <polygon class="top" points="46.0,48.0 50.0,49.0 46.0,50.0 42.0,49.0"/>
+  </g>
+
+  <g class="active tile" style="animation-delay:0.15s">
+    <polygon class="left" points="34.0,48.0 38.0,49.0 38.0,57.0 34.0,56.0"/>
+    <polygon class="right" points="42.0,48.0 38.0,49.0 38.0,57.0 42.0,56.0"/>
+    <polygon class="top" points="38.0,47.0 42.0,48.0 38.0,49.0 34.0,48.0"/>
+  </g>
+
+  <g class="active tile" style="animation-delay:0.15s">
+    <polygon class="left" points="26.0,50.0 30.0,51.0 30.0,57.0 26.0,56.0"/>
+    <polygon class="right" points="34.0,50.0 30.0,51.0 30.0,57.0 34.0,56.0"/>
+    <polygon class="top" points="30.0,49.0 34.0,50.0 30.0,51.0 26.0,50.0"/>
+  </g>
+
+  <g class="base tile">
+    <polygon class="left" points="18.0,54.0 22.0,55.0 22.0,57.0 18.0,56.0"/>
+    <polygon class="right" points="26.0,54.0 22.0,55.0 22.0,57.0 26.0,56.0"/>
+    <polygon class="top" points="22.0,53.0 26.0,54.0 22.0,55.0 18.0,54.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.20s">
-    <polygon class="left" points="38.0,50.0 42.0,51.0 42.0,58.0 38.0,57.0"/>
-    <polygon class="right" points="46.0,50.0 42.0,51.0 42.0,58.0 46.0,57.0"/>
-    <polygon class="top" points="42.0,49.0 46.0,50.0 42.0,51.0 38.0,50.0"/>
+    <polygon class="left" points="46.0,41.0 50.0,42.0 50.0,58.0 46.0,57.0"/>
+    <polygon class="right" points="54.0,41.0 50.0,42.0 50.0,58.0 54.0,57.0"/>
+    <polygon class="top" points="50.0,40.0 54.0,41.0 50.0,42.0 46.0,41.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.20s">
-    <polygon class="left" points="30.0,51.0 34.0,52.0 34.0,58.0 30.0,57.0"/>
-    <polygon class="right" points="38.0,51.0 34.0,52.0 34.0,58.0 38.0,57.0"/>
-    <polygon class="top" points="34.0,50.0 38.0,51.0 34.0,52.0 30.0,51.0"/>
+    <polygon class="left" points="38.0,42.0 42.0,43.0 42.0,58.0 38.0,57.0"/>
+    <polygon class="right" points="46.0,42.0 42.0,43.0 42.0,58.0 46.0,57.0"/>
+    <polygon class="top" points="42.0,41.0 46.0,42.0 42.0,43.0 38.0,42.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.20s">
-    <polygon class="left" points="22.0,50.0 26.0,51.0 26.0,58.0 22.0,57.0"/>
-    <polygon class="right" points="30.0,50.0 26.0,51.0 26.0,58.0 30.0,57.0"/>
-    <polygon class="top" points="26.0,49.0 30.0,50.0 26.0,51.0 22.0,50.0"/>
+    <polygon class="left" points="30.0,50.0 34.0,51.0 34.0,58.0 30.0,57.0"/>
+    <polygon class="right" points="38.0,50.0 34.0,51.0 34.0,58.0 38.0,57.0"/>
+    <polygon class="top" points="34.0,49.0 38.0,50.0 34.0,51.0 30.0,50.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.20s">
-    <polygon class="left" points="14.0,50.0 18.0,51.0 18.0,58.0 14.0,57.0"/>
-    <polygon class="right" points="22.0,50.0 18.0,51.0 18.0,58.0 22.0,57.0"/>
-    <polygon class="top" points="18.0,49.0 22.0,50.0 18.0,51.0 14.0,50.0"/>
+    <polygon class="left" points="22.0,42.0 26.0,43.0 26.0,58.0 22.0,57.0"/>
+    <polygon class="right" points="30.0,42.0 26.0,43.0 26.0,58.0 30.0,57.0"/>
+    <polygon class="top" points="26.0,41.0 30.0,42.0 26.0,43.0 22.0,42.0"/>
+  </g>
+
+  <g class="base tile">
+    <polygon class="left" points="14.0,55.0 18.0,56.0 18.0,58.0 14.0,57.0"/>
+    <polygon class="right" points="22.0,55.0 18.0,56.0 18.0,58.0 22.0,57.0"/>
+    <polygon class="top" points="18.0,54.0 22.0,55.0 18.0,56.0 14.0,55.0"/>
   </g>
 
   <g class="base tile">
@@ -129,22 +129,22 @@
     <polygon class="top" points="54.0,55.0 58.0,56.0 54.0,57.0 50.0,56.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="42.0,56.0 46.0,57.0 46.0,59.0 42.0,58.0"/>
-    <polygon class="right" points="50.0,56.0 46.0,57.0 46.0,59.0 50.0,58.0"/>
-    <polygon class="top" points="46.0,55.0 50.0,56.0 46.0,57.0 42.0,56.0"/>
+  <g class="active tile" style="animation-delay:0.25s">
+    <polygon class="left" points="42.0,51.0 46.0,52.0 46.0,59.0 42.0,58.0"/>
+    <polygon class="right" points="50.0,51.0 46.0,52.0 46.0,59.0 50.0,58.0"/>
+    <polygon class="top" points="46.0,50.0 50.0,51.0 46.0,52.0 42.0,51.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.25s">
-    <polygon class="left" points="34.0,47.0 38.0,48.0 38.0,59.0 34.0,58.0"/>
-    <polygon class="right" points="42.0,47.0 38.0,48.0 38.0,59.0 42.0,58.0"/>
-    <polygon class="top" points="38.0,46.0 42.0,47.0 38.0,48.0 34.0,47.0"/>
+    <polygon class="left" points="34.0,52.0 38.0,53.0 38.0,59.0 34.0,58.0"/>
+    <polygon class="right" points="42.0,52.0 38.0,53.0 38.0,59.0 42.0,58.0"/>
+    <polygon class="top" points="38.0,51.0 42.0,52.0 38.0,53.0 34.0,52.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="26.0,56.0 30.0,57.0 30.0,59.0 26.0,58.0"/>
-    <polygon class="right" points="34.0,56.0 30.0,57.0 30.0,59.0 34.0,58.0"/>
-    <polygon class="top" points="30.0,55.0 34.0,56.0 30.0,57.0 26.0,56.0"/>
+  <g class="active tile" style="animation-delay:0.25s">
+    <polygon class="left" points="26.0,51.0 30.0,52.0 30.0,59.0 26.0,58.0"/>
+    <polygon class="right" points="34.0,51.0 30.0,52.0 30.0,59.0 34.0,58.0"/>
+    <polygon class="top" points="30.0,50.0 34.0,51.0 30.0,52.0 26.0,51.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.25s">
@@ -171,34 +171,34 @@
     <polygon class="top" points="50.0,56.0 54.0,57.0 50.0,58.0 46.0,57.0"/>
   </g>
 
+  <g class="active tile" style="animation-delay:0.30s">
+    <polygon class="left" points="38.0,48.0 42.0,49.0 42.0,60.0 38.0,59.0"/>
+    <polygon class="right" points="46.0,48.0 42.0,49.0 42.0,60.0 46.0,59.0"/>
+    <polygon class="top" points="42.0,47.0 46.0,48.0 42.0,49.0 38.0,48.0"/>
+  </g>
+
   <g class="base tile">
-    <polygon class="left" points="38.0,57.0 42.0,58.0 42.0,60.0 38.0,59.0"/>
-    <polygon class="right" points="46.0,57.0 42.0,58.0 42.0,60.0 46.0,59.0"/>
-    <polygon class="top" points="42.0,56.0 46.0,57.0 42.0,58.0 38.0,57.0"/>
+    <polygon class="left" points="30.0,57.0 34.0,58.0 34.0,60.0 30.0,59.0"/>
+    <polygon class="right" points="38.0,57.0 34.0,58.0 34.0,60.0 38.0,59.0"/>
+    <polygon class="top" points="34.0,56.0 38.0,57.0 34.0,58.0 30.0,57.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.30s">
-    <polygon class="left" points="30.0,43.0 34.0,44.0 34.0,60.0 30.0,59.0"/>
-    <polygon class="right" points="38.0,43.0 34.0,44.0 34.0,60.0 38.0,59.0"/>
-    <polygon class="top" points="34.0,42.0 38.0,43.0 34.0,44.0 30.0,43.0"/>
+    <polygon class="left" points="22.0,52.0 26.0,53.0 26.0,60.0 22.0,59.0"/>
+    <polygon class="right" points="30.0,52.0 26.0,53.0 26.0,60.0 30.0,59.0"/>
+    <polygon class="top" points="26.0,51.0 30.0,52.0 26.0,53.0 22.0,52.0"/>
   </g>
 
-  <g class="active tile" style="animation-delay:0.30s">
-    <polygon class="left" points="22.0,51.0 26.0,52.0 26.0,60.0 22.0,59.0"/>
-    <polygon class="right" points="30.0,51.0 26.0,52.0 26.0,60.0 30.0,59.0"/>
-    <polygon class="top" points="26.0,50.0 30.0,51.0 26.0,52.0 22.0,51.0"/>
+  <g class="base tile">
+    <polygon class="left" points="14.0,57.0 18.0,58.0 18.0,60.0 14.0,59.0"/>
+    <polygon class="right" points="22.0,57.0 18.0,58.0 18.0,60.0 22.0,59.0"/>
+    <polygon class="top" points="18.0,56.0 22.0,57.0 18.0,58.0 14.0,57.0"/>
   </g>
 
-  <g class="active tile" style="animation-delay:0.30s">
-    <polygon class="left" points="14.0,48.0 18.0,49.0 18.0,60.0 14.0,59.0"/>
-    <polygon class="right" points="22.0,48.0 18.0,49.0 18.0,60.0 22.0,59.0"/>
-    <polygon class="top" points="18.0,47.0 22.0,48.0 18.0,49.0 14.0,48.0"/>
-  </g>
-
-  <g class="active tile" style="animation-delay:0.30s">
-    <polygon class="left" points="6.0,53.0 10.0,54.0 10.0,60.0 6.0,59.0"/>
-    <polygon class="right" points="14.0,53.0 10.0,54.0 10.0,60.0 14.0,59.0"/>
-    <polygon class="top" points="10.0,52.0 14.0,53.0 10.0,54.0 6.0,53.0"/>
+  <g class="base tile">
+    <polygon class="left" points="6.0,57.0 10.0,58.0 10.0,60.0 6.0,59.0"/>
+    <polygon class="right" points="14.0,57.0 10.0,58.0 10.0,60.0 14.0,59.0"/>
+    <polygon class="top" points="10.0,56.0 14.0,57.0 10.0,58.0 6.0,57.0"/>
   </g>
 
   <g class="base tile">
@@ -219,28 +219,28 @@
     <polygon class="top" points="46.0,57.0 50.0,58.0 46.0,59.0 42.0,58.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="34.0,58.0 38.0,59.0 38.0,61.0 34.0,60.0"/>
-    <polygon class="right" points="42.0,58.0 38.0,59.0 38.0,61.0 42.0,60.0"/>
-    <polygon class="top" points="38.0,57.0 42.0,58.0 38.0,59.0 34.0,58.0"/>
+  <g class="active tile" style="animation-delay:0.35s">
+    <polygon class="left" points="34.0,44.0 38.0,45.0 38.0,61.0 34.0,60.0"/>
+    <polygon class="right" points="42.0,44.0 38.0,45.0 38.0,61.0 42.0,60.0"/>
+    <polygon class="top" points="38.0,43.0 42.0,44.0 38.0,45.0 34.0,44.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.35s">
-    <polygon class="left" points="26.0,36.0 30.0,37.0 30.0,61.0 26.0,60.0"/>
-    <polygon class="right" points="34.0,36.0 30.0,37.0 30.0,61.0 34.0,60.0"/>
-    <polygon class="top" points="30.0,35.0 34.0,36.0 30.0,37.0 26.0,36.0"/>
+    <polygon class="left" points="26.0,52.0 30.0,53.0 30.0,61.0 26.0,60.0"/>
+    <polygon class="right" points="34.0,52.0 30.0,53.0 30.0,61.0 34.0,60.0"/>
+    <polygon class="top" points="30.0,51.0 34.0,52.0 30.0,53.0 26.0,52.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.35s">
-    <polygon class="left" points="18.0,48.0 22.0,49.0 22.0,61.0 18.0,60.0"/>
-    <polygon class="right" points="26.0,48.0 22.0,49.0 22.0,61.0 26.0,60.0"/>
-    <polygon class="top" points="22.0,47.0 26.0,48.0 22.0,49.0 18.0,48.0"/>
+    <polygon class="left" points="18.0,49.0 22.0,50.0 22.0,61.0 18.0,60.0"/>
+    <polygon class="right" points="26.0,49.0 22.0,50.0 22.0,61.0 26.0,60.0"/>
+    <polygon class="top" points="22.0,48.0 26.0,49.0 22.0,50.0 18.0,49.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.35s">
-    <polygon class="left" points="10.0,37.0 14.0,38.0 14.0,61.0 10.0,60.0"/>
-    <polygon class="right" points="18.0,37.0 14.0,38.0 14.0,61.0 18.0,60.0"/>
-    <polygon class="top" points="14.0,36.0 18.0,37.0 14.0,38.0 10.0,37.0"/>
+    <polygon class="left" points="10.0,54.0 14.0,55.0 14.0,61.0 10.0,60.0"/>
+    <polygon class="right" points="18.0,54.0 14.0,55.0 14.0,61.0 18.0,60.0"/>
+    <polygon class="top" points="14.0,53.0 18.0,54.0 14.0,55.0 10.0,54.0"/>
   </g>
 
   <g class="base tile">
@@ -268,9 +268,9 @@
   </g>
 
   <g class="active tile" style="animation-delay:0.40s">
-    <polygon class="left" points="30.0,54.0 34.0,55.0 34.0,62.0 30.0,61.0"/>
-    <polygon class="right" points="38.0,54.0 34.0,55.0 34.0,62.0 38.0,61.0"/>
-    <polygon class="top" points="34.0,53.0 38.0,54.0 34.0,55.0 30.0,54.0"/>
+    <polygon class="left" points="30.0,37.0 34.0,38.0 34.0,62.0 30.0,61.0"/>
+    <polygon class="right" points="38.0,37.0 34.0,38.0 34.0,62.0 38.0,61.0"/>
+    <polygon class="top" points="34.0,36.0 38.0,37.0 34.0,38.0 30.0,37.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.40s">
@@ -280,9 +280,9 @@
   </g>
 
   <g class="active tile" style="animation-delay:0.40s">
-    <polygon class="left" points="14.0,55.0 18.0,56.0 18.0,62.0 14.0,61.0"/>
-    <polygon class="right" points="22.0,55.0 18.0,56.0 18.0,62.0 22.0,61.0"/>
-    <polygon class="top" points="18.0,54.0 22.0,55.0 18.0,56.0 14.0,55.0"/>
+    <polygon class="left" points="14.0,38.0 18.0,39.0 18.0,62.0 14.0,61.0"/>
+    <polygon class="right" points="22.0,38.0 18.0,39.0 18.0,62.0 22.0,61.0"/>
+    <polygon class="top" points="18.0,37.0 22.0,38.0 18.0,39.0 14.0,38.0"/>
   </g>
 
   <g class="base tile">
@@ -310,21 +310,21 @@
   </g>
 
   <g class="active tile" style="animation-delay:0.45s">
-    <polygon class="left" points="34.0,51.0 38.0,52.0 38.0,63.0 34.0,62.0"/>
-    <polygon class="right" points="42.0,51.0 38.0,52.0 38.0,63.0 42.0,62.0"/>
-    <polygon class="top" points="38.0,50.0 42.0,51.0 38.0,52.0 34.0,51.0"/>
+    <polygon class="left" points="34.0,55.0 38.0,56.0 38.0,63.0 34.0,62.0"/>
+    <polygon class="right" points="42.0,55.0 38.0,56.0 38.0,63.0 42.0,62.0"/>
+    <polygon class="top" points="38.0,54.0 42.0,55.0 38.0,56.0 34.0,55.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.45s">
-    <polygon class="left" points="26.0,42.0 30.0,43.0 30.0,63.0 26.0,62.0"/>
-    <polygon class="right" points="34.0,42.0 30.0,43.0 30.0,63.0 34.0,62.0"/>
-    <polygon class="top" points="30.0,41.0 34.0,42.0 30.0,43.0 26.0,42.0"/>
+    <polygon class="left" points="26.0,50.0 30.0,51.0 30.0,63.0 26.0,62.0"/>
+    <polygon class="right" points="34.0,50.0 30.0,51.0 30.0,63.0 34.0,62.0"/>
+    <polygon class="top" points="30.0,49.0 34.0,50.0 30.0,51.0 26.0,50.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.45s">
-    <polygon class="left" points="18.0,55.0 22.0,56.0 22.0,63.0 18.0,62.0"/>
-    <polygon class="right" points="26.0,55.0 22.0,56.0 22.0,63.0 26.0,62.0"/>
-    <polygon class="top" points="22.0,54.0 26.0,55.0 22.0,56.0 18.0,55.0"/>
+    <polygon class="left" points="18.0,56.0 22.0,57.0 22.0,63.0 18.0,62.0"/>
+    <polygon class="right" points="26.0,56.0 22.0,57.0 22.0,63.0 26.0,62.0"/>
+    <polygon class="top" points="22.0,55.0 26.0,56.0 22.0,57.0 18.0,56.0"/>
   </g>
 
   <g class="base tile">
@@ -351,22 +351,22 @@
     <polygon class="top" points="50.0,60.0 54.0,61.0 50.0,62.0 46.0,61.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="38.0,61.0 42.0,62.0 42.0,64.0 38.0,63.0"/>
-    <polygon class="right" points="46.0,61.0 42.0,62.0 42.0,64.0 46.0,63.0"/>
-    <polygon class="top" points="42.0,60.0 46.0,61.0 42.0,62.0 38.0,61.0"/>
+  <g class="active tile" style="animation-delay:0.50s">
+    <polygon class="left" points="38.0,52.0 42.0,53.0 42.0,64.0 38.0,63.0"/>
+    <polygon class="right" points="46.0,52.0 42.0,53.0 42.0,64.0 46.0,63.0"/>
+    <polygon class="top" points="42.0,51.0 46.0,52.0 42.0,53.0 38.0,52.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.50s">
-    <polygon class="left" points="30.0,57.0 34.0,58.0 34.0,64.0 30.0,63.0"/>
-    <polygon class="right" points="38.0,57.0 34.0,58.0 34.0,64.0 38.0,63.0"/>
-    <polygon class="top" points="34.0,56.0 38.0,57.0 34.0,58.0 30.0,57.0"/>
+    <polygon class="left" points="30.0,43.0 34.0,44.0 34.0,64.0 30.0,63.0"/>
+    <polygon class="right" points="38.0,43.0 34.0,44.0 34.0,64.0 38.0,63.0"/>
+    <polygon class="top" points="34.0,42.0 38.0,43.0 34.0,44.0 30.0,43.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.50s">
-    <polygon class="left" points="22.0,55.0 26.0,56.0 26.0,64.0 22.0,63.0"/>
-    <polygon class="right" points="30.0,55.0 26.0,56.0 26.0,64.0 30.0,63.0"/>
-    <polygon class="top" points="26.0,54.0 30.0,55.0 26.0,56.0 22.0,55.0"/>
+    <polygon class="left" points="22.0,56.0 26.0,57.0 26.0,64.0 22.0,63.0"/>
+    <polygon class="right" points="30.0,56.0 26.0,57.0 26.0,64.0 30.0,63.0"/>
+    <polygon class="top" points="26.0,55.0 30.0,56.0 26.0,57.0 22.0,56.0"/>
   </g>
 
   <g class="base tile">
@@ -399,16 +399,16 @@
     <polygon class="top" points="46.0,61.0 50.0,62.0 46.0,63.0 42.0,62.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="34.0,62.0 38.0,63.0 38.0,65.0 34.0,64.0"/>
-    <polygon class="right" points="42.0,62.0 38.0,63.0 38.0,65.0 42.0,64.0"/>
-    <polygon class="top" points="38.0,61.0 42.0,62.0 38.0,63.0 34.0,62.0"/>
+  <g class="active tile" style="animation-delay:0.55s">
+    <polygon class="left" points="34.0,58.0 38.0,59.0 38.0,65.0 34.0,64.0"/>
+    <polygon class="right" points="42.0,58.0 38.0,59.0 38.0,65.0 42.0,64.0"/>
+    <polygon class="top" points="38.0,57.0 42.0,58.0 38.0,59.0 34.0,58.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="26.0,62.0 30.0,63.0 30.0,65.0 26.0,64.0"/>
-    <polygon class="right" points="34.0,62.0 30.0,63.0 30.0,65.0 34.0,64.0"/>
-    <polygon class="top" points="30.0,61.0 34.0,62.0 30.0,63.0 26.0,62.0"/>
+  <g class="active tile" style="animation-delay:0.55s">
+    <polygon class="left" points="26.0,56.0 30.0,57.0 30.0,65.0 26.0,64.0"/>
+    <polygon class="right" points="34.0,56.0 30.0,57.0 30.0,65.0 34.0,64.0"/>
+    <polygon class="top" points="30.0,55.0 34.0,56.0 30.0,57.0 26.0,56.0"/>
   </g>
 
   <g class="base tile">
@@ -663,10 +663,10 @@
     <polygon class="top" points="54.0,67.0 58.0,68.0 54.0,69.0 50.0,68.0"/>
   </g>
 
-  <g class="active tile" style="animation-delay:0.20s">
-    <polygon class="left" points="102.0,65.0 106.0,66.0 106.0,72.0 102.0,71.0"/>
-    <polygon class="right" points="110.0,65.0 106.0,66.0 106.0,72.0 110.0,71.0"/>
-    <polygon class="top" points="106.0,64.0 110.0,65.0 106.0,66.0 102.0,65.0"/>
+  <g class="base tile">
+    <polygon class="left" points="102.0,69.0 106.0,70.0 106.0,72.0 102.0,71.0"/>
+    <polygon class="right" points="110.0,69.0 106.0,70.0 106.0,72.0 110.0,71.0"/>
+    <polygon class="top" points="106.0,68.0 110.0,69.0 106.0,70.0 102.0,69.0"/>
   </g>
 
   <g class="base tile">
@@ -705,10 +705,10 @@
     <polygon class="top" points="58.0,68.0 62.0,69.0 58.0,70.0 54.0,69.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="106.0,70.0 110.0,71.0 110.0,73.0 106.0,72.0"/>
-    <polygon class="right" points="114.0,70.0 110.0,71.0 110.0,73.0 114.0,72.0"/>
-    <polygon class="top" points="110.0,69.0 114.0,70.0 110.0,71.0 106.0,70.0"/>
+  <g class="active tile" style="animation-delay:0.25s">
+    <polygon class="left" points="106.0,66.0 110.0,67.0 110.0,73.0 106.0,72.0"/>
+    <polygon class="right" points="114.0,66.0 110.0,67.0 110.0,73.0 114.0,72.0"/>
+    <polygon class="top" points="110.0,65.0 114.0,66.0 110.0,67.0 106.0,66.0"/>
   </g>
 
   <g class="base tile">
