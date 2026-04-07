@@ -45,10 +45,10 @@
     <polygon class="top" points="38.0,51.0 42.0,52.0 38.0,53.0 34.0,52.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="26.0,52.0 30.0,53.0 30.0,55.0 26.0,54.0"/>
-    <polygon class="right" points="34.0,52.0 30.0,53.0 30.0,55.0 34.0,54.0"/>
-    <polygon class="top" points="30.0,51.0 34.0,52.0 30.0,53.0 26.0,52.0"/>
+  <g class="active tile" style="animation-delay:0.05s">
+    <polygon class="left" points="26.0,48.0 30.0,49.0 30.0,55.0 26.0,54.0"/>
+    <polygon class="right" points="34.0,48.0 30.0,49.0 30.0,55.0 34.0,54.0"/>
+    <polygon class="top" points="30.0,47.0 34.0,48.0 30.0,49.0 26.0,48.0"/>
   </g>
 
   <g class="active tile" style="animation-delay:0.10s">
