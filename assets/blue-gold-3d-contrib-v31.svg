@@ -14,7 +14,7 @@
 .active{filter:url(#glow)}
 </style>
 <rect x="0" y="0" width="280" height="150" fill="none" rx="4"/>
-<text class="title" x="4" y="10">771 contributions</text>
+<text class="title" x="4" y="10">781 contributions</text>
 <text class="sub" x="4" y="18">in the last year</text>
 <g class="base tile"><polygon class="left" points="30.0,51.0 34.0,52.0 34.0,54.0 30.0,53.0"/><polygon class="right" points="38.0,51.0 34.0,52.0 34.0,54.0 38.0,53.0"/><polygon class="top" points="34.0,50.0 38.0,51.0 34.0,52.0 30.0,51.0"/></g>
 <g class="base tile"><polygon class="left" points="34.0,52.0 38.0,53.0 38.0,55.0 34.0,54.0"/><polygon class="right" points="42.0,52.0 38.0,53.0 38.0,55.0 42.0,54.0"/><polygon class="top" points="38.0,51.0 42.0,52.0 38.0,53.0 34.0,52.0"/></g>
