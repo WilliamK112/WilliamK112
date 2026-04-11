@@ -153,10 +153,10 @@
     <polygon class="top" points="22.0,50.0 26.0,51.0 22.0,52.0 18.0,51.0"/>
   </g>
 
-  <g class="base tile">
-    <polygon class="left" points="10.0,56.0 14.0,57.0 14.0,59.0 10.0,58.0"/>
-    <polygon class="right" points="18.0,56.0 14.0,57.0 14.0,59.0 18.0,58.0"/>
-    <polygon class="top" points="14.0,55.0 18.0,56.0 14.0,57.0 10.0,56.0"/>
+  <g class="active tile" style="animation-delay:0.25s">
+    <polygon class="left" points="10.0,52.0 14.0,53.0 14.0,59.0 10.0,58.0"/>
+    <polygon class="right" points="18.0,52.0 14.0,53.0 14.0,59.0 18.0,58.0"/>
+    <polygon class="top" points="14.0,51.0 18.0,52.0 14.0,53.0 10.0,52.0"/>
   </g>
 
   <g class="base tile">
