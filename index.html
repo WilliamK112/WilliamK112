@@ -4,9 +4,19 @@
     <meta charset="UTF-8">
     <title>Ching-Wei Kang - Portfolio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Ching-Wei (William) Kang, UW-Madison Computer Science and Data Science student building AI products, backend systems, and developer tools.">
+    <meta name="robots" content="index,follow">
+    <meta property="og:title" content="Ching-Wei Kang | Software Engineer Portfolio">
+    <meta property="og:description" content="AI products, backend engineering projects, and recruiter-friendly portfolio highlights.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://william-kang-site.vercel.app/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ching-Wei Kang | Software Engineer Portfolio">
+    <meta name="twitter:description" content="UW-Madison CS + Data Science student building AI products, backend systems, and developer tooling.">
+    <link rel="canonical" href="https://william-kang-site.vercel.app/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Prata&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script>
 </head>
@@ -14,16 +24,27 @@
     <div class="noise" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-1" aria-hidden="true"></div>
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
+    <div class="entry-mask-intro" data-entry-intro aria-hidden="true">
+        <div class="entry-mask-title-wrap">
+            <span class="entry-mask-title entry-mask-title-full">Ching-Wei Kang</span>
+            <span class="entry-mask-gate entry-mask-gate-right" aria-hidden="true"></span>
+        </div>
+    </div>
 
     <a href="#main" class="skip-link">Skip to main content</a>
 
     <header class="topbar">
-        <span class="brand">Ching-Wei Kang</span>
+        <div class="topbar-left">
+            <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Switch to light mode">☀️ Light</button>
+            <button class="lang-toggle" type="button" data-lang-toggle aria-pressed="false" aria-label="Switch to Chinese">中文</button>
+            <span class="brand">Ching-Wei Kang</span>
+        </div>
         <nav>
             <a href="#about">About</a>
             <a href="#experience">Experience</a>
             <a href="#work">Work</a>
             <a href="#projects">Projects</a>
+            <a href="#certificates">Certificates</a>
             <a href="#contact">Contact</a>
         </nav>
         <div class="top-actions">
@@ -34,15 +55,27 @@
 
     <main id="main">
         <section id="hero" class="hero">
-            <p class="eyebrow">Portfolio</p>
-            <h1>Ching<span class="name-sep">-</span>Wei Kang <span>Software Engineer</span></h1>
-            <p class="lead">Computer Science and Data Science double major at UW-Madison (Class of 2027), building practical AI + developer tools. Focused on open-source AI tooling, local LLM usability and benchmarking, and product-focused engineering.</p>
+            <p class="eyebrow" data-i18n="heroEyebrow">Portfolio</p>
+            <h1 class="hero-heading">
+                <span class="hero-name" data-i18n="heroName">Ching-Wei Kang</span>
+                <span class="hero-role" data-i18n="heroRole">Software Engineer</span>
+            </h1>
+            <p class="lead" data-i18n="heroLead">UW-Madison CS + Data Science student building AI products, backend systems, and developer tooling. I turn prototypes into product-grade demos across full-stack apps, automation pipelines, and computer vision workflows.</p>
+            <div class="signal-bar" aria-label="Current engineering focus">
+                <span data-i18n="heroSignal1">Now Shipping: Badminton AI Tracking</span>
+                <span data-i18n="heroSignal2">Focus: AI Engineering + Systems</span>
+                <span data-i18n="heroSignal3">Open to 2026 SWE/AI Internships</span>
+            </div>
             <div class="hero-visuals">
                 <figure class="portrait-frame">
                     <button class="profile-flip-card" type="button" data-flip-card aria-pressed="false" aria-label="Flip to view personal information">
                         <div class="profile-flip-inner">
                             <div class="profile-flip-face profile-flip-front">
                                 <img src="assets/William_Kang-9c2f39ca-aa59-4956-8969-b7e0fa9d303a.png" alt="Portrait of Ching-Wei Kang in a black suit">
+                                <div class="profile-front-badge" aria-hidden="true">
+                                    <span>UWM 2027</span>
+                                    <span>GPA 3.91</span>
+                                </div>
                                 <span class="profile-flip-hint">Click to flip</span>
                             </div>
                             <div class="profile-flip-face profile-flip-back">
@@ -67,7 +100,7 @@
                                 <span class="uw-flip-hint">Click to flip</span>
                             </div>
                             <div class="uw-flip-face uw-flip-back">
-                                <strong class="uw-mini-title">U.S. Ranking</strong>
+                                <strong class="uw-mini-title">UW-Madison CS Edge</strong>
                                 <span class="uw-mini-standing">I am a junior undergraduate at UW-Madison.</span>
                                 <span class="uw-mini-ranks">
                                     <span>#16 Overall CS</span>
@@ -87,65 +120,49 @@
                 </figure>
             </div>
             <div class="hero-cta">
-                <a href="https://github.com/WilliamK112" class="btn" target="_blank" rel="noopener noreferrer">View GitHub</a>
-                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://calendly.com/ckang53-wisc/30min" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Get in Touch</a>
-                <a href="https://linktr.ee/WilliamKangCW" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" title="more general work">More General Work</a>
+                <a href="assets/Ching-Wei-Kang-Resume.pdf" class="btn" target="_blank" rel="noopener noreferrer" data-i18n="ctaResume">Resume PDF</a>
+                <button type="button" class="btn btn-ghost copy-email-btn" data-copy-email="ckang53@wisc.edu" data-i18n="ctaEmail">Copy Email</button>
+                <a href="https://github.com/WilliamK112" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="ctaGithub">View GitHub</a>
+                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="ctaLinkedIn">LinkedIn</a>
+                <a href="https://calendly.com/ckang53-wisc/30min" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="ctaBook">Book 30-Min Intro</a>
+                <a href="https://linktr.ee/WilliamKangCW" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" title="more general work" data-i18n="ctaMore">More General Work</a>
             </div>
         </section>
 
         <section id="about" class="grid-2">
             <article class="card">
-                <h2>Recruiter Snapshot</h2>
+                <h2 data-i18n="snapshotTitle">Snapshot</h2>
                 <div class="recruiter-snapshot">
                     <ul>
-                        <li><span>Education</span><strong>Junior, BS CS + Data Science Double Major (2027)</strong></li>
-                        <li><span>Focus</span><strong>AI · Full-Stack · Data</strong></li>
-                        <li><span>Tech</span><strong>TypeScript · Python · Node.js</strong></li>
-                        <li><span>Work Auth (US)</span><strong>Yes</strong></li>
-                        <li><span>Sponsorship</span><strong>Yes (future)</strong></li>
+                        <li><span data-i18n="snapshotEducationLabel">Education</span><strong data-i18n="snapshotEducationValue">Junior, BS CS + Data Science Double Major (2027)</strong></li>
+                        <li><span data-i18n="snapshotFocusLabel">Focus</span><strong data-i18n="snapshotFocusValue">AI Engineering · Backend Systems · Data Pipelines · Product Delivery</strong></li>
+                        <li><span data-i18n="snapshotTechLabel">Tech</span><strong data-i18n="snapshotTechValue">TypeScript · Python · Node.js</strong></li>
+                        <li><span data-i18n="snapshotAuthLabel">Work Auth (US)</span><strong data-i18n="snapshotAuthValue">Yes</strong></li>
+                        <li><span data-i18n="snapshotSponsorLabel">Sponsorship</span><strong data-i18n="snapshotSponsorValue">Yes (future)</strong></li>
                     </ul>
                 </div>
             </article>
             <div>
                 <article class="card">
-                    <h2>Education</h2>
-                    <p>Bachelor of Science double major in Computer Science and Data Science, University of Wisconsin-Madison. GPA: 3.91. Expected graduation: May 2027.</p>
+                    <h2 data-i18n="educationTitle">Education</h2>
+                    <p data-i18n="educationDesc">UW-Madison BS double major in Computer Science and Data Science, maintaining a 3.91 GPA and graduating in May 2027.</p>
                 </article>
                 <div class="stats">
                     <div>
-                        <p class="big">6+</p>
-                        <p class="label">Featured Projects</p>
+                        <p class="big">7+</p>
+                        <p class="label" data-i18n="statsProjects">Featured Projects</p>
                     </div>
                     <div>
                         <p class="big">11+</p>
-                        <p class="label">Months Experience</p>
+                        <p class="label" data-i18n="statsExperience">Months Experience</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience">
-            <h2>Experience and Focus</h2>
-            <ul class="timeline">
-                <li>
-                    <h3>Full-Stack and AI</h3>
-                    <p>Led full-stack delivery with Next.js/TypeScript/Node.js/PostgreSQL as project lead. Built AI-assisted document processing workflows and LLM-integrated product features.</p>
-                </li>
-                <li>
-                    <h3>Data Pipelines</h3>
-                    <p>Built Python data ingestion pipelines (BeautifulSoup/Requests/Pandas) and processed 50,000+ records.</p>
-                </li>
-                <li>
-                    <h3>Open-Source Tooling</h3>
-                    <p>Shipping practical AI + developer tools. Local LLM usability, benchmarking, and product-focused engineering.</p>
-                </li>
-            </ul>
-        </section>
-
         <section id="work">
-            <h2>Work Experience</h2>
-            <p class="section-note">From <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <h2 data-i18n="workTitle">Work Experience</h2>
+            <p class="section-note"><span data-i18n="workNotePrefix">5 roles across data, research, and operations (Jun 2024 - Aug 2025). Source:</span> <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer" data-i18n="workNoteLink">LinkedIn</a></p>
             <ul class="timeline">
                 <li>
                     <h3>Maintenance Technician · University of Wisconsin-Madison</h3>
@@ -174,60 +191,207 @@
             </ul>
         </section>
 
+        <section id="experience">
+            <h2 data-i18n="experienceTitle">Experience and Focus</h2>
+            <ul class="timeline">
+                <li>
+                    <h3 data-i18n="exp1Title">Full-Stack and AI</h3>
+                    <p data-i18n="exp1Desc">Led full-stack delivery with Next.js/TypeScript/Node.js/PostgreSQL as project lead. Built AI-assisted document processing workflows and LLM-integrated product features.</p>
+                </li>
+                <li>
+                    <h3 data-i18n="exp2Title">Data Pipelines</h3>
+                    <p data-i18n="exp2Desc">Built Python data ingestion pipelines (BeautifulSoup/Requests/Pandas) and processed 50,000+ records.</p>
+                </li>
+                <li>
+                    <h3 data-i18n="exp3Title">Open-Source Tooling</h3>
+                    <p data-i18n="exp3Desc">Shipping practical AI + developer tools. Local LLM usability, benchmarking, and product-focused engineering.</p>
+                </li>
+            </ul>
+        </section>
+
         <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">ClawWork-personal</a></h3>
-                    <p>Production-oriented AI coworker platform for benchmarking, economic tracking, and paper-trading operations.</p>
-                    <p class="project-date">Last updated: 2026-03-19 10:10 UTC</p>
-                    <div class="project-links">
-                        <a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <h2 data-i18n="projectsTitle">Projects</h2>
+            <div class="project-grid" data-project-grid>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip D&D Voice Adventure project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="https://raw.githubusercontent.com/WilliamK112/dungeons-and-dragons-adventure-voice-version/main/public/Fantasy_Image_Animation_Request.gif?v=3dbf253-cropfix" alt="Preview GIF for D&D Voice Adventure project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">D&amp;D Voice Adventure</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">D&amp;D Voice Adventure</a></h3>
+                            <p><strong class="impact">Tech:</strong> Gemini Live, multimodal voice interaction, dynamic visuals. <strong class="impact">Impact:</strong> Delivered a production-style real-time storytelling demo with turn-based gameplay and live agent responses.</p>
+                            <p class="project-date">Last updated: 2026-03-16 16:44 UTC</p>
+                            <div class="project-links">
+                                <a href="https://dungeons-and-dragons-adventure-voic.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                                <a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">llm-fit</a></h3>
-                    <p><strong class="impact">Can my laptop run this model?</strong> Instant local LLM fit and speed estimator with runnable command suggestions.</p>
-                    <p class="project-date">Last updated: 2026-03-18 04:22 UTC</p>
-                    <div class="project-links">
-                        <a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip TrustRent project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="https://raw.githubusercontent.com/WilliamK112/Madhacks2025---TrustRent/main/public/Trust2-removebg-preview.png" alt="Preview image for TrustRent project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">TrustRent</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">TrustRent</a></h3>
+                            <p><strong class="impact">Tech:</strong> AI document analysis, workflow automation, renter tooling. <strong class="impact">Impact:</strong> Turned lease review and inspection reporting into a faster, more usable rental workflow.</p>
+                            <p class="project-date">Last updated: 2026-03-10 08:50 UTC</p>
+                            <div class="project-links">
+                                <a href="https://madhacks2025-trustrent.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                                <a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">D&amp;D Voice Adventure</a></h3>
-                    <p>Production-style Gemini Live Agent demo with turn-based storytelling, dynamic visuals, and multimodal gameplay.</p>
-                    <p class="project-date">Last updated: 2026-03-16 16:44 UTC</p>
-                    <div class="project-links">
-                        <a href="https://dungeons-and-dragons-adventure-voic.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
-                        <a href="https://github.com/WilliamK112/dungeons-and-dragons-adventure-voice-version" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip TableUs project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="https://raw.githubusercontent.com/WilliamK112/TableUs/main/assets/branding/Logo_Reveal_Animation_Request.gif?v=tableus-logo-gif-1" alt="Preview GIF for TableUs project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">TableUs</span>
+                                <span class="project-flip-subtitle">AI-assisted restaurant discovery for groups</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/TableUs" target="_blank" rel="noopener noreferrer">TableUs</a></h3>
+                            <p><strong class="impact">Tech:</strong> Next.js, React, Python, FastAPI, Google Gemini, Google Maps, group preference ranking. <strong class="impact">Impact:</strong> Built an AI-assisted restaurant discovery product that blends friend preferences, location, and natural language search into explainable local recommendations.</p>
+                            <p class="project-date">Last updated: 2026-04-11</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/TableUs" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">prompttrace</a></h3>
-                    <p>Black-box trace recorder for LLM calls with metrics for cost, latency, reliability, and failures.</p>
-                    <p class="project-date">Last updated: 2026-03-16 15:33 UTC</p>
-                    <div class="project-links">
-                        <a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip multi-agent-openclaw project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="assets/projects/multi-agent-openclaw-front.gif" alt="Preview GIF for multi-agent-openclaw project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">multi-agent-openclaw</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">multi-agent-openclaw</a></h3>
+                            <p><strong class="impact">Tech:</strong> multi-agent orchestration, desktop workflows, research tooling. <strong class="impact">Impact:</strong> Enabled coordinated agent pipelines for practical research and writing tasks beyond single-prompt demos.</p>
+                            <p class="project-date">Last updated: 2026-03-14 07:55 UTC</p>
+                            <div class="project-links">
+                                <a href="https://multi-agent-openclaw-amber.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
+                                <a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">multi-agent-openclaw</a></h3>
-                    <p>Desktop-first multi-agent orchestration workspace for research and writing pipelines.</p>
-                    <p class="project-date">Last updated: 2026-03-14 07:55 UTC</p>
-                    <div class="project-links">
-                        <a href="https://multi-agent-openclaw-amber.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
-                        <a href="https://github.com/WilliamK112/multi-agent-openclaw" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <article class="project-featured project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip badminton-matching-learning project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="https://raw.githubusercontent.com/WilliamK112/badminton-machine-learning/main/demo/gif/badminton_github_long.gif?v=loopfix-1" alt="Preview GIF for badminton-machine-learning project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">badminton-machine-learning</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/badminton-machine-learning" target="_blank" rel="noopener noreferrer">badminton-machine-learning</a></h3>
+                            <p><strong class="impact">Tech:</strong> Python, computer vision, player tracking, pose overlays, shuttle recovery. <strong class="impact">Impact:</strong> Produced stable 2-player badminton visualizations and demo-ready match analysis outputs with more impressive visual storytelling.</p>
+                            <p class="project-date">Last updated: 2026-03-27</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/badminton-machine-learning" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
-                <article>
-                    <h3><a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">TrustRent</a></h3>
-                    <p>AI-assisted lease analysis and inspection-report workflow for renters and property managers.</p>
-                    <p class="project-date">Last updated: 2026-03-10 08:50 UTC</p>
-                    <div class="project-links">
-                        <a href="https://madhacks2025-trustrent.vercel.app" target="_blank" rel="noopener noreferrer">Try Out</a>
-                        <a href="https://github.com/WilliamK112/Madhacks2025---TrustRent" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip bci-mvp project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front bci-mvp-front-face">
+                            <img class="bci-mvp-front-art" src="assets/projects/bci-mvp-front.png?v=bci-mvp-front-1" alt="Preview image for bci-mvp project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">bci-mvp</span>
+                                <span class="project-flip-subtitle">Real-time neural signal visualization MVP</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/bci-mvp" target="_blank" rel="noopener noreferrer">bci-mvp</a></h3>
+                            <p><strong class="impact">Tech:</strong> Python, Streamlit, real-time signal pipelines, interactive visualization. <strong class="impact">Impact:</strong> Built an end-to-end brain-computer-interface MVP to process, inspect, and present neural signals for applied ML prototyping.</p>
+                            <p class="project-date">Last updated: 2026-04</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/bci-mvp" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
                     </div>
                 </article>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip prompttrace project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front">
+                            <img src="https://raw.githubusercontent.com/WilliamK112/prompttrace/main/1.png" alt="Preview image for prompttrace project">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">prompttrace</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">prompttrace</a></h3>
+                            <p><strong class="impact">Tech:</strong> LLM tracing, latency logging, cost analytics. <strong class="impact">Impact:</strong> Made experiments easier to debug and optimize with visibility into failures, latency, and spend.</p>
+                            <p class="project-date">Last updated: 2026-03-16 15:33 UTC</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/prompttrace" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip llm-fit project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front project-flip-placeholder llmfit-placeholder">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">llm-fit</span>
+                                <span class="project-flip-subtitle">Can my laptop run this model?</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">llm-fit</a></h3>
+                            <p><strong class="impact">Tech:</strong> local LLM hardware fit estimation, command generation. <strong class="impact">Impact:</strong> Helped users quickly translate device constraints into runnable model choices and commands.</p>
+                            <p class="project-date">Last updated: 2026-03-18 04:22 UTC</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/llm-fit" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <article class="project-card project-flip-card" data-flip-card aria-pressed="false" aria-label="Flip ClawWork-personal project card">
+                    <div class="project-flip-inner">
+                        <div class="project-flip-face project-flip-front project-flip-placeholder clawwork-placeholder">
+                            <div class="project-flip-overlay">
+                                <span class="project-flip-title">ClawWork-personal</span>
+                                <span class="project-flip-subtitle">AI coworker + paper-trading ops dashboard</span>
+                                <span class="project-flip-hint">Click to see details</span>
+                            </div>
+                        </div>
+                        <div class="project-flip-face project-flip-back">
+                            <h3><a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">ClawWork-personal</a></h3>
+                            <p><strong class="impact">Tech:</strong> benchmarking, economic tracking, operations dashboarding. <strong class="impact">Impact:</strong> Combined AI coworker workflows and paper-trading operations into one production-oriented interface.</p>
+                            <p class="project-date">Last updated: 2026-03-19 10:10 UTC</p>
+                            <div class="project-links">
+                                <a href="https://github.com/WilliamK112/ClawWork-personal" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="projects-controls" data-projects-controls>
+                <span class="projects-page-indicator" data-project-indicator>Showing 1-6</span>
+                <button class="btn btn-ghost btn-sm project-more-btn" type="button" data-project-more data-i18n="projectsMore">Show More Projects</button>
             </div>
             <div class="pill-row">
                 <span>TypeScript</span>
@@ -237,32 +401,109 @@
                 <span>React</span>
                 <span>Vercel</span>
             </div>
-            <p class="section-note">Always building. Always shipping.</p>
+            <p class="section-note" data-i18n="projectsNote">Selected projects focused on AI tooling, practical product delivery, and deployable engineering.</p>
+        </section>
+
+        <section id="certificates">
+            <h2 data-i18n="certificatesTitle">Certificates</h2>
+            <div class="certificate-grid" data-certificate-grid>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Google · Issued Apr 2026</p>
+                    <h3>AI for Research and Insights</h3>
+                    <p>Google certificate focused on applying AI for research workflows, insight generation, and practical knowledge work acceleration.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Google · Issued Apr 2026</p>
+                    <h3>Google Data Analytics Certificate</h3>
+                    <p>Demonstrates data analysis fundamentals with analytics workflows and Python-based problem solving.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Google · Issued Apr 2026</p>
+                    <h3>Google AI Essentials</h3>
+                    <p>Foundational AI certificate covering practical use of modern AI tools and core concepts for applied engineering and productivity.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Anthropic · Issued Apr 2026 · Expires Dec 2036</p>
+                    <h3>Building with the Claude API</h3>
+                    <p>Validates practical experience building applications with Anthropic APIs and production-oriented AI integration patterns.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Anthropic · Issued Apr 2026 · Expires Dec 2036</p>
+                    <h3>AI Fluency: Framework &amp; Foundations</h3>
+                    <p>Focuses on AI frameworks, foundational concepts, and structured understanding of how modern AI systems are built and used.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Anthropic · Issued Apr 2026 · Expires Dec 2036</p>
+                    <h3>AI Capabilities and Limitations</h3>
+                    <p>Highlights understanding of model strengths, constraints, and practical AI evaluation for real-world engineering decisions.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Anthropic · Issued Apr 2026 · Expires Dec 2036</p>
+                    <h3>Claude 101</h3>
+                    <p>Introductory Anthropic certification covering Claude workflows, prompting patterns, and agent-oriented practical usage.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+                <article class="certificate-card" data-certificate-card>
+                    <p class="certificate-meta">Anthropic · Issued Apr 2026 · Expires Dec 2036</p>
+                    <h3>Claude with Google Vertex AI</h3>
+                    <p>Shows familiarity with deploying and using Claude through Google Vertex AI, including cloud AI integration workflows.</p>
+                    <div class="project-links">
+                        <a href="https://www.linkedin.com/in/kcw2027/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    </div>
+                </article>
+            </div>
+            <div class="projects-controls">
+                <span class="projects-page-indicator" data-certificate-indicator>Showing 1-3 / 4</span>
+                <button class="btn btn-ghost btn-sm project-more-btn" type="button" data-certificate-more data-i18n="certificatesMore">Next Page</button>
+            </div>
+            <p class="section-note" data-i18n="certificatesNote">Latest certificates are shown first. Source of truth is LinkedIn, and older certificates can be paged through.</p>
         </section>
 
         <section id="contact" class="contact">
-            <h2>Contact</h2>
+            <h2 data-i18n="contactTitle">Contact</h2>
             <div class="contact-actions">
-                <a href="https://github.com/WilliamK112" class="btn" target="_blank" rel="noopener noreferrer">GitHub @WilliamK112</a>
-                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <button type="button" class="btn copy-email-btn" data-copy-email="ckang53@wisc.edu" data-i18n="contactEmail">Copy Email</button>
+                <a href="assets/Ching-Wei-Kang-Resume.pdf" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="contactResume">Resume PDF</a>
+                <a href="https://github.com/WilliamK112" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub @WilliamK112</a>
+                <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="contactLinkedIn">LinkedIn</a>
             </div>
             <article class="card message-board">
-                <h3>Leave a Message</h3>
-                <p>If you want to connect, send me a quick message here.</p>
+                <h3 data-i18n="messageTitle">Leave a Message</h3>
+                <p data-i18n="messageDesc">Open to software engineering internships and project collaboration—send a quick message and I’ll follow up.</p>
                 <form class="message-form" novalidate>
-                    <label for="sender-email">Your Email</label>
-                    <input id="sender-email" name="email" type="email" placeholder="you@example.com" required>
-                    <label for="sender-message">Message</label>
-                    <textarea id="sender-message" name="message" rows="5" placeholder="Write your message..." required></textarea>
-                    <button type="submit" class="btn">Send</button>
+                    <label for="sender-email" data-i18n="formEmailLabel">Your Email</label>
+                    <input id="sender-email" name="email" type="email" placeholder="you@example.com" data-i18n-placeholder="formEmailPlaceholder" required>
+                    <label for="sender-message" data-i18n="formMessageLabel">Message</label>
+                    <textarea id="sender-message" name="message" rows="5" placeholder="Write your message..." data-i18n-placeholder="formMessagePlaceholder" required></textarea>
+                    <button type="submit" class="btn" data-i18n="formSend">Send</button>
                     <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </article>
             <article class="card meeting-card">
-                <h3>Schedule a Meeting</h3>
-                <p>Book a 30-minute meeting directly on my calendar.</p>
+                <h3 data-i18n="meetingTitle">Schedule a Meeting</h3>
+                <p data-i18n="meetingDesc">Book a 30-minute meeting directly on my calendar.</p>
                 <div class="meeting-actions">
-                    <a href="https://calendly.com/ckang53-wisc/30min" class="btn" target="_blank" rel="noopener noreferrer">Schedule Meeting</a>
+                    <a href="https://calendly.com/ckang53-wisc/30min" class="btn" target="_blank" rel="noopener noreferrer" data-i18n="meetingBtn">Schedule Meeting</a>
                 </div>
             </article>
             <div class="footer-links">
