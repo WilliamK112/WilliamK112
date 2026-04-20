@@ -4,6 +4,7 @@
 
 <p align="center">
  <a href="https://www.linkedin.com/in/kcw2027/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white&logoWidth=16"></a>
+ <a href="https://devpost.com/ckang53"><img src="https://img.shields.io/badge/Devpost-003E54?style=flat&logo=devpost&logoColor=white&logoWidth=16"></a>
  <a href="https://www.instagram.com/williamkangcw/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=flat&logo=instagram&logoColor=white&logoWidth=16"></a>
  <a href="https://william-kang-site.vercel.app/"><img src="https://img.shields.io/badge/Personal%20Website-222?style=flat&logo=vercel&logoColor=white&logoWidth=16"></a>
  <a href="https://calendly.com/ckang53-wisc/30min"><img src="https://img.shields.io/badge/Book%20a%20Chat-006BFF?style=flat&logo=calendly&logoColor=white&logoWidth=16"></a>
