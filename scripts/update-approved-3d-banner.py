@@ -1,69 +1,57 @@
 #!/usr/bin/env python3
-"""Update WilliamK112's approved 3D contribution banner without changing its visual language.
+"""
+Update approved 3D contribution banner.
+Generates isometric cube grid from GitHub contribution data.
 
-Rules baked into this script:
-- Keep the approved white-card isometric cube composition.
-- Keep newest GitHub activity on the RIGHT.
-- Use the last 53 contribution weeks from GitHub, oldest -> newest.
-- Do not change geometry, perspective, colors, or layout constants unless re-approved.
-
-Examples:
-  python3 scripts/update-approved-3d-banner.py --version v35 --reveal
-  python3 scripts/update-approved-3d-banner.py --overwrite-approved --reveal
+Usage:
+    python3 scripts/update-approved-3d-banner.py --version v35 --reveal   # preview
+    python3 scripts/update-approved-3d-banner.py --overwrite-approved    # update approved v32 files
 """
 
-from __future__ import annotations
-
 import argparse
-import json
-import math
 import os
-import re
-import subprocess
 import sys
-import urllib.request
+import re
+import math
+import subprocess
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-ASSETS_DIR = REPO_ROOT / "assets"
-README_PATH = REPO_ROOT / "README.md"
-DEFAULT_USERNAME = "WilliamK112"
-
-SVG_WIDTH = 280
-SVG_HEIGHT = 150
-ROWS = 7
-CELL_W = 4
-CELL_H = 1
-START_X = 34
-START_Y = 52
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    import matplotlib.patches as mpatches
+    from matplotlib.patches import FancyBboxPatch
+except ImportError:
+    print("ERROR: matplotlib required. Run: pip install matplotlib")
+    sys.exit(1)
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Update the approved 3D contribution banner")
-    parser.add_argument("--username", default=DEFAULT_USERNAME, help="GitHub username")
-    parser.add_argument("--version", default="preview", help="Output suffix when not overwriting approved asset")
-    parser.add_argument(
-        "--overwrite-approved",
-        action="store_true",
-        help="Overwrite assets/blue-gold-3d-contrib-v32.svg/png and refresh README alt count",
-    )
-    parser.add_argument("--reveal", action="store_true", help="Reveal generated PNG in Finder")
-    return parser.parse_args()
+# ─── Colour palette (approved blue-gold theme) ───────────────────────────────
+C_BG      = "#eef4ff"   # card background
+C_GRID    = "#8bb8ff"   # grid line / card border
+C0        = "#eef4ff"   # 0 contributions
+C1        = "#d6e8ff"   # 1-3 contributions
+C2        = "#8bb8ff"   # 4-6 contributions
+C3        = "#4f8dff"   # 7-9 contributions
+C4        = "#1f5fd6"   # 10+ contributions (deepest)
+GOLD      = "#f5c86b"   # accent / title colour
+WHITE     = "#ffffff"
 
 
-def fetch_calendar_with_token(username: str, token: str) -> dict:
+# ─── GitHub GraphQL ────────────────────────────────────────────────────────────
+def fetch_contributions(token: str) -> dict:
+    """Fetch 53 weeks of contribution counts via GitHub GraphQL."""
     query = """
-    query($login: String!) {
-      user(login: $login) {
+    {
+      viewer {
         contributionsCollection {
           contributionCalendar {
             totalContributions
             weeks {
               contributionDays {
                 contributionCount
-                contributionLevel
                 date
-                weekday
               }
             }
           }
@@ -71,181 +59,244 @@ def fetch_calendar_with_token(username: str, token: str) -> dict:
       }
     }
     """
-    payload = json.dumps({"query": query, "variables": {"login": username}}).encode("utf-8")
+    import urllib.request
     req = urllib.request.Request(
         "https://api.github.com/graphql",
-        data=payload,
+        data=query.encode(),
         headers={
-            "Authorization": f"bearer {token}",
+            "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
-            "User-Agent": "openclaw-approved-3d-banner-updater",
+            "User-Agent": "WilliamK112/3d-banner-updater",
         },
         method="POST",
     )
-    with urllib.request.urlopen(req) as resp:
-        data = json.loads(resp.read())
-    return data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
-
-
-def fetch_calendar_with_gh(username: str) -> dict:
-    query = (
-        "query($login:String!){ user(login:$login){ contributionsCollection { contributionCalendar "
-        "{ totalContributions weeks { contributionDays { contributionCount contributionLevel date weekday } } } } } }"
-    )
-    out = subprocess.check_output(
-        ["gh", "api", "graphql", "-f", f"query={query}", "-F", f"login={username}"],
-        text=True,
-        cwd=REPO_ROOT,
-    )
-    data = json.loads(out)
-    return data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
-
-
-def fetch_calendar(username: str) -> dict:
-    token = os.environ.get("GITHUB_TOKEN")
-    if token:
-        return fetch_calendar_with_token(username, token)
-    return fetch_calendar_with_gh(username)
-
-
-def level_score(level: str) -> int:
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        data = resp.read()
+    import json
+    result = json.loads(data)
+    if "errors" in result:
+        raise RuntimeError(f"GraphQL error: {result['errors']}")
+    cal = result["data"]["viewer"]["contributionsCollection"]["contributionCalendar"]
     return {
-        "FOURTH_QUARTILE": 4,
-        "THIRD_QUARTILE": 3,
-        "SECOND_QUARTILE": 2,
-        "FIRST_QUARTILE": 1,
-    }.get(level, 0)
+        "total": cal["totalContributions"],
+        "weeks": [w["contributionDays"] for w in cal["weeks"]],
+    }
 
 
-def bar_height(count: int, level: str, max_count: int) -> int:
-    if count <= 0:
-        return 2
-    return round(2 + math.sqrt(count / max_count) * 14 + level_score(level) * 3)
+# ─── Isometric cube helper ─────────────────────────────────────────────────────
+def iso_cube(ax, cx, cy, cz, size, face_colors):
+    """
+    Draw a 3D isometric cube at (cx,cy,cz) with given face colours.
+    cx,cy = bottom-centre x,y in data coords; cz = 'height' in data coords
+    face_colors = (top, left, right) hex strings.
+    """
+    d = size
+    # Isometric projection: 30° from horizontal
+    # Top face (diamond)
+    top = [
+        (cx,              cy - d * 0.866),
+        (cx + d * 0.5,    cy - d * 0.433),
+        (cx,              cy - d * 0.0),
+        (cx - d * 0.5,    cy - d * 0.433),
+    ]
+    # Left face
+    left = [
+        (cx - d * 0.5,    cy - d * 0.433),
+        (cx,              cy),
+        (cx,              cy + cz),
+        (cx - d * 0.5,    cy - d * 0.433 + cz),
+    ]
+    # Right face
+    right = [
+        (cx,              cy),
+        (cx + d * 0.5,    cy - d * 0.433),
+        (cx + d * 0.5,   cy - d * 0.433 + cz),
+        (cx,              cy + cz),
+    ]
+    for pts, col in [(top, face_colors[0]), (left, face_colors[1]), (right, face_colors[2])]:
+        poly = plt.Polygon(pts, closed=True, facecolor=col, edgecolor="none", linewidth=0)
+        ax.add_patch(poly)
 
 
-def points(coords: list[tuple[float, float]]) -> str:
-    return " ".join(f"{x:.1f},{y:.1f}" for x, y in coords)
+def contrib_color(count: int) -> tuple:
+    if count == 0: return (C0, C0, C0)
+    if count <= 3: return (C1, C1, C1)
+    if count <= 6: return (C2, C2, C2)
+    if count <= 9: return (C3, C3, C3)
+    return (C4, C4, C4)
 
 
-def cube(cx: float, cy: float, height: int, active: bool, delay: float | None = None) -> str:
-    top = [(cx, cy - height), (cx + CELL_W, cy - height + CELL_H), (cx, cy - height + 2 * CELL_H), (cx - CELL_W, cy - height + CELL_H)]
-    left = [(cx - CELL_W, cy - height + CELL_H), (cx, cy - height + 2 * CELL_H), (cx, cy + 2 * CELL_H), (cx - CELL_W, cy + CELL_H)]
-    right = [(cx + CELL_W, cy - height + CELL_H), (cx, cy - height + 2 * CELL_H), (cx, cy + 2 * CELL_H), (cx + CELL_W, cy + CELL_H)]
-    cls = "active tile" if active else "base tile"
-    style = f' style="animation-delay:{delay:.2f}s"' if active and delay is not None else ""
-    return (
-        f'<g class="{cls}"{style}>'
-        f'<polygon class="left" points="{points(left)}"/>'
-        f'<polygon class="right" points="{points(right)}"/>'
-        f'<polygon class="top" points="{points(top)}"/>'
-        f'</g>'
+# ─── Renderer ─────────────────────────────────────────────────────────────────
+def render_banner(weeks_data: list, total: int, output_svg: str, output_png: str,
+                  reveal: bool = False):
+    """
+    Render the approved white-card isometric cube grid.
+    53 columns (weeks) × 7 rows (days).
+    """
+    CELL   = 0.85   # horizontal spacing
+    ROW_H  = 0.60   # vertical step per day
+    CUBE_D = 0.45   # cube base half-width
+    MIN_H  = 0.08   # minimum cube height for 0 contributions
+    MAX_H  = 1.10   # max cube height for 10+ contributions
+    TOP_PAD   = 1.4
+    BOT_PAD   = 0.3
+    LEFT_PAD  = 0.5
+    RIGHT_PAD = 0.5
+
+    n_weeks = len(weeks_data)
+    n_days_max = 7
+
+    fig_w = LEFT_PAD + n_weeks * CELL + RIGHT_PAD
+    fig_h = TOP_PAD + n_days_max * ROW_H + BOT_PAD
+
+    fig, ax = plt.subplots(figsize=(fig_w, fig_h), dpi=120)
+    fig.patch.set_facecolor(C_BG)
+    ax.set_facecolor(C_BG)
+
+    # Title
+    title_color = GOLD if not reveal else "#888888"
+    ax.text(
+        fig_w / 2, fig_h - 0.55,
+        f"github contributions",
+        fontsize=7, fontweight="bold", color=title_color,
+        ha="center", va="top",
+        fontfamily="monospace",
+    )
+    ax.text(
+        fig_w / 2, fig_h - 0.95,
+        f"{total:,} in the last year",
+        fontsize=5.5, color=title_color,
+        ha="center", va="top",
+        fontfamily="monospace",
     )
 
-
-def build_svg(calendar: dict) -> str:
-    weeks = calendar["weeks"][-53:]
-    cols = len(weeks)
-    max_count = max((day["contributionCount"] for week in weeks for day in week.get("contributionDays", [])), default=1) or 1
-
-    svg: list[str] = []
-    svg.append(f'<svg xmlns="http://www.w3.org/2000/svg" width="{SVG_WIDTH}" height="{SVG_HEIGHT}" viewBox="0 0 {SVG_WIDTH} {SVG_HEIGHT}">')
-    svg.append(
-        '<defs>'
-        '<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f6f8fa"/><stop offset="100%" stop-color="#f6f8fa"/></linearGradient>'
-        '<linearGradient id="topFace" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#73c6ff"/><stop offset="58%" stop-color="#2f73ff"/><stop offset="100%" stop-color="#f0cb75"/></linearGradient>'
-        '<linearGradient id="leftFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2b64e3"/><stop offset="100%" stop-color="#173a78"/></linearGradient>'
-        '<linearGradient id="rightFace" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f0cb75"/><stop offset="100%" stop-color="#8a6a2e"/></linearGradient>'
-        '<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>'
-        '</defs>'
+    max_count = max(
+        max(day["contributionCount"] for day in week) if week else 0
+        for week in weeks_data
     )
-    svg.append(
-        '<style>'
-        '.title{font:700 10px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#24292f}'
-        '.sub{font:500 8px -apple-system,BlinkMacSystemFont,Segoe UI,Inter,Arial;fill:#57606a}'
-        '.base .top{fill:#e7ebef}.base .left{fill:#d8dee4}.base .right{fill:#cfd8e3}'
-        '.active .top{fill:url(#topFace)} .active .left{fill:url(#leftFace)} .active .right{fill:url(#rightFace)}'
-        '.active{filter:url(#glow)}'
-        '</style>'
+    if max_count == 0:
+        max_count = 1
+
+    # Draw cubes
+    for col, week in enumerate(weeks_data):
+        x = LEFT_PAD + col * CELL + CELL / 2
+        for row in range(7):
+            # Pad short weeks at the start
+            if row < len(week):
+                count = week[row]["contributionCount"]
+            else:
+                count = 0
+
+            height_frac = count / max_count if max_count > 0 else 0
+            cz = MIN_H + height_frac * (MAX_H - MIN_H)
+
+            y_base = TOP_PAD + (6 - row) * ROW_H  # top row = day 0 (Sunday)
+
+            iso_cube(
+                ax,
+                cx=x,
+                cy=y_base,
+                cz=cz,
+                size=CUBE_D,
+                face_colors=contrib_color(count),
+            )
+
+    # Card border
+    card_x = LEFT_PAD - 0.15
+    card_y = BOT_PAD - 0.05
+    card_w = n_weeks * CELL + 0.30
+    card_h = TOP_PAD + n_days_max * ROW_H + 0.10
+    card = FancyBboxPatch(
+        (card_x, card_y), card_w, card_h,
+        boxstyle="round,pad=0.05",
+        linewidth=1.2,
+        edgecolor=C_GRID,
+        facecolor="none",
     )
-    svg.append('<rect x="0" y="0" width="280" height="150" fill="none" rx="4"/>')
-    svg.append(f'<text class="title" x="4" y="10">{calendar["totalContributions"]} contributions</text>')
-    svg.append('<text class="sub" x="4" y="18">in the last year</text>')
+    ax.add_patch(card)
 
-    for diagonal in range(cols + ROWS - 1):
-        for row in range(ROWS):
-            col = diagonal - row
-            if col < 0 or col >= cols:
-                continue
-            days = weeks[col].get("contributionDays", [])
-            day = days[row] if row < len(days) else None
-            count = day.get("contributionCount", 0) if day else 0
-            level = day.get("contributionLevel", "NONE") if day else "NONE"
-            height = bar_height(count, level, max_count)
-            cx = START_X + (col - row) * CELL_W
-            cy = START_Y + (col + row) * CELL_H
-            delay = ((col + row) % 14) * 0.05
-            svg.append(cube(cx, cy, height, count > 0, delay))
+    ax.set_xlim(0, fig_w)
+    ax.set_ylim(0, fig_h)
+    ax.set_aspect("equal")
+    ax.axis("off")
 
-    svg.append('</svg>')
-    return "\n".join(svg)
+    fig.savefig(output_svg, bbox_inches="tight", facecolor=C_BG)
+    plt.close(fig)
+    print(f"Saved SVG: {output_svg}")
 
-
-def render_png(svg_path: Path, png_path: Path) -> None:
-    subprocess.check_call([
-        "rsvg-convert",
-        "-w",
-        "560",
-        "-h",
-        "300",
-        str(svg_path),
-        "-o",
-        str(png_path),
-    ])
+    # Convert SVG → PNG with librsvg
+    if output_png:
+        result = subprocess.run(
+            ["rsvg-convert", "-w", "900", "-h", "180", "-f", "png",
+             "-o", output_png, output_svg],
+            capture_output=True, text=True,
+        )
+        if result.returncode != 0:
+            print(f"WARNING: rsvg-convert failed: {result.stderr}")
+        else:
+            print(f"Saved PNG: {output_png}")
 
 
-def update_readme_total(total: int) -> None:
-    content = README_PATH.read_text()
-    content = re.sub(
-        r'alt="\d+ contributions in the last year \(shape locked\)"',
-        f'alt="{total} contributions in the last year (shape locked)"',
-        content,
-    )
-    README_PATH.write_text(content)
+# ─── README updater ──────────────────────────────────────────────────────────
+def update_readme_alt(total: int):
+    readme = Path("README.md")
+    if not readme.exists():
+        return
+    content = readme.read_text(encoding="utf-8")
+    # Match: <!-- contributions count start -->NUMBER<!-- contributions count end -->
+    pattern = r"(<!-- contributions count start -->)\d+(<!-- contributions count end -->)"
+    replacement = f"\\g<1>{total}\\g<2>"
+    new_content = re.sub(pattern, replacement, content)
+    if new_content != content:
+        readme.write_text(new_content, encoding="utf-8")
+        print(f"Updated README.md contribution count → {total}")
 
 
-def reveal(path: Path) -> None:
-    subprocess.run(["open", "-R", str(path)], cwd=REPO_ROOT, check=False)
+# ─── Main ─────────────────────────────────────────────────────────────────────
+def main():
+    parser = argparse.ArgumentParser(description="Update approved 3D contribution banner")
+    parser.add_argument("--version", default="v35", help="Banner version label (default: v35)")
+    parser.add_argument("--reveal", action="store_true", help="Show preview instead of overwriting")
+    parser.add_argument("--overwrite-approved", action="store_true",
+                        help="Overwrite approved v32 assets and update README")
+    args = parser.parse_args()
 
+    token = os.environ.get("GITHUB_TOKEN", "")
+    if not token:
+        print("WARNING: GITHUB_TOKEN not set; trying local gh auth")
+        try:
+            import urllib.request
+            result = subprocess.run(
+                ["gh", "auth", "token"], capture_output=True, text=True, timeout=10
+            )
+            if result.returncode == 0:
+                token = result.stdout.strip()
+        except Exception as e:
+            print(f"Could not get gh token: {e}")
+    if not token:
+        print("ERROR: No GitHub token available. Set GITHUB_TOKEN env var.")
+        sys.exit(1)
 
-def main() -> int:
-    args = parse_args()
-    ASSETS_DIR.mkdir(parents=True, exist_ok=True)
-
-    calendar = fetch_calendar(args.username)
-    svg = build_svg(calendar)
+    print("Fetching GitHub contributions...")
+    contrib_data = fetch_contributions(token)
+    weeks = contrib_data["weeks"]
+    total  = contrib_data["total"]
+    print(f"Total contributions: {total:,} across {len(weeks)} weeks")
 
     if args.overwrite_approved:
-        stem = "blue-gold-3d-contrib-v32"
+        out_svg = "assets/blue-gold-3d-contrib-v32.svg"
+        out_png = "assets/blue-gold-3d-contrib-v32.png"
+        os.makedirs("assets", exist_ok=True)
+        render_banner(weeks, total, out_svg, out_png, reveal=False)
+        update_readme_alt(total)
+    elif args.reveal:
+        out_svg = f"assets/blue-gold-3d-contrib-{args.version}.svg"
+        out_png = f"assets/blue-gold-3d-contrib-{args.version}.png"
+        os.makedirs("assets", exist_ok=True)
+        render_banner(weeks, total, out_svg, out_png, reveal=True)
     else:
-        stem = f"blue-gold-3d-contrib-{args.version}"
-
-    svg_path = ASSETS_DIR / f"{stem}.svg"
-    png_path = ASSETS_DIR / f"{stem}.png"
-    svg_path.write_text(svg)
-    render_png(svg_path, png_path)
-
-    if args.overwrite_approved:
-        update_readme_total(calendar["totalContributions"])
-
-    print(f"generated {svg_path}")
-    print(f"generated {png_path}")
-    print(f"total contributions: {calendar['totalContributions']}")
-
-    if args.reveal:
-        reveal(png_path)
-
-    return 0
+        print("No action. Use --reveal to preview or --overwrite-approved to update.")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
