@@ -59,10 +59,14 @@ def fetch_contributions(token: str) -> dict:
       }
     }
     """
+    import json
+    import urllib.error
     import urllib.request
+
+    payload = json.dumps({"query": query}).encode("utf-8")
     req = urllib.request.Request(
         "https://api.github.com/graphql",
-        data=query.encode(),
+        data=payload,
         headers={
             "Authorization": f"Bearer {token}",
             "Content-Type": "application/json",
@@ -70,9 +74,13 @@ def fetch_contributions(token: str) -> dict:
         },
         method="POST",
     )
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        data = resp.read()
-    import json
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            data = resp.read()
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"GitHub GraphQL HTTP {e.code}: {body}") from e
+
     result = json.loads(data)
     if "errors" in result:
         raise RuntimeError(f"GraphQL error: {result['errors']}")
@@ -243,10 +251,16 @@ def update_readme_alt(total: int):
     if not readme.exists():
         return
     content = readme.read_text(encoding="utf-8")
-    # Match: <!-- contributions count start -->NUMBER<!-- contributions count end -->
-    pattern = r"(<!-- contributions count start -->)\d+(<!-- contributions count end -->)"
+
+    marker_pattern = r"(<!-- contributions count start -->)\d+(<!-- contributions count end -->)"
     replacement = f"\\g<1>{total}\\g<2>"
-    new_content = re.sub(pattern, replacement, content)
+    new_content = re.sub(marker_pattern, replacement, content)
+
+    if new_content == content:
+        image_pattern = r'(<img[^>]*src="\./assets/blue-gold-3d-contrib-v32\.png"[^>]*alt=")([^"]*)("[^>]*>)'
+        image_replacement = rf'\g<1>{total:,} contributions in the last year (shape locked)\g<3>'
+        new_content = re.sub(image_pattern, image_replacement, content, count=1)
+
     if new_content != content:
         readme.write_text(new_content, encoding="utf-8")
         print(f"Updated README.md contribution count → {total}")
