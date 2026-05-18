@@ -9,12 +9,18 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: profile-readme-writers
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Generate contribution snake
         uses: Platane/snk@v3
