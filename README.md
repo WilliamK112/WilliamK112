@@ -2,14 +2,9 @@
 
 **CS + Data Science @ UW-Madison (2027)** · SWE / AI internship candidate building full-stack systems, LLM products, and developer tools
 
-**External OSS Contributions**
+**Merged External OSS Contributions**
 - **github/docs** - merged PR [#43969](https://github.com/github/docs/pull/43969)
-- **NVIDIA/NemoClaw** - merged PR [#1794](https://github.com/NVIDIA/NemoClaw/pull/1794), plus follow-up PRs [#1795](https://github.com/NVIDIA/NemoClaw/pull/1795), [#2474](https://github.com/NVIDIA/NemoClaw/pull/2474), [#2475](https://github.com/NVIDIA/NemoClaw/pull/2475), and [#2476](https://github.com/NVIDIA/NemoClaw/pull/2476)
-- **docker/cli** - open PRs [#6956](https://github.com/docker/cli/pull/6956) and [#6957](https://github.com/docker/cli/pull/6957)
-- **vercel/serve-handler** - open PR [#232](https://github.com/vercel/serve-handler/pull/232)
-- **microsoft/apm** - PRs [#930](https://github.com/microsoft/apm/pull/930) and [#931](https://github.com/microsoft/apm/pull/931)
-- **vitest-dev/vitest** - PR [#10125](https://github.com/vitest-dev/vitest/pull/10125)
-- **eslint/eslint** - PRs [#20759](https://github.com/eslint/eslint/pull/20759) and [#20760](https://github.com/eslint/eslint/pull/20760)
+- **NVIDIA/NemoClaw** - merged PR [#1794](https://github.com/NVIDIA/NemoClaw/pull/1794)
 
 <p align="center">
  <a href="https://www.linkedin.com/in/kcw2027/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white&logoWidth=16"></a>
