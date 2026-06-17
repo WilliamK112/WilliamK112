@@ -681,8 +681,24 @@
 })();
 
 (function setupInteractionSfx() {
+  const hasLocalStorage = (() => {
+    try {
+      const test = '__sfx_ls_test__';
+      window.localStorage.setItem(test, '1');
+      window.localStorage.removeItem(test);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  })();
+
+  const params = new URLSearchParams(window.location.search);
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
+  const prefForceOn = params.get('sfx') === '1' || (hasLocalStorage && window.localStorage.getItem('portfolio-sfx') === 'on');
+  const prefForceOff = params.get('sfx') === '0' || (hasLocalStorage && window.localStorage.getItem('portfolio-sfx') === 'off');
+
+  const isEnabled = prefForceOff ? false : (!prefersReduced || prefForceOn);
+  if (!isEnabled) return;
 
   const clickCooldownMs = 55;
   const slideCooldownMs = 75;
@@ -696,6 +712,7 @@
   let lastSlide = 0;
   let pointerStart = null;
   let ignoreNextClick = false;
+  let failedToUnlock = false;
 
   const interactiveSelector = [
     'a',
@@ -731,13 +748,19 @@
     const ctx = ensureAudioContext();
     if (!ctx) return;
     if (ctx.state === 'suspended') {
-      ctx.resume().catch(() => {});
+      ctx.resume().catch(() => {
+        failedToUnlock = true;
+      });
     }
   }
 
   function playTone(startFreq, endFreq, durationMs, attack = 0.001, decay = 0.09, gain = 1, wave = 'sine') {
     const ctx = ensureAudioContext();
-    if (!ctx || ctx.state !== 'running') return;
+    if (!ctx) return;
+    if (ctx.state === 'suspended') {
+      failedToUnlock = true;
+      return;
+    }
 
     const now = ctx.currentTime;
     const osc = ctx.createOscillator();
@@ -776,6 +799,29 @@
     const end = Math.max(95, 360 / speed);
     playTone(start, end, 92, 0.003, 0.04, 0.95, 'triangle');
   }
+
+  window.__portfolioSfx = window.__portfolioSfx || {};
+  window.__portfolioSfx.test = function runPortfolioSfxTest() {
+    unlockAudio();
+    playClick();
+  };
+  window.__portfolioSfx.setEnabled = function setPortfolioSfxEnabled(next) {
+    if (!hasLocalStorage) return;
+    window.localStorage.setItem('portfolio-sfx', next ? 'on' : 'off');
+    window.location.reload();
+  };
+  window.__portfolioSfx.status = function getPortfolioSfxStatus() {
+    const ctx = ensureAudioContext();
+    return {
+      reducedMotionPref: prefersReduced,
+      isEnabled,
+      forceOn: prefForceOn,
+      forceOff: prefForceOff,
+      contextState: ctx ? ctx.state : 'uninitialized',
+      contextExists: !!ctx,
+      failedToUnlock
+    };
+  };
 
   function isInteractiveElement(target) {
     if (!(target instanceof Element)) return false;
