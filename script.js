@@ -679,3 +679,177 @@
 
   applyPage(0);
 })();
+
+(function setupInteractionSfx() {
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const clickCooldownMs = 55;
+  const slideCooldownMs = 75;
+  const moveThreshold = 22;
+  const durationThresholdMs = 420;
+  const minSwipeDistance = 45;
+
+  let audioCtx = null;
+  let masterGain = null;
+  let lastClick = 0;
+  let lastSlide = 0;
+  let pointerStart = null;
+  let ignoreNextClick = false;
+
+  const interactiveSelector = [
+    'a',
+    'button',
+    'input',
+    'textarea',
+    'select',
+    '[role="button"]',
+    '[role="link"]',
+    '[role="menuitem"]',
+    '[data-copy-email]',
+    '[data-flip-card]',
+    '[data-theme-toggle]',
+    '[data-lang-toggle]',
+    '[data-project-more]',
+    '[data-certificate-more]'
+  ].join(',');
+
+  function ensureAudioContext() {
+    if (!audioCtx) {
+      const context = window.AudioContext || window.webkitAudioContext;
+      if (!context) return null;
+
+      audioCtx = new context();
+      masterGain = audioCtx.createGain();
+      masterGain.gain.value = 0.18;
+      masterGain.connect(audioCtx.destination);
+    }
+    return audioCtx;
+  }
+
+  function unlockAudio() {
+    const ctx = ensureAudioContext();
+    if (!ctx) return;
+    if (ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+  }
+
+  function playTone(startFreq, endFreq, durationMs, attack = 0.001, decay = 0.09, gain = 1, wave = 'sine') {
+    const ctx = ensureAudioContext();
+    if (!ctx || ctx.state !== 'running') return;
+
+    const now = ctx.currentTime;
+    const osc = ctx.createOscillator();
+    const env = ctx.createGain();
+
+    env.gain.setValueAtTime(0.0001, now);
+    env.gain.exponentialRampToValueAtTime(gain * 0.25, now + attack);
+    env.gain.exponentialRampToValueAtTime(0.0001, now + (durationMs / 1000));
+    osc.type = wave;
+    osc.frequency.setValueAtTime(startFreq, now);
+    if (typeof endFreq === 'number') {
+      osc.frequency.exponentialRampToValueAtTime(Math.max(28, endFreq), now + (durationMs / 1000));
+    }
+
+    osc.connect(env);
+    env.connect(masterGain);
+    osc.start(now);
+    osc.stop(now + (durationMs / 1000) + 0.06);
+  }
+
+  function playClick() {
+    const now = performance.now();
+    if (now - lastClick < clickCooldownMs) return;
+    lastClick = now;
+    playTone(980, 620, 45, 0.001, 0.02, 1.0, 'sine');
+    playTone(420, 240, 55, 0.004, 0.03, 0.6, 'triangle');
+  }
+
+  function playSlide(velocity) {
+    const now = performance.now();
+    if (now - lastSlide < slideCooldownMs) return;
+    lastSlide = now;
+
+    const speed = Math.min(Math.max(velocity / 1400, 0.55), 1.6);
+    const start = 420 * speed;
+    const end = Math.max(95, 360 / speed);
+    playTone(start, end, 92, 0.003, 0.04, 0.95, 'triangle');
+  }
+
+  function isInteractiveElement(target) {
+    if (!(target instanceof Element)) return false;
+    return target.closest(interactiveSelector) !== null;
+  }
+
+  document.addEventListener('pointerdown', (event) => {
+    unlockAudio();
+    if (!(event.target instanceof Element)) return;
+    pointerStart = {
+      x: event.clientX,
+      y: event.clientY,
+      time: performance.now(),
+      active: true
+    };
+    ignoreNextClick = false;
+  }, { passive: true });
+
+  document.addEventListener('pointerup', (event) => {
+    if (!pointerStart || !pointerStart.active) return;
+    pointerStart.active = false;
+
+    const dt = performance.now() - pointerStart.time;
+    const dx = event.clientX - pointerStart.x;
+    const dy = event.clientY - pointerStart.y;
+    const distance = Math.hypot(dx, dy);
+    const velocity = distance / Math.max(dt, 1);
+    const dominatedX = Math.abs(dx) > Math.abs(dy) * 1.25;
+    const dominatedY = Math.abs(dy) > Math.abs(dx) * 1.25;
+    const isSwipe = dt <= durationThresholdMs && distance >= minSwipeDistance;
+    const isDominated = dominatedX || dominatedY;
+
+    if (isSwipe && (isDominated || distance >= minSwipeDistance * 1.35)) {
+      playSlide(velocity);
+      ignoreNextClick = true;
+    }
+  }, { passive: true });
+
+  document.addEventListener('pointercancel', () => {
+    if (pointerStart) pointerStart.active = false;
+  }, { passive: true });
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      if (ignoreNextClick) {
+        ignoreNextClick = false;
+        return;
+      }
+      if (!isInteractiveElement(event.target)) return;
+      if (!(event.isTrusted)) return;
+      unlockAudio();
+      playClick();
+    },
+    true
+  );
+
+  document.addEventListener('keydown', (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    if (!isInteractiveElement(target)) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    unlockAudio();
+    playClick();
+  });
+
+  document.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) < Math.abs(event.deltaY) * 1.15) return;
+    if (Math.abs(event.deltaX) < moveThreshold * 2) return;
+    playSlide(Math.abs(event.deltaX));
+  }, { passive: true });
+
+  window.addEventListener('blur', () => {
+    ignoreNextClick = false;
+    pointerStart = null;
+  });
+})();
