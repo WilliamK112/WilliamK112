@@ -25,6 +25,145 @@
   });
 })();
 
+(function setupSignalField() {
+  const canvas = document.getElementById('portfolio-signal-field');
+  const cursor = document.querySelector('[data-cursor-light]');
+  const ctx = canvas && canvas.getContext ? canvas.getContext('2d') : null;
+  if (!canvas || !ctx) return;
+
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pointer = {
+    x: window.innerWidth * 0.58,
+    y: window.innerHeight * 0.34,
+    active: false
+  };
+  let nodes = [];
+  let dpr = 1;
+  let width = 0;
+  let height = 0;
+  let colors = {
+    node: '132, 238, 255',
+    link: '142, 167, 255',
+    pointer: '137, 247, 209'
+  };
+
+  function cssValue(name, fallback) {
+    const value = window.getComputedStyle(document.body).getPropertyValue(name).trim();
+    return value || fallback;
+  }
+
+  function refreshColors() {
+    colors = {
+      node: cssValue('--signal-node-rgb', '132, 238, 255'),
+      link: cssValue('--signal-link-rgb', '142, 167, 255'),
+      pointer: cssValue('--signal-pointer-rgb', '137, 247, 209')
+    };
+  }
+
+  function resize() {
+    width = Math.max(1, window.innerWidth);
+    height = Math.max(1, window.innerHeight);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(width * dpr);
+    canvas.height = Math.floor(height * dpr);
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(104, Math.max(44, Math.floor((width * height) / 18500)));
+    nodes = Array.from({ length: count }, (_, index) => ({
+      x: (index * 149 + (index % 7) * 23) % width,
+      y: (index * 83 + (index % 5) * 37) % height,
+      vx: ((index % 5) - 2) * 0.11,
+      vy: (((index + 2) % 7) - 3) * 0.08,
+      r: 1.1 + (index % 4) * 0.34
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalCompositeOperation = 'lighter';
+
+    nodes.forEach((node, index) => {
+      if (!reduceMotion) {
+        node.x += node.vx;
+        node.y += node.vy;
+        if (node.x < -20) node.x = width + 20;
+        if (node.x > width + 20) node.x = -20;
+        if (node.y < -20) node.y = height + 20;
+        if (node.y > height + 20) node.y = -20;
+      }
+
+      const pointerDistance = Math.hypot(node.x - pointer.x, node.y - pointer.y);
+      const glow = Math.max(0, 1 - pointerDistance / 260);
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(${colors.node}, ${0.14 + glow * 0.42})`;
+      ctx.arc(node.x, node.y, node.r + glow * 1.8, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let otherIndex = index + 1; otherIndex < nodes.length; otherIndex += 1) {
+        const other = nodes[otherIndex];
+        const span = Math.hypot(node.x - other.x, node.y - other.y);
+        if (span < 136) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(${colors.link}, ${(1 - span / 136) * 0.13})`;
+          ctx.lineWidth = 1;
+          ctx.moveTo(node.x, node.y);
+          ctx.lineTo(other.x, other.y);
+          ctx.stroke();
+        }
+      }
+    });
+
+    if (pointer.active) {
+      nodes.forEach((node) => {
+        const span = Math.hypot(node.x - pointer.x, node.y - pointer.y);
+        if (span < 214) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(${colors.pointer}, ${(1 - span / 214) * 0.34})`;
+          ctx.lineWidth = 1.15;
+          ctx.moveTo(pointer.x, pointer.y);
+          ctx.lineTo(node.x, node.y);
+          ctx.stroke();
+        }
+      });
+    }
+
+    ctx.globalCompositeOperation = 'source-over';
+    if (!reduceMotion) window.requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('pointermove', (event) => {
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+    pointer.active = true;
+    document.body.classList.add('is-pointer-active');
+    if (cursor) {
+      cursor.style.transform = `translate3d(${event.clientX - 140}px, ${event.clientY - 140}px, 0)`;
+    }
+  }, { passive: true });
+
+  window.addEventListener('pointerleave', () => {
+    pointer.active = false;
+    document.body.classList.remove('is-pointer-active');
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    resize();
+    if (reduceMotion) draw();
+  }, { passive: true });
+
+  new MutationObserver(() => {
+    refreshColors();
+    if (reduceMotion) draw();
+  }).observe(document.body, { attributes: true, attributeFilter: ['data-theme'] });
+
+  refreshColors();
+  resize();
+  draw();
+})();
+
 (function setupEntryMaskIntro() {
   const intro = document.querySelector('[data-entry-intro]');
   if (!intro) return;
