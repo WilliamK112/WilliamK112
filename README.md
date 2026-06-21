@@ -1,5 +1,7 @@
 # William Kang (Ching-Wei Kang)
 
+Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | Identity page: [About William Kang / Ching-Wei Kang](https://williamkang.com/about-william-kang.html)
+
 **CS + Data Science @ UW-Madison (2027)** · SWE / AI internship candidate building full-stack systems, LLM products, and developer tools
 
 **Merged External OSS Contributions**
@@ -20,6 +22,7 @@
 
 
 **👋 About Me**  
+I publish work as both William Kang and Ching-Wei Kang. My canonical personal website is [williamkang.com](https://williamkang.com/).
 CS + Data Science student @ UW-Madison (Class of May 2027)  
 Focus: AI systems, backend, full-stack systems, developer tools, and product engineering  
 Looking for: Software Engineering, AI Engineering, LLM tooling, and applied ML internships
