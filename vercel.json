@@ -10,6 +10,17 @@
         }
       ],
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://williamkang.com/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.william-kang-site.vercel.app"
+        }
+      ],
+      "permanent": true
     }
   ]
 }
