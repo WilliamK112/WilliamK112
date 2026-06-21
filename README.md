@@ -1,6 +1,6 @@
 # William Kang (Ching-Wei Kang)
 
-Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | Identity page: [About William Kang / Ching-Wei Kang](https://williamkang.com/about-william-kang.html) | Exact-name profile: [Ching-Wei Kang (William Kang)](https://williamkang.com/ching-wei-kang.html) | Projects: [William Kang Projects](https://williamkang.com/william-kang-projects.html) | Resume: [William Kang Resume](https://williamkang.com/william-kang-resume.html)
+Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | William Kang profile: [William Kang (Ching-Wei Kang)](https://williamkang.com/william-kang.html) | Identity page: [About William Kang / Ching-Wei Kang](https://williamkang.com/about-william-kang.html) | Exact-name profile: [Ching-Wei Kang (William Kang)](https://williamkang.com/ching-wei-kang.html) | Projects: [William Kang Projects](https://williamkang.com/william-kang-projects.html) | Resume: [William Kang Resume](https://williamkang.com/william-kang-resume.html)
 
 **CS + Data Science @ UW-Madison (2027)** · SWE / AI internship candidate building full-stack systems, LLM products, and developer tools
 
@@ -22,7 +22,7 @@ Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | 
 
 
 **👋 About Me**  
-I publish work as both William Kang and Ching-Wei Kang. My canonical personal website is [williamkang.com](https://williamkang.com/), with an exact-name profile at [williamkang.com/ching-wei-kang.html](https://williamkang.com/ching-wei-kang.html).
+I publish work as both William Kang and Ching-Wei Kang. My canonical personal website is [williamkang.com](https://williamkang.com/), with exact-name profiles at [williamkang.com/william-kang.html](https://williamkang.com/william-kang.html) and [williamkang.com/ching-wei-kang.html](https://williamkang.com/ching-wei-kang.html).
 CS + Data Science student @ UW-Madison (Class of May 2027)  
 Focus: AI systems, backend, full-stack systems, developer tools, and product engineering  
 Looking for: Software Engineering, AI Engineering, LLM tooling, and applied ML internships
