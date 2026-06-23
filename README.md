@@ -16,7 +16,7 @@ Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | 
  <a href="https://calendly.com/ckang53-wisc/30min"><img src="https://img.shields.io/badge/Book%20a%20Chat-006BFF?style=flat&logo=calendly&logoColor=white&logoWidth=16"></a>
 </p>
 
-<img align="left" width="56%" src="./assets/blue-gold-3d-contrib-v32.png" alt="1299 contributions in the last year (shape locked)" />
+<img align="left" width="56%" src="./assets/blue-gold-3d-contrib-v32.png" alt="1307 contributions in the last year (shape locked)" />
 
 <img align="left" width="56%" alt="GitHub contribution snake animation" src="https://raw.githubusercontent.com/WilliamK112/WilliamK112/main/output/github-contribution-grid-snake.svg" />
 
