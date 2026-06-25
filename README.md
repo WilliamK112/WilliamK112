@@ -22,7 +22,7 @@ Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | 
 
 
 **👋 About Me**  
-I publish work as both William Kang and Ching-Wei Kang. My canonical personal website is [williamkang.com](https://williamkang.com/), with exact-name profiles at [williamkang.com/william-kang.html](https://williamkang.com/william-kang.html) and [williamkang.com/ching-wei-kang.html](https://williamkang.com/ching-wei-kang.html).
+I publish work as both William Kang and Ching-Wei Kang. My canonical personal website is [williamkang.com](https://williamkang.com/)
 CS + Data Science student @ UW-Madison (Class of May 2027)  
 Focus: AI systems, backend, full-stack systems, developer tools, and product engineering  
 Looking for: Software Engineering, AI Engineering, LLM tooling, and applied ML internships
