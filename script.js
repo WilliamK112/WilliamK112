@@ -1,4 +1,4 @@
-(function setupThemeToggle() {
+﻿(function setupPortfolioI18n() {
   const body = document.body;
   const toggle = document.querySelector('[data-theme-toggle]');
   if (!body || !toggle) return;
@@ -9,11 +9,19 @@
   const initialTheme = saved || (prefersLight ? 'light' : 'dark');
 
   function applyTheme(theme) {
-    body.dataset.theme = theme;
+    const getText = window.__portfolioI18n && typeof window.__portfolioI18n.getText === 'function'
+      ? window.__portfolioI18n.getText
+      : null;
     const isLight = theme === 'light';
+    const lightLabel = getText ? getText('themeLight') : '☀️ Light';
+    const darkLabel = getText ? getText('themeDark') : '🌙 Dark';
+    const ariaToDark = getText ? getText('themeAriaToDark') : 'Switch to dark mode';
+    const ariaToLight = getText ? getText('themeAriaToLight') : 'Switch to light mode';
+
+    body.dataset.theme = theme;
     toggle.setAttribute('aria-pressed', isLight ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    toggle.textContent = isLight ? '🌙 Dark' : '☀️ Light';
+    toggle.setAttribute('aria-label', isLight ? ariaToDark : ariaToLight);
+    toggle.textContent = isLight ? darkLabel : lightLabel;
   }
 
   applyTheme(initialTheme);
@@ -22,6 +30,14 @@
     const nextTheme = body.dataset.theme === 'light' ? 'dark' : 'light';
     applyTheme(nextTheme);
     window.localStorage.setItem(storageKey, nextTheme);
+  });
+
+  window.__portfolioTheme = {
+    applyTheme
+  };
+
+  window.addEventListener('portfolio-language-changed', () => {
+    applyTheme(body.dataset.theme);
   });
 })();
 
@@ -195,161 +211,297 @@
   const saved = window.localStorage.getItem(storageKey);
   const initialLang = saved || 'en';
 
+  const en = {};
+  document.querySelectorAll('[data-i18n], [data-i18n-placeholder]').forEach((node) => {
+    if (node.hasAttribute('data-i18n')) {
+      const key = node.getAttribute('data-i18n');
+      if (key && en[key] === undefined) {
+        en[key] = node.innerHTML;
+      }
+    }
+
+    if (node.hasAttribute('data-i18n-placeholder')) {
+      const key = node.getAttribute('data-i18n-placeholder');
+      if (key && en[key] === undefined) {
+        en[key] = node.getAttribute('placeholder') || '';
+      }
+    }
+  });
+  Object.assign(en, {
+    langAriaToEnglish: 'Switch to English',
+    langAriaToChinese: 'Switch to Chinese',
+    themeDark: '🌙 Dark',
+    themeAriaToDark: 'Switch to dark mode',
+    themeAriaToLight: 'Switch to light mode',
+    projectGitHub: 'GitHub'
+  });
+
   const translations = {
-    en: {
-      heroEyebrow: 'Portfolio',
-      heroName: 'Ching-Wei Kang',
-      heroRole: 'Software Engineer',
-      heroLead: 'UW-Madison CS + Data Science student building AI products, backend systems, and developer tooling. I turn prototypes into product-grade demos across full-stack apps, automation pipelines, and computer vision workflows.',
-      heroSignal1: 'Now Shipping: Badminton AI Tracking',
-      heroSignal2: 'Focus: AI Engineering + Systems',
-      heroSignal3: 'Open to 2026 SWE/AI Internships',
-      ctaResume: 'Resume PDF',
-      ctaEmail: 'Copy Email',
-      ctaGithub: 'View GitHub',
-      ctaLinkedIn: 'LinkedIn',
-      ctaDevpost: 'Devpost',
-      ctaBook: 'Book 30-Min Intro',
-      ctaMore: 'More General Work',
-      snapshotTitle: 'Snapshot',
-      snapshotEducationLabel: 'Education',
-      snapshotEducationValue: 'Junior, BS CS + Data Science Double Major (2027)',
-      snapshotFocusLabel: 'Focus',
-      snapshotFocusValue: 'AI Engineering · Backend Systems · Data Pipelines · Product Delivery',
-      snapshotTechLabel: 'Tech',
-      snapshotTechValue: 'TypeScript · Python · Node.js',
-      snapshotAuthLabel: 'Work Auth (US)',
-      snapshotAuthValue: 'Yes',
-      snapshotSponsorLabel: 'Sponsorship',
-      snapshotSponsorValue: 'Yes (future)',
-      educationTitle: 'Education',
-      educationDesc: 'Studied <span class="keyword-highlight">Data Science</span> at <span class="keyword-highlight">George Washington University</span> (2023–2024), then transferred to <span class="keyword-highlight">the University of Wisconsin–Madison</span> (2025–2027), where I am pursuing a <span class="keyword-highlight">BS double major in Computer Science and Data Science</span>. <span class="keyword-highlight">GPA: 3.91</span>. <span class="keyword-highlight">Expected graduation: May 2027</span>.',
-      statsProjects: 'Featured Projects',
-      statsExperience: 'Years Experience',
-      experienceTitle: 'Experience and Focus',
-      exp1Title: 'Full-Stack and AI',
-      exp1Desc: 'Led full-stack delivery with Next.js/TypeScript/Node.js/PostgreSQL as project lead. Built AI-assisted document processing workflows and LLM-integrated product features.',
-      exp2Title: 'Data Pipelines',
-      exp2Desc: 'Built Python data ingestion pipelines (BeautifulSoup/Requests/Pandas) and processed 50,000+ records.',
-      exp3Title: 'Open-Source Tooling',
-      exp3Desc: 'Shipping practical AI + developer tools. Local LLM usability, benchmarking, and product-focused engineering.',
-      workTitle: 'Work Experience',
-      workNotePrefix: '5 roles across data, research, and operations (Jun 2024 - Aug 2025). Source:',
-      workNoteLink: 'LinkedIn',
-      projectsTitle: 'Projects',
-      projectsMore: 'Show More Projects',
-      projectsNote: 'Selected projects focused on AI tooling, practical product delivery, and deployable engineering.',
-      certificatesTitle: 'Certificates',
-      certificatesMore: 'Next Page',
-      certificatesNote: 'Latest certificates are shown first. Source of truth is LinkedIn, and older certificates can be paged through.',
-      contactTitle: 'Contact',
-      contactEmail: 'Copy Email',
-      contactResume: 'Resume PDF',
-      contactLinkedIn: 'LinkedIn',
-      contactDevpost: 'Devpost',
-      messageTitle: 'Leave a Message',
-      messageDesc: 'Open to software engineering internships and project collaboration—send a quick message and I’ll follow up.',
-      formEmailLabel: 'Your Email',
-      formEmailPlaceholder: 'you@example.com',
-      formMessageLabel: 'Message',
-      formMessagePlaceholder: 'Write your message...',
-      formSend: 'Send',
-      meetingTitle: 'Schedule a Meeting',
-      meetingDesc: 'Book a 30-minute meeting directly on my calendar.',
-      meetingBtn: 'Schedule Meeting'
-    },
+    en,
     zh: {
-      heroEyebrow: '个人作品集',
+      skipLinkText: '跳转到主要内容',
+      themeLight: '☀️ 浅色',
+      themeDark: '🌙 深色',
+      themeAriaToDark: '切换到深色模式',
+      themeAriaToLight: '切换到浅色模式',
+      langButtonText: 'EN',
+      langAriaToEnglish: '切换到英文',
+      langAriaToChinese: '切换到中文',
+      brandName: '康景威',
+      navAbout: '关于',
+      navExperience: '经历',
+      navWork: '工作',
+      navProjects: '项目',
+      navCertificates: '证书',
+      navContact: '联系',
+      topGitHub: 'GitHub',
+      topLinkedIn: '领英',
+      topDevpost: 'Devpost',
+      heroEyebrow: '作品集',
       heroName: '康景威',
       heroRole: '软件工程师',
-      heroLead: '我就读于威斯康星大学麦迪逊分校，主修计算机科学与数据科学，主要方向是 AI 产品、后端系统与开发者工具。我擅长把原型快速推进到可展示、可使用的工程化成果。',
-      heroSignal1: '当前重点：羽毛球 AI 追踪系统',
-      heroSignal2: '方向：AI 工程与系统能力',
-      heroSignal3: '正在寻找 2026 软件 / AI 工程实习',
-      ctaResume: '查看简历 PDF',
+      heroLead: '威斯康星大学麦迪逊分校的计算机科学与数据科学学生，正在构建 AI 产品、后端系统和开发者工具。我将原型快速转化为可展示、可落地的产品级演示，覆盖全栈应用、自动化流水线与计算机视觉流程。',
+      heroSignal1: '当前重点：羽毛球 AI 追踪',
+      heroSignal2: '方向：AI 工程 + 系统',
+      heroSignal3: '正在开放 2026 SWE/AI 实习机会',
+      flipHint: '点击翻转',
+      profileSnapshotTitle: '个人速览',
+      profileName: '康景威（William）',
+      profileSchool: '威斯康星大学麦迪逊 · 大三',
+      profileDegree: '计算机科学 + 数据科学（双学位）',
+      profileGraduation: '预计毕业：2027 年 5 月',
+      profileGpa: 'GPA：3.91',
+      profileFocus: '方向：AI、后端与数据系统',
+      profileMiniTagSchool: '威斯康星大学麦迪逊 · 2027',
+      profileMiniTagGpa: 'GPA：3.91',
+      profileMiniInstagram: 'Instagram：@williamkangcw',
+      uwMiniTitle: '威斯康星大学麦迪逊 CS 优势',
+      uwMiniStanding: '我目前是威斯康星大学麦迪逊分校的大三本科生。',
+      uwRankOverall: '全校第16名 CS',
+      uwRankPublic: '公立大学第9名 CS',
+      uwRankSystems: '系统方向第6名',
+      uwRankLanguages: '编程语言方向第15名',
+      uwRankAI: '人工智能方向第23名',
+      uwPointSystems: '具备扎实的系统深度与研究导向。',
+      uwPointExecution: '通过严谨的 CS 训练实现高质量工程执行。',
+      uwSource: 'U.S. News + UW CS + CSRankings（UW 来源）',
+      ctaResume: '简历 PDF',
       ctaEmail: '复制邮箱',
       ctaGithub: '查看 GitHub',
-      ctaLinkedIn: '领英主页',
+      ctaLinkedIn: '领英',
       ctaDevpost: 'Devpost',
       ctaBook: '预约 30 分钟交流',
       ctaMore: '更多作品',
       snapshotTitle: '速览',
-      snapshotEducationLabel: '教育背景',
-      snapshotEducationValue: '威斯康星大学麦迪逊分校大三，计算机科学 + 数据科学双专业（2027）',
-      snapshotFocusLabel: '技术方向',
+      snapshotEducationLabel: '教育',
+      snapshotEducationValue: '大三，计算机科学 + 数据科学双学位（2027）',
+      snapshotFocusLabel: '方向',
       snapshotFocusValue: 'AI 工程 · 后端系统 · 数据流水线 · 产品交付',
-      snapshotTechLabel: '核心技术',
+      snapshotTechLabel: '技术',
       snapshotTechValue: 'TypeScript · Python · Node.js',
       snapshotAuthLabel: '美国工作授权',
       snapshotAuthValue: '有',
-      snapshotSponsorLabel: '未来签证支持',
-      snapshotSponsorValue: '需要（未来）',
+      snapshotSponsorLabel: '签证支持',
+      snapshotSponsorValue: '未来有',
       educationTitle: '教育背景',
-      educationDesc: '2023–2024 年就读于<span class="keyword-highlight">乔治·华盛顿大学</span>，学习<span class="keyword-highlight">数据科学</span>；2025–2027 年转学至<span class="keyword-highlight">威斯康星大学麦迪逊分校</span>，攻读<span class="keyword-highlight">计算机科学与数据科学双专业</span>。<span class="keyword-highlight">GPA：3.91</span>，<span class="keyword-highlight">预计 2027 年 5 月毕业</span>。',
+      educationDesc: '在 <span class="keyword-highlight">乔治·华盛顿大学</span>（2023–2024）学习 <span class="keyword-highlight">数据科学</span>，随后于 2025–2027 年转入 <span class="keyword-highlight">威斯康星大学麦迪逊分校</span>，攻读 <span class="keyword-highlight">计算机科学与数据科学双学位</span>。<span class="keyword-highlight">GPA：3.91</span>。<span class="keyword-highlight">预计 2027 年 5 月毕业</span>。',
       statsProjects: '重点项目',
-      statsExperience: '相关经验（年）',
-      experienceTitle: '经历与技术重点',
-      exp1Title: '全栈开发与 AI',
-      exp1Desc: '曾以项目负责人身份推进 Next.js / TypeScript / Node.js / PostgreSQL 的全栈交付，并落地 AI 文档处理流程与 LLM 集成产品功能。',
+      statsExperience: '经验年限',
+      experienceTitle: '经历与重点',
+      exp1Title: '全栈与 AI',
+      exp1Desc: '作为项目负责人，主导 Next.js/TypeScript/Node.js/PostgreSQL 的全栈交付，构建 AI 助理文档处理流程，并集成 LLM 产品功能。',
       exp2Title: '数据流水线',
-      exp2Desc: '使用 BeautifulSoup、Requests 与 Pandas 构建 Python 数据采集流程，累计处理超过 50,000 条记录。',
-      exp3Title: '开源工具与工程产品化',
-      exp3Desc: '持续打造实用型 AI 与开发者工具，聚焦本地 LLM 可用性、评测能力与面向产品的工程落地。',
+      exp2Desc: '使用 Python（BeautifulSoup、Requests、Pandas）构建数据采集流水线，处理超过 50,000 条记录。',
+      exp3Title: '开源工具化',
+      exp3Desc: '持续交付实用型 AI 与开发者工具，重点覆盖本地 LLM 可用性、评估和面向产品的工程化。',
       workTitle: '工作经历',
-      workNotePrefix: '共 5 段数据、研究与运营相关经历（2024 年 6 月 - 2025 年 8 月）。来源：',
+      workNotePrefix: '共 6 段经历：数据、研究、运营与全栈工程方向（2024 年 6 月 - 至今）。来源：',
       workNoteLink: 'LinkedIn',
+      work1Title: '全栈工程实习生 · Global AI（Global API Inc.）',
+      work1Period: '2026 年 1 月 - 至今 · 6+ 个月 · 纽约，美国',
+      work1Desc: '在纽约参与 AI 与平台工程开发，独立交付从 Next.js/TypeScript 前端到 Node.js + FastAPI 后端、PostgreSQL 与 Redis 的端到端特性；构建安全角色体系、可观测性与数据监控能力，并通过 GitHub Actions 落地每周发布的 CI/CD 流程。',
+      work2Title: '维修技师 · 威斯康星大学麦迪逊',
+      work2Period: '2025 年 5 月 - 2025 年 8 月 · 3 个月 · 麦迪逊，美国',
+      work3Title: '研究助理 · 中国科学技术协会',
+      work3Period: '2024 年 12 月 - 2025 年 2 月 · 2 个月',
+      work3Desc: '参与研究国家级关键技术人才配置机制的项目，支持数据采集、政策对比分析与研究报告编写。',
+      work4Title: '数据采集与录入 · Marcus Harris Foundation',
+      work4Period: '2024 年 10 月 - 2024 年 12 月 · 2 个月 · 美国',
+      work4Desc: '使用 Python 自动化 IRS 非营利组织数据采集流程，并将大量数据整理进结构化奖学金数据库。',
+      work5Title: '数据分析与自动化实习生 · Springer Capital',
+      work5Period: '2024 年 8 月 - 2024 年 10 月 · 2 个月 · 芝加哥，美国',
+      work5Desc: '通过 Excel、SQL 与 Python 进行数据采集与分析，利用自动化与可视化报告推进流程改进。',
+      work6Title: '数据分析师 · Chihuo Inc',
+      work6Period: '2024 年 6 月 - 2024 年 9 月 · 3 个月',
+      work6Desc: '开展北美亚洲美食市场研究，结合 Python 与 Excel 输出数据驱动洞察。',
+      openSourceTitle: '开源 PR',
+      openSourceNote: '47 个已合并 + 52 个进行中 PR，覆盖 GitHub、Docker、Microsoft、NVIDIA、ESLint、Vitest 等成熟开源项目，证明我具备 maintainer 评审、CI 流程和面向交付能力的协作经验。',
+      openSourceMerged: '47 个已合并 PR',
+      openSourceActive: '52 个进行中 PR',
+      openSourceWorkflow: '真实 maintainer 评审 + CI 流程',
       projectsTitle: '项目',
+      projectTechLabel: '技术：',
+      projectImpactLabel: '影响：',
+      project1Tech: 'Gemini Live、多模态语音交互、动态视觉。',
+      project1Impact: '交付了一个生产风格的实时叙事演示，支持回合制玩法与实时 AI 回答。',
+      project1Date: '最后更新：2026-03-16 16:44 UTC',
+      project2Tech: 'AI 文档分析、流程自动化、租户工具。',
+      project2Impact: '将租赁审核与检查报告流程转化为更快、可用性更高的租房工作流。',
+      project2Date: '最后更新：2026-03-10 08:50 UTC',
+      project3Subtitle: 'AI 辅助的团体餐厅发现',
+      project3Tech: 'Next.js、React、Python、FastAPI、Google Gemini、Google Maps。',
+      project3Impact: '构建 AI 餐厅发现产品，将小组偏好、位置与自然语言输入转化为可解释推荐。',
+      project3Date: '最后更新：2026-04-11',
+      project4Tech: '多智能体编排、桌面工作流、研究工具。',
+      project4Impact: '支持实际研究和写作任务，构建了超越单一提示词演示的协同智能体流水线。',
+      project4Date: '最后更新：2026-03-14 07:55 UTC',
+      project5Tech: 'Python、计算机视觉、球员追踪、姿态叠加、羽毛球回收。',
+      project5Impact: '产出稳定的双人羽毛球可视化展示，并生成可用于演示的比赛分析结果。',
+      project5Date: '最后更新：2026-03-27',
+      project6Subtitle: 'DreamerV3 vs PPO 在 NES Mario 上的对比测试，优先选择右侧通关路径',
+      project6Tech: 'Python、强化学习、DreamerV3、PPO、实验诊断。',
+      project6Impact: '对 Super Mario Bros 1-1 进行两种 RL 方法基准测试，完整记录工程过程，并发布 PPO 基线，能以右侧更优通关路径清关。',
+      project6Date: '最后更新：2026-04-27 08:33 UTC',
+      project6BestRun: '最佳演示 MP4',
+      project7Subtitle: '实时神经信号可视化 MVP',
+      project7Tech: 'Python、Streamlit、实时信号流水线、交互式可视化。',
+      project7Impact: '构建端到端脑机接口 MVP，用于采集、检查与展示神经信号，用于应用机器学习原型。',
+      project7Date: '最后更新：2026-04',
+      project8Tech: 'LLM tracing、延迟日志、成本分析。',
+      project8Impact: '通过失败、延迟和成本可见性，降低实验排障难度并便于优化。',
+      project8Date: '最后更新：2026-03-16 15:33 UTC',
+      project9Tech: '本地 LLM 资源匹配、指令生成。',
+      project9Impact: '帮助用户将设备资源约束快速映射为可运行模型与命令选择。',
+      project9Date: '最后更新：2026-03-18 04:22 UTC',
+      project10Subtitle: 'AI 助手 + 纸上交易运营仪表盘',
+      project10Tech: '评测、经济追踪、运营面板。',
+      project10Impact: '将 AI 助手协作与 paper-trading 运营整合到一个面向生产的界面。',
+      project10Date: '最后更新：2026-03-19 10:10 UTC',
+      projectsIndicator: '显示 {{start}}-{{end}} / {{total}}',
       projectsMore: '查看更多项目',
-      projectsNote: '精选项目聚焦于 AI 工具、真实产品交付能力，以及可部署的工程实践。',
+      projectsBack: '返回前 6 个',
+      projectsAllShown: '全部项目已展示',
+      projectsNote: '精选项目聚焦 AI 工具、实际产品交付与可部署工程实践。',
       certificatesTitle: '证书',
+      certificate1Meta: 'Google · 2026 年 4 月颁发',
+      certificate1Title: '研究与洞察 AI',
+      certificate1Desc: 'Google 证书，聚焦 AI 在研究流程、洞察生成和实践知识工作的加速应用。',
+      certificate2Meta: 'Google · 2026 年 4 月颁发',
+      certificate2Title: 'Google 数据分析师认证',
+      certificate2Desc: '展示数据分析基础知识与流程，结合基于 Python 的问题解决能力。',
+      certificate3Meta: 'Google · 2026 年 4 月颁发',
+      certificate3Title: 'Google AI Essentials',
+      certificate3Desc: '覆盖 AI 核心概念以及现代 AI 工具的实用使用，增强工程与生产力。',
+      certificate4Meta: 'Anthropic · 2026 年 4 月颁发 · 2036 年 12 月到期',
+      certificate4Title: '基于 Claude API 的开发',
+      certificate4Desc: '验证使用 Anthropic API 构建应用与面向生产的 AI 集成实践。',
+      certificate5Meta: 'Anthropic · 2026 年 4 月颁发 · 2036 年 12 月到期',
+      certificate5Title: 'AI 流畅度：框架与基础',
+      certificate5Desc: '聚焦 AI 框架、基础概念以及理解现代 AI 系统构建与应用的结构化认知。',
+      certificate6Meta: 'Anthropic · 2026 年 4 月颁发 · 2036 年 12 月到期',
+      certificate6Title: 'AI 的能力与局限',
+      certificate6Desc: '强调模型优势、约束与现实工程决策中的 AI 评估能力。',
+      certificate7Meta: 'Anthropic · 2026 年 4 月颁发 · 2036 年 12 月到期',
+      certificate7Title: 'Claude 101',
+      certificate7Desc: '面向 Claude 的入门认证，覆盖交互流程、提示词模式与面向智能体的实际使用。',
+      certificate8Meta: 'Anthropic · 2026 年 4 月颁发 · 2036 年 12 月到期',
+      certificate8Title: 'Claude 与 Google Vertex AI',
+      certificate8Desc: '展示在 Google Vertex AI 上部署和使用 Claude 的经验，包含云端 AI 集成流程。',
+      certificatesIndicator: '显示 {{start}}-{{end}} / {{total}}',
       certificatesMore: '下一页',
-      certificatesNote: '默认优先展示最新证书，信息来源以 LinkedIn 为准，旧证书可翻页查看。',
-      contactTitle: '联系我',
+      certificatesAllShown: '全部证书已展示',
+      certificatesNote: '默认优先展示最新证书，事实来源以 LinkedIn 为准，历史证书可翻页查看。',
+      contactTitle: '联系',
       contactEmail: '复制邮箱',
       contactResume: '简历 PDF',
-      contactLinkedIn: '领英主页',
+      contactGitHub: 'GitHub @WilliamK112',
+      contactLinkedIn: '领英',
       contactDevpost: 'Devpost',
-      messageTitle: '给我留言',
-      messageDesc: '我目前开放软件工程实习与项目合作机会，欢迎留下信息，我会尽快回复。',
+      messageTitle: '留言',
+      messageDesc: '我目前对软件工程实习和项目合作持开放态度。留下简短留言，我会尽快回复。',
       formEmailLabel: '你的邮箱',
       formEmailPlaceholder: 'you@example.com',
       formMessageLabel: '留言内容',
-      formMessagePlaceholder: '写下你想说的话...',
+      formMessagePlaceholder: '写下你的内容...',
       formSend: '发送',
-      meetingTitle: '预约交流',
-      meetingDesc: '你可以直接在我的日程中预约一场 30 分钟的交流。',
-      meetingBtn: '预约会议'
+      meetingTitle: '安排见面',
+      meetingDesc: '在我的日程里直接预约 30 分钟会话。',
+      meetingBtn: '预约会议',
+      formSending: '发送中...',
+      formMissingFields: '请填写邮箱和留言内容。',
+      formSent: '已发送，感谢你的留言。',
+      formFailed: '发送失败，请稍后重试。',
+      copyEmailSuccess: '已复制邮箱',
+      copyEmailFailed: '复制失败',
+      projectTryOut: '立即体验',
+      projectGitHub: 'GitHub',
     }
   };
 
+  function getDictionary(lang) {
+    return translations[lang] || translations.en || {};
+  }
+
+  function interpolate(template, vars) {
+    if (!vars || typeof template !== 'string') return template;
+    return template.replace(/{{\s*(\w+)\s*}}/g, (match, key) => {
+      return vars[key] !== undefined ? vars[key] : match;
+    });
+  }
+
+  function getText(key, vars = null) {
+    const lang = document.documentElement.lang === 'zh-CN' ? 'zh' : 'en';
+    const dict = getDictionary(lang);
+    const raw = dict[key] !== undefined ? dict[key] : translations.en[key];
+    return interpolate(raw || key, vars);
+  }
+
   function applyLanguage(lang) {
-    const dict = translations[lang] || translations.en;
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    const isZh = lang === 'zh';
+    const dict = getDictionary(lang);
+
     document.querySelectorAll('[data-i18n]').forEach((node) => {
       const key = node.getAttribute('data-i18n');
-      if (!key || !(key in dict)) return;
-      node.innerHTML = dict[key];
+      if (!key) return;
+      const value = dict[key] !== undefined ? dict[key] : translations.en[key];
+      if (value !== undefined) node.innerHTML = value;
     });
+
     document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
       const key = node.getAttribute('data-i18n-placeholder');
-      if (!key || !(key in dict)) return;
-      node.setAttribute('placeholder', dict[key]);
+      if (!key) return;
+      const value = dict[key] !== undefined ? dict[key] : translations.en[key];
+      if (value !== undefined) node.setAttribute('placeholder', value);
     });
-    const isZh = lang === 'zh';
+
     toggle.setAttribute('aria-pressed', isZh ? 'true' : 'false');
-    toggle.setAttribute('aria-label', isZh ? 'Switch to English' : 'Switch to Chinese');
-    toggle.textContent = isZh ? 'EN' : '中文';
+    toggle.setAttribute('aria-label', isZh ? getText('langAriaToEnglish') : getText('langAriaToChinese'));
+    toggle.textContent = isZh ? (dict.langButtonText || 'EN') : (translations.en.langButtonText || '中文');
+    window.localStorage.setItem(storageKey, lang);
+    window.dispatchEvent(new CustomEvent('portfolio-language-changed', {
+      detail: { lang }
+    }));
+
+    if (window.__portfolioTheme && typeof window.__portfolioTheme.applyTheme === 'function' && document.body) {
+      window.__portfolioTheme.applyTheme(document.body.dataset.theme || 'dark');
+    }
   }
+
+  window.__portfolioI18n = {
+    getText,
+    interpolate,
+    getCurrentLang: () => (document.documentElement.lang === 'zh-CN' ? 'zh' : 'en'),
+    translations
+  };
 
   applyLanguage(initialLang);
 
   toggle.addEventListener('click', () => {
     const next = document.documentElement.lang === 'zh-CN' ? 'en' : 'zh';
     applyLanguage(next);
-    window.localStorage.setItem(storageKey, next);
   });
 })();
-
 // Minimal JS to integrate small accessibility tweaks.
 (function optimizeTabOrder() {
   const skip = document.querySelector('.skip-link');
@@ -480,10 +632,13 @@
   const form = document.querySelector('.message-form');
   const status = document.getElementById('form-status');
   if (!form || !status) return;
+  const getText = window.__portfolioI18n && typeof window.__portfolioI18n.getText === 'function'
+    ? window.__portfolioI18n.getText
+    : null;
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    status.textContent = 'Sending...';
+    status.textContent = getText ? getText('formSending') : 'Sending...';
     status.className = 'form-status';
 
     const emailInput = document.getElementById('sender-email');
@@ -492,7 +647,7 @@
     const message = messageInput && 'value' in messageInput ? messageInput.value.trim() : '';
 
     if (!email || !message) {
-      status.textContent = 'Please enter both your email and message.';
+      status.textContent = getText ? getText('formMissingFields') : 'Please enter both your email and message.';
       status.className = 'form-status error';
       return;
     }
@@ -516,10 +671,10 @@
       if (!response.ok) throw new Error('Request failed');
 
       form.reset();
-      status.textContent = 'Message sent. Thank you!';
+      status.textContent = getText ? getText('formSent') : 'Message sent. Thank you!';
       status.className = 'form-status success';
     } catch (error) {
-      status.textContent = 'Send failed. Please try again in a moment.';
+      status.textContent = getText ? getText('formFailed') : 'Send failed. Please try again in a moment.';
       status.className = 'form-status error';
     }
   });
@@ -541,6 +696,9 @@
 (function setupCopyEmailButtons() {
   const buttons = document.querySelectorAll('[data-copy-email]');
   if (!buttons.length) return;
+  const getText = window.__portfolioI18n && typeof window.__portfolioI18n.getText === 'function'
+    ? window.__portfolioI18n.getText
+    : null;
 
   buttons.forEach((button) => {
     const originalText = button.textContent || 'Copy Email';
@@ -550,14 +708,14 @@
 
       try {
         await navigator.clipboard.writeText(email);
-        button.textContent = document.documentElement.lang === 'zh-CN' ? '已复制邮箱' : 'Copied Email';
+        button.textContent = getText ? getText('copyEmailSuccess') : (document.documentElement.lang === 'zh-CN' ? '已复制邮箱' : 'Copied Email');
         button.classList.add('copied');
         window.setTimeout(() => {
           button.textContent = originalText;
           button.classList.remove('copied');
         }, 1600);
       } catch (error) {
-        button.textContent = email;
+        button.textContent = getText ? getText('copyEmailFailed') : (document.documentElement.lang === 'zh-CN' ? '复制失败' : 'Copy failed');
         button.classList.add('copied');
         window.setTimeout(() => {
           button.textContent = originalText;
@@ -573,6 +731,9 @@
   const btn = document.querySelector('[data-project-more]');
   const indicator = document.querySelector('[data-project-indicator]');
   if (!grid || !btn) return;
+  const getText = window.__portfolioI18n && typeof window.__portfolioI18n.getText === 'function'
+    ? window.__portfolioI18n.getText
+    : null;
 
   const cards = Array.from(grid.querySelectorAll('.project-card'));
   const pageSize = 6;
@@ -600,16 +761,27 @@
 
     const start = page * pageSize;
     const end = Math.min(start + pageSize, total);
-    if (indicator) indicator.textContent = `Showing ${total ? start + 1 : 0}-${end} / ${total}`;
+    if (indicator) {
+      const label = getText
+        ? getText('projectsIndicator', { start: total ? start + 1 : 0, end, total })
+        : `Showing ${total ? start + 1 : 0}-${end} / ${total}`;
+      indicator.textContent = label;
+    }
 
     if (totalPages <= 1) {
-      btn.textContent = 'All Projects Shown';
+      btn.textContent = getText ? getText('projectsAllShown') : 'All Projects Shown';
       btn.disabled = true;
     } else {
-      btn.textContent = page === totalPages - 1 ? 'Back to First 6' : 'Show More Projects';
+      btn.textContent = page === totalPages - 1 ? (getText ? getText('projectsBack') : 'Back to First 6') : (getText ? getText('projectsMore') : 'Show More Projects');
       btn.disabled = false;
     }
   }
+
+  function refreshLanguageText() {
+    applyPage(currentPage, false);
+  }
+
+  window.addEventListener('portfolio-language-changed', refreshLanguageText);
 
   btn.addEventListener('click', () => {
     if (totalPages <= 1 || isAnimating) return;
@@ -647,6 +819,9 @@
   const btn = document.querySelector('[data-certificate-more]');
   const indicator = document.querySelector('[data-certificate-indicator]');
   if (!grid || !btn) return;
+  const getText = window.__portfolioI18n && typeof window.__portfolioI18n.getText === 'function'
+    ? window.__portfolioI18n.getText
+    : null;
 
   const cards = Array.from(grid.querySelectorAll('[data-certificate-card]'));
   const pageSize = 3;
@@ -662,14 +837,26 @@
       card.style.display = idx >= start && idx < end ? '' : 'none';
     });
 
-    if (indicator) indicator.textContent = `Showing ${total ? start + 1 : 0}-${Math.min(end, total)} / ${total}`;
+    if (indicator) {
+      const currentEnd = Math.min(end, total);
+      const label = getText
+        ? getText('certificatesIndicator', { start: total ? start + 1 : 0, end: currentEnd, total })
+        : `Showing ${total ? start + 1 : 0}-${currentEnd} / ${total}`;
+      indicator.textContent = label;
+    }
     btn.disabled = totalPages <= 1;
     if (totalPages <= 1) {
-      btn.textContent = document.documentElement.lang === 'zh-CN' ? '已显示全部' : 'All Certificates Shown';
+      btn.textContent = getText ? getText('certificatesAllShown') : (document.documentElement.lang === 'zh-CN' ? '已显示全部' : 'All Certificates Shown');
     } else {
-      btn.textContent = document.documentElement.lang === 'zh-CN' ? '下一页' : 'Next Page';
+      btn.textContent = getText ? getText('certificatesMore') : (document.documentElement.lang === 'zh-CN' ? '下一页' : 'Next Page');
     }
   }
+
+  function refreshLanguageText() {
+    applyPage(currentPage);
+  }
+
+  window.addEventListener('portfolio-language-changed', refreshLanguageText);
 
   btn.addEventListener('click', () => {
     if (totalPages <= 1) return;
@@ -899,3 +1086,5 @@
     pointerStart = null;
   });
 })();
+
+

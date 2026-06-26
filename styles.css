@@ -1562,14 +1562,37 @@ body[data-theme="light"] .keyword-highlight {
   box-shadow: 0 12px 24px rgba(79, 224, 178, 0.14);
   background: linear-gradient(135deg, rgba(137, 247, 209, 0.16), rgba(142, 167, 255, 0.14));
 }
+.open-source-chip-enterprise {
+  border-color: color-mix(in srgb, var(--accent) 60%, #0b2440 40%);
+  background: linear-gradient(135deg, rgba(79, 224, 178, 0.22), rgba(142, 167, 255, 0.22));
+  box-shadow: 0 12px 24px rgba(79, 224, 178, 0.2);
+}
+.open-source-chip-enterprise:hover,
+.open-source-chip-enterprise:focus-visible {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 72%, white 28%);
+  box-shadow: 0 14px 28px rgba(79, 224, 178, 0.26);
+  background: linear-gradient(135deg, rgba(137, 247, 209, 0.24), rgba(142, 167, 255, 0.24));
+}
 body[data-theme="light"] .open-source-chip {
   background: linear-gradient(135deg, rgba(212, 166, 58, 0.13), rgba(184, 134, 11, 0.09));
   border-color: rgba(184, 134, 11, 0.22);
+}
+body[data-theme="light"] .open-source-chip-enterprise {
+  border-color: rgba(143, 104, 5, 0.38);
+  background: linear-gradient(135deg, rgba(236, 182, 54, 0.22), rgba(168, 118, 16, 0.18));
+  box-shadow: 0 12px 22px rgba(168, 118, 16, 0.16);
 }
 body[data-theme="light"] .open-source-chip:hover,
 body[data-theme="light"] .open-source-chip:focus-visible {
   border-color: rgba(184, 134, 11, 0.4);
   box-shadow: 0 12px 24px rgba(184, 134, 11, 0.14);
+}
+body[data-theme="light"] .open-source-chip-enterprise:hover,
+body[data-theme="light"] .open-source-chip-enterprise:focus-visible {
+  border-color: rgba(168, 118, 16, 0.5);
+  box-shadow: 0 14px 28px rgba(168, 118, 16, 0.22);
+  background: linear-gradient(135deg, rgba(236, 182, 54, 0.28), rgba(168, 118, 16, 0.24));
 }
 
 #certificates {
