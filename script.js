@@ -331,6 +331,7 @@
       openSourceMerged: '已核验 merged PR',
       openSourceActive: '不放 pending 链接',
       openSourceWorkflow: '真实 maintainer 评审 + CI 流程',
+      openSourceMore: '查看更多 PR',
       projectsTitle: '项目',
       projectTechLabel: '技术：',
       projectImpactLabel: '影响：',
