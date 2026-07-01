@@ -1433,6 +1433,19 @@ body[data-theme="light"] .keyword-highlight {
   text-transform: uppercase;
   color: color-mix(in srgb, var(--muted) 78%, white 22%);
 }
+.projects-more-work {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.projects-more-work .section-note {
+  margin: 0;
+}
+.projects-more-work .btn {
+  flex: 0 0 auto;
+}
 .project-more-btn {
   min-width: 132px;
   position: relative;
@@ -2104,6 +2117,10 @@ section[data-scroll-reveal].is-visible {
   }
   .hero-cta {
     transform: translateY(calc(var(--hero-progress) * -8px));
+  }
+  .projects-more-work {
+    align-items: flex-start;
+    flex-direction: column;
   }
   #work,
   #projects {
