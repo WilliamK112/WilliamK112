@@ -1623,6 +1623,71 @@ body[data-theme="light"] .open-source-chip-enterprise:focus-visible {
   background: linear-gradient(135deg, rgba(236, 182, 54, 0.28), rgba(168, 118, 16, 0.24));
 }
 
+.github-contrib-section {
+  display: grid;
+  gap: 1rem;
+}
+.github-contrib-link {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+.github-contrib-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+  gap: 0.9rem;
+  align-items: stretch;
+}
+.github-contrib-panel {
+  position: relative;
+  min-width: 0;
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 24%, var(--line));
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(137, 247, 209, 0.1), rgba(142, 167, 255, 0.08)),
+    rgba(255, 255, 255, 0.035);
+  overflow: hidden;
+}
+.github-contrib-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.16), transparent 42%);
+  opacity: 0.5;
+}
+.github-contrib-panel img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  object-fit: contain;
+}
+.github-contrib-panel-hero img {
+  aspect-ratio: 16 / 8;
+  object-fit: cover;
+}
+.github-contrib-panel figcaption {
+  position: relative;
+  z-index: 1;
+  margin-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.github-contrib-stats {
+  margin-top: 0;
+}
+body[data-theme="light"] .github-contrib-panel {
+  border-color: rgba(184, 134, 11, 0.2);
+  background:
+    linear-gradient(135deg, rgba(236, 182, 54, 0.14), rgba(98, 128, 180, 0.09)),
+    rgba(255, 255, 255, 0.66);
+}
+
 #certificates {
   margin-top: 2.5rem;
 }
@@ -1996,6 +2061,7 @@ section[data-scroll-reveal].is-visible {
 @media (max-width: 940px) {
   .grid-2 { grid-template-columns: 1fr; }
   .project-grid, .focus-grid, .ability-grid, .certificate-grid { grid-template-columns: 1fr; }
+  .github-contrib-grid { grid-template-columns: 1fr; }
   .recruiter-snapshot li { flex-direction: column; }
   .recruiter-snapshot strong { text-align: left; }
   .stats > div { min-height: auto; }
