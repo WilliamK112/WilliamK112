@@ -403,6 +403,7 @@
       certificatesIndicator: '显示 {{start}}-{{end}} / {{total}}',
       certificatesMore: '下一页',
       certificatesAllShown: '全部证书已展示',
+      certificatesProof: '索取证书凭证',
       contactTitle: '联系',
       contactEmail: '复制邮箱',
       contactResume: '简历 PDF',

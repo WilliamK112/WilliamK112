@@ -1672,6 +1672,11 @@ body[data-theme="light"] .open-source-chip-enterprise:focus-visible {
   letter-spacing: 0.08em;
   color: color-mix(in srgb, var(--muted) 75%, white 25%);
 }
+.certificate-actions {
+  margin-top: 0.85rem;
+  display: flex;
+  justify-content: flex-end;
+}
 
 .ability-grid {
   margin-top: 1rem;
