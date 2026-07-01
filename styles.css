@@ -1086,6 +1086,26 @@ h1 {
 .card:focus-within {
   border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
 }
+.education-card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  padding: 0.2rem 0 0;
+}
+.education-card:hover {
+  transform: none;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+body[data-theme="light"] .education-card,
+body[data-theme="light"] .education-card:hover {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
 h2 {
   margin: 0;
   font-family: "Cormorant Garamond", serif;

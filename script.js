@@ -1087,4 +1087,144 @@
   });
 })();
 
+(function setupSpatialDepthCards() {
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
 
+  if (!document.getElementById('spatial-depth-styles')) {
+    const style = document.createElement('style');
+    style.id = 'spatial-depth-styles';
+    style.textContent = `
+.spatial-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --tilt-lift: 0px;
+  --glare-x: 50%;
+  --glare-y: 35%;
+  --glare-opacity: 0;
+  position: relative;
+  isolation: isolate;
+  transform: perspective(1000px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translate3d(0, var(--tilt-lift), 0);
+  transform-style: preserve-3d;
+  transition: transform 260ms cubic-bezier(.2,.7,.2,1), border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+  will-change: transform;
+}
+.spatial-card::before,
+.spatial-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 2;
+}
+.spatial-card::before {
+  background:
+    radial-gradient(circle at var(--glare-x) var(--glare-y),
+      rgba(255, 255, 255, 0.28),
+      rgba(255, 255, 255, 0.1) 18%,
+      transparent 48%);
+  opacity: var(--glare-opacity);
+  mix-blend-mode: screen;
+  transition: opacity 240ms ease;
+}
+.spatial-card::after {
+  padding: 1px;
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.26),
+      transparent 18%,
+      transparent 72%,
+      color-mix(in srgb, var(--accent) 28%, transparent));
+  opacity: calc(0.2 + (var(--glare-opacity) * 0.28));
+  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+  mask-composite: exclude;
+}
+.spatial-card.is-spatial-active {
+  --tilt-lift: -5px;
+  border-color: color-mix(in srgb, var(--accent) 46%, var(--line));
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.28),
+    0 18px 42px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.spatial-card > :not(.uw-logo-glow) {
+  position: relative;
+  z-index: 3;
+}
+.spatial-card .profile-flip-card,
+.spatial-card .uw-flip-card,
+.spatial-card .project-flip-inner,
+.spatial-card h2,
+.spatial-card h3,
+.spatial-card .big {
+  transform: translateZ(22px);
+}
+.spatial-card p,
+.spatial-card li,
+.spatial-card .label,
+.spatial-card .certificate-meta {
+  transform: translateZ(12px);
+}`;
+    document.head.appendChild(style);
+  }
+
+  const candidates = Array.from(document.querySelectorAll([
+    '.portrait-frame',
+    '.uw-logo-showcase',
+    '.card:not(.education-card)',
+    '.stats > div',
+    '.project-card',
+    '.certificate-card',
+    '.ability-grid article'
+  ].join(',')));
+  if (!candidates.length) return;
+
+  const maxTilt = 8;
+  const resetDelayMs = 120;
+
+  candidates.forEach((card) => {
+    card.classList.add('spatial-card');
+
+    let resetTimer = 0;
+
+    function resetCard() {
+      card.classList.remove('is-spatial-active');
+      card.style.setProperty('--tilt-x', '0deg');
+      card.style.setProperty('--tilt-y', '0deg');
+      card.style.setProperty('--glare-opacity', '0');
+    }
+
+    card.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch') return;
+      window.clearTimeout(resetTimer);
+
+      const rect = card.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+
+      const localX = (event.clientX - rect.left) / rect.width;
+      const localY = (event.clientY - rect.top) / rect.height;
+      const rotateY = (localX - 0.5) * maxTilt;
+      const rotateX = (0.5 - localY) * maxTilt;
+
+      card.classList.add('is-spatial-active');
+      card.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`);
+      card.style.setProperty('--tilt-y', `${rotateY.toFixed(2)}deg`);
+      card.style.setProperty('--glare-x', `${(localX * 100).toFixed(2)}%`);
+      card.style.setProperty('--glare-y', `${(localY * 100).toFixed(2)}%`);
+      card.style.setProperty('--glare-opacity', '1');
+    }, { passive: true });
+
+    card.addEventListener('pointerleave', () => {
+      resetTimer = window.setTimeout(resetCard, resetDelayMs);
+    }, { passive: true });
+
+    card.addEventListener('focusin', () => {
+      card.classList.add('is-spatial-active');
+      card.style.setProperty('--tilt-x', '-2deg');
+      card.style.setProperty('--tilt-y', '2deg');
+      card.style.setProperty('--glare-opacity', '0.5');
+    });
+
+    card.addEventListener('focusout', resetCard);
+  });
+})();
