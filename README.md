@@ -1,6 +1,6 @@
 # William Kang (Ching-Wei Kang)
 
-Portfolio: [williamkang.com](https://williamkang.com/) · [Resume](https://williamkang.com/william-kang-resume.html) · [Projects](https://williamkang.com/william-kang-projects.html)
+Portfolio: [williamkang.com](https://williamkang.com/) · [Resume](https://williamkang.com/assets/Ching-Wei-Kang-Resume.pdf) · [Projects](https://williamkang.com/#projects)
 
 **CS + Data Science @ UW-Madison (2027)** · Software engineering candidate focused on full-stack systems, data systems, and applied machine learning
 
