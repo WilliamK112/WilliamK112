@@ -1665,6 +1665,18 @@ body[data-theme="light"] .open-source-chip-enterprise:focus-visible {
   margin-top: 0.55rem;
   line-height: 1.6;
 }
+.certificate-link {
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  color: var(--accent-2);
+  font-size: 0.88rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+.certificate-link:hover {
+  color: var(--accent);
+}
 .certificate-meta {
   margin: 0;
   font-size: 0.78rem;
@@ -1672,12 +1684,6 @@ body[data-theme="light"] .open-source-chip-enterprise:focus-visible {
   letter-spacing: 0.08em;
   color: color-mix(in srgb, var(--muted) 75%, white 25%);
 }
-.certificate-actions {
-  margin-top: 0.85rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .ability-grid {
   margin-top: 1rem;
   display: grid;
