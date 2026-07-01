@@ -403,7 +403,6 @@
       certificatesIndicator: '显示 {{start}}-{{end}} / {{total}}',
       certificatesMore: '下一页',
       certificatesAllShown: '全部证书已展示',
-      certificatesNote: '默认优先展示最新证书；如有 issuer 托管的公开 credential URL，可以直接补到这里。',
       contactTitle: '联系',
       contactEmail: '复制邮箱',
       contactResume: '简历 PDF',
