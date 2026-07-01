@@ -4,9 +4,11 @@ Portfolio: [williamkang.com](https://williamkang.com/) · [Resume](https://willi
 
 **CS + Data Science @ UW-Madison (2027)** · Software engineering candidate focused on full-stack systems, data systems, and applied machine learning
 
-**Merged External OSS Contributions**
-- **github/docs** - merged PR [#43969](https://github.com/github/docs/pull/43969)
-- **NVIDIA/NemoClaw** - merged PR [#1794](https://github.com/NVIDIA/NemoClaw/pull/1794)
+**Selected Merged External OSS Contributions**
+- **Meta / Facebook DotSlash** - verified downloaded release digest in installer flow, merged PR [#16](https://github.com/facebook/install-dotslash/pull/16)
+- **GitHub Docs** - clarified private GitHub Actions reference behavior, merged PR [#43969](https://github.com/github/docs/pull/43969)
+- **NVIDIA NemoClaw** - improved installer help for provider configuration, merged PR [#1794](https://github.com/NVIDIA/NemoClaw/pull/1794)
+- More merged PRs: [GitHub contribution search](https://github.com/pulls?q=is%3Apr+author%3AWilliamK112+is%3Amerged)
 
 <p align="center">
  <a href="https://www.linkedin.com/in/kcw2027/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white&logoWidth=16"></a>
