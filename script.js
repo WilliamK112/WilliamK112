@@ -318,7 +318,7 @@
       workNotePrefix: '共 6 段经历：数据、研究、运营与全栈工程方向（2024 年 6 月 - 至今）。来源：',
       workNoteLink: 'LinkedIn',
       work1Title: '全栈工程实习生 · Global AI（Global API Inc.）',
-      work1Period: '2026 年 1 月 - 至今 · 6+ 个月 · 纽约，美国',
+      work1Period: '2026 年 5 月 - 至今 · 纽约，美国',
       work1Desc: '在纽约参与 AI 与平台工程开发，独立交付从 Next.js/TypeScript 前端到 Node.js + FastAPI 后端、PostgreSQL 与 Redis 的端到端特性；构建安全角色体系、可观测性与数据监控能力，并通过 GitHub Actions 落地每周发布的 CI/CD 流程。',
       work2Title: '维修技师 · 威斯康星大学麦迪逊',
       work2Period: '2025 年 5 月 - 2025 年 8 月 · 3 个月 · 麦迪逊，美国',
