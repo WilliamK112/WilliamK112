@@ -297,7 +297,7 @@
       snapshotFocusLabel: '方向',
       snapshotFocusValue: 'AI 工程 · 后端系统 · 数据流水线 · 产品交付',
       snapshotTechLabel: '技术',
-      snapshotTechValue: 'TypeScript · Python · Node.js',
+      snapshotTechValue: 'TypeScript/JavaScript · Python · React/Next.js · Node/FastAPI · PostgreSQL/Redis · PyTorch/OpenCV · Docker/GitHub Actions/AWS',
       snapshotAuthLabel: '美国工作授权',
       snapshotAuthValue: '有',
       snapshotSponsorLabel: '签证支持',
@@ -590,6 +590,55 @@
   }, { threshold: 0.14, rootMargin: '0px 0px -10% 0px' });
 
   sections.forEach((section) => observer.observe(section));
+})();
+
+(function setupFragmentAssemblyReveal() {
+  const sections = Array.from(document.querySelectorAll('main > section'))
+    .filter((section) => section.id !== 'hero');
+  if (!sections.length) return;
+
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const pieceSelector = [
+    'h2',
+    'h3',
+    '.section-note',
+    '.recruiter-snapshot li',
+    '.timeline li',
+    '.stats > div',
+    '.pill-row span',
+    '.open-source-chip',
+    '.certificate-card',
+    '.contact-actions .btn',
+    '.message-board',
+    '.meeting-card'
+  ].join(',');
+
+  const mediaSelector = [
+    '.project-flip-front',
+    '.portrait-frame',
+    '.uw-logo-showcase'
+  ].join(',');
+
+  sections.forEach((section) => {
+    section.setAttribute('data-fragment-section', '');
+    const pieces = Array.from(section.querySelectorAll(pieceSelector))
+      .filter((node) => !node.closest('[data-fragment-piece]'));
+
+    pieces.forEach((node, index) => {
+      node.setAttribute('data-fragment-piece', '');
+      node.style.setProperty('--fragment-delay', `${Math.min(index * 46, 460)}ms`);
+      node.style.setProperty('--fragment-x', `${((index % 3) - 1) * 16}px`);
+      node.style.setProperty('--fragment-y', `${22 + (index % 4) * 8}px`);
+      node.style.setProperty('--fragment-rot', `${((index % 5) - 2) * 1.8}deg`);
+    });
+
+    Array.from(section.querySelectorAll(mediaSelector)).forEach((node, index) => {
+      node.setAttribute('data-fragment-media', '');
+      node.style.setProperty('--fragment-delay', `${Math.min(index * 58, 360)}ms`);
+    });
+  });
 })();
 
 (function setupProjectCardReveal() {
