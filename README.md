@@ -1,8 +1,8 @@
 # William Kang (Ching-Wei Kang)
 
-Official portfolio: [William Kang (Ching-Wei Kang)](https://williamkang.com/) | William Kang profile: [William Kang (Ching-Wei Kang)](https://williamkang.com/william-kang.html) | Identity page: [About William Kang / Ching-Wei Kang](https://williamkang.com/about-william-kang.html) | Exact-name profile: [Ching-Wei Kang (William Kang)](https://williamkang.com/ching-wei-kang.html) | Projects: [William Kang Projects](https://williamkang.com/william-kang-projects.html) | Resume: [William Kang Resume](https://williamkang.com/william-kang-resume.html)
+Portfolio: [williamkang.com](https://williamkang.com/) · [Resume](https://williamkang.com/william-kang-resume.html) · [Projects](https://williamkang.com/william-kang-projects.html)
 
-**CS + Data Science @ UW-Madison (2027)** · SWE / AI internship candidate building full-stack systems, LLM products, and developer tools
+**CS + Data Science @ UW-Madison (2027)** · Software engineering candidate focused on full-stack systems, data systems, and applied machine learning
 
 **Merged External OSS Contributions**
 - **github/docs** - merged PR [#43969](https://github.com/github/docs/pull/43969)
