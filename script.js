@@ -190,17 +190,54 @@
     return;
   }
 
-  // Keep intro simple: fade out in 0.5s.
-  const holdMs = 900;
-  const fadeMs = 500;
+  const entryVideo = intro.querySelector('[data-entry-video]');
+  const savedHoldFrameVideoTime = Number(window.localStorage.getItem('introHoldFrameVideoTime'));
+  const holdFrameVideoTime = Number.isFinite(savedHoldFrameVideoTime) && savedHoldFrameVideoTime > 0
+    ? savedHoldFrameVideoTime
+    : 0.99;
+  const holdAfterPauseMs = 180;
+  const fallbackMs = 1900;
+  const fadeOutMs = 90;
+  let removed = false;
+  let ending = false;
+  let pausedOnHoldFrame = false;
+  let frameWatcher = 0;
+  let holdTimer = 0;
 
-  window.setTimeout(() => {
-    intro.classList.add('is-end');
-  }, holdMs);
-
-  window.setTimeout(() => {
+  const removeIntro = () => {
+    if (removed) return;
+    removed = true;
+    if (frameWatcher) window.cancelAnimationFrame(frameWatcher);
+    if (holdTimer) window.clearTimeout(holdTimer);
     if (document.body.contains(intro)) intro.remove();
-  }, holdMs + fadeMs + 40);
+  };
+
+  const finishIntro = () => {
+    if (ending || removed) return;
+    ending = true;
+    intro.classList.add('is-fading');
+    window.setTimeout(removeIntro, fadeOutMs);
+  };
+
+  if (entryVideo) {
+    entryVideo.play().catch(() => {});
+    const watchVideoFrame = () => {
+      if (removed || ending) return;
+      if (entryVideo.readyState > 0) {
+        if (!pausedOnHoldFrame && entryVideo.currentTime >= holdFrameVideoTime) {
+          pausedOnHoldFrame = true;
+          entryVideo.pause();
+          intro.classList.add('is-holding');
+          holdTimer = window.setTimeout(finishIntro, holdAfterPauseMs);
+          return;
+        }
+      }
+      frameWatcher = window.requestAnimationFrame(watchVideoFrame);
+    };
+    frameWatcher = window.requestAnimationFrame(watchVideoFrame);
+  }
+
+  window.setTimeout(finishIntro, fallbackMs);
 })();
 
 (function setupLanguageToggle() {
@@ -264,13 +301,10 @@
       heroSignal2: '方向：AI 工程 + 系统',
       heroSignal3: '正在开放 2026 SWE/AI 实习机会',
       flipHint: '点击翻转',
-      profileSnapshotTitle: '个人速览',
-      profileName: '康景威（William）',
+      profileSnapshotTitle: '个人信息',
+      profileName: '康景威（William Kang）',
       profileSchool: '威斯康星大学麦迪逊 · 大三',
-      profileDegree: '计算机科学 + 数据科学（双学位）',
-      profileGraduation: '预计毕业：2027 年 5 月',
       profileGpa: 'GPA：3.91',
-      profileFocus: '方向：AI、后端与数据系统',
       profileMiniTagSchool: '威斯康星大学麦迪逊 · 2027',
       profileMiniTagGpa: 'GPA：3.91',
       profileMiniInstagram: 'Instagram：@williamkangcw',
@@ -302,6 +336,9 @@
       snapshotAuthValue: '有',
       snapshotSponsorLabel: '签证支持',
       snapshotSponsorValue: '未来有',
+      originMapLabel: '身份背景',
+      originMapTitle: '来自台湾，面向全球做工程',
+      originMapDesc: '台湾成长背景，美国工程训练，全球产品视角。',
       educationTitle: '教育背景',
       educationDesc: '在 <span class="keyword-highlight">乔治·华盛顿大学</span>（2023–2024）学习 <span class="keyword-highlight">数据科学</span>，随后于 2025–2027 年转入 <span class="keyword-highlight">威斯康星大学麦迪逊分校</span>，攻读 <span class="keyword-highlight">计算机科学与数据科学双学位</span>。<span class="keyword-highlight">GPA：3.91</span>。<span class="keyword-highlight">预计 2027 年 5 月毕业</span>。',
       statsProjects: '重点项目',
@@ -342,6 +379,9 @@
       project2Impact: '将租赁审核与检查报告流程转化为更快、可用性更高的租房工作流。',
       project2Date: '最后更新：2026-03-10 08:50 UTC',
       project3Subtitle: 'AI 辅助的团体餐厅发现',
+      project3AwardBadge: '获奖项目',
+      projectAwardLabel: '获奖信息：',
+      project3AwardNote: '获奖的团体 AI 餐厅发现项目。',
       project3Tech: 'Next.js、React、Python、FastAPI、Google Gemini、Google Maps。',
       project3Impact: '构建 AI 餐厅发现产品，将小组偏好、位置与自然语言输入转化为可解释推荐。',
       project3Date: '最后更新：2026-04-11',
@@ -374,7 +414,6 @@
       projectsMore: '查看更多项目',
       projectsBack: '返回前 6 个',
       projectsAllShown: '全部项目已展示',
-      projectsNote: '精选项目聚焦 AI 工具、实际产品交付与可部署工程实践。',
       certificatesTitle: '证书',
       certificate1Meta: 'Google · 2026 年 4 月颁发',
       certificate1Title: '研究与洞察 AI',
@@ -866,6 +905,13 @@
   });
 
   applyPage(0, false);
+})();
+
+(function placeCertificatesInAboutColumn() {
+  const slot = document.querySelector('[data-about-certificates-slot]');
+  const certificates = document.querySelector('#certificates');
+  if (!slot || !certificates) return;
+  slot.appendChild(certificates);
 })();
 
 (function setupCertificatePagination() {
