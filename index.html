@@ -14,6 +14,20 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="William Kang (Ching-Wei Kang) | Software Engineer Portfolio">
   <meta name="twitter:description" content="UW-Madison CS + Data Science student focused on software engineering, data systems, and applied machine learning.">
+  <style>
+    html,
+    body {
+      background: #000;
+    }
+    .entry-mask-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: grid;
+      place-items: center;
+      background: #000;
+    }
+  </style>
   <script>
     (function redirectLegacyDomain() {
       const host = window.location.hostname;
@@ -28,9 +42,9 @@
   <link rel="canonical" href="https://williamkang.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Prata&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=signal-field-1">
-    <script defer src="script.js?v=signal-field-1"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Prata&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=taiwan-personal-bg-5">
+    <script defer src="script.js?v=taiwan-personal-bg-5"></script>
 </head>
 <body>
     <div class="noise" aria-hidden="true"></div>
@@ -40,8 +54,10 @@
     <div class="bg-orb bg-orb-2" aria-hidden="true"></div>
     <div class="entry-mask-intro" data-entry-intro aria-hidden="true">
         <div class="entry-mask-title-wrap">
-            <span class="entry-mask-title entry-mask-title-full">Ching-Wei Kang</span>
-            <span class="entry-mask-gate entry-mask-gate-right" aria-hidden="true"></span>
+            <video class="entry-wordmark" data-entry-video autoplay muted playsinline preload="auto" poster="assets/gemini-intro/entry-black-poster.png">
+                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-1s-alpha.webm?v=lossless-final-hold-1" type="video/webm">
+                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-05.mp4?v=lossless-final-hold-1" type="video/mp4">
+            </video>
         </div>
     </div>
 
@@ -93,13 +109,11 @@
                                 <span class="profile-flip-hint" data-i18n="flipHint">Click to flip</span>
                             </div>
                             <div class="profile-flip-face profile-flip-back">
-                                <strong class="profile-mini-title" data-i18n="profileSnapshotTitle">Personal Snapshot</strong>
+                                <img class="profile-origin-bg" src="assets/taiwan-dot-personal-bg.svg?v=taiwan-personal-bg-5" alt="" aria-hidden="true">
+                                <strong class="profile-mini-title" data-i18n="profileSnapshotTitle">Personal Info</strong>
                                 <span class="profile-mini-line" data-i18n="profileName">Ching-Wei (William) Kang</span>
                                 <span class="profile-mini-line" data-i18n="profileSchool">Junior, UW-Madison</span>
-                                <span class="profile-mini-line" data-i18n="profileDegree">BS Computer Science + Data Science (Double Major)</span>
-                                <span class="profile-mini-line" data-i18n="profileGraduation">Expected graduation: May 2027</span>
                                 <span class="profile-mini-line" data-i18n="profileGpa">GPA: 3.91</span>
-                                <span class="profile-mini-line" data-i18n="profileFocus">Focus: AI, backend, and data systems</span>
                                 <a class="profile-mini-link" href="https://www.instagram.com/williamkangcw/" target="_blank" rel="noopener noreferrer" data-i18n="profileMiniInstagram">Instagram: @williamkangcw</a>
                             </div>
                         </div>
@@ -156,11 +170,7 @@
                     </ul>
                 </div>
             </article>
-            <div>
-                <article class="card education-card">
-                    <h2 data-i18n="educationTitle">Education</h2>
-                    <p data-i18n="educationDesc">UW-Madison BS double major in Computer Science and Data Science, maintaining a 3.91 GPA and graduating in May 2027.</p>
-                </article>
+            <div class="about-side">
                 <div class="stats">
                     <div>
                         <p class="big">10+</p>
@@ -171,6 +181,7 @@
                         <p class="label" data-i18n="statsExperience">Years Experience</p>
                     </div>
                 </div>
+                <div data-about-certificates-slot></div>
             </div>
         </section>
 
@@ -257,6 +268,7 @@
                     <div class="project-flip-inner">
                         <div class="project-flip-face project-flip-front">
                             <img src="https://raw.githubusercontent.com/WilliamK112/TableUs/main/assets/branding/Logo_Reveal_Animation_Request.gif?v=tableus-logo-gif-1" alt="Preview GIF for TableUs project">
+                            <span class="project-award-badge" data-i18n="project3AwardBadge">Award-winning project</span>
                             <div class="project-flip-overlay">
                                 <span class="project-flip-title">TableUs</span>
                                 <span class="project-flip-subtitle" data-i18n="project3Subtitle">AI-assisted restaurant discovery for groups</span>
@@ -265,6 +277,7 @@
                         </div>
                         <div class="project-flip-face project-flip-back">
                             <h3><a href="https://github.com/WilliamK112/TableUs" target="_blank" rel="noopener noreferrer">TableUs</a></h3>
+                            <p class="project-award-note"><strong data-i18n="projectAwardLabel">Recognition:</strong><span data-i18n="project3AwardNote">Award-winning group AI dining discovery project.</span></p>
                             <p><strong class="impact" data-i18n="projectTechLabel">Tech:</strong><span data-i18n="project3Tech">Next.js, React, Python, FastAPI, Google Gemini, Google Maps.</span><strong class="impact" data-i18n="projectImpactLabel">Impact:</strong><span data-i18n="project3Impact">Built an AI restaurant discovery product that turns group preferences, location, and natural-language input into explainable recommendations.</span></p>
                             <p class="project-date" data-i18n="project3Date">Last updated: 2026-04-11</p>
                             <div class="project-links">
@@ -424,7 +437,6 @@
                 <span>Vercel</span>
             </div>
             <div class="projects-more-work">
-                <p class="section-note" data-i18n="projectsNote">Selected projects focused on AI tooling, practical product delivery, and deployable engineering.</p>
                 <a href="https://linktr.ee/WilliamKangCW" class="btn btn-ghost btn-sm" target="_blank" rel="noopener noreferrer" title="more general work" data-i18n="ctaMore">More General Work</a>
             </div>
         </section>
