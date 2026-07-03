@@ -191,23 +191,39 @@
   }
 
   const entryVideo = intro.querySelector('[data-entry-video]');
-  const savedHoldFrameVideoTime = Number(window.localStorage.getItem('introHoldFrameVideoTime'));
-  const holdFrameVideoTime = Number.isFinite(savedHoldFrameVideoTime) && savedHoldFrameVideoTime > 0
-    ? savedHoldFrameVideoTime
-    : 0.99;
-  const holdAfterPauseMs = 180;
+  const glowVideo = intro.querySelector('[data-entry-glow-video]');
+  const entryVideos = [entryVideo, glowVideo].filter(Boolean);
+  const introParams = new URLSearchParams(window.location.search);
+  const requestedHoldFrameVideoTime = Number(introParams.get('intro-hold'));
+  const holdFrameVideoTime = Number.isFinite(requestedHoldFrameVideoTime) && requestedHoldFrameVideoTime > 0
+    ? requestedHoldFrameVideoTime
+    : 0.88;
+  const holdAfterPauseMs = 50;
   const fallbackMs = 1900;
   const fadeOutMs = 90;
   let removed = false;
   let ending = false;
+  let started = false;
   let pausedOnHoldFrame = false;
   let frameWatcher = 0;
+  let frameWatcherIsVideo = false;
   let holdTimer = 0;
+
+  const cancelFrameWatcher = () => {
+    if (!frameWatcher) return;
+    if (frameWatcherIsVideo && entryVideo && entryVideo.cancelVideoFrameCallback) {
+      entryVideo.cancelVideoFrameCallback(frameWatcher);
+    } else {
+      window.cancelAnimationFrame(frameWatcher);
+    }
+    frameWatcher = 0;
+    frameWatcherIsVideo = false;
+  };
 
   const removeIntro = () => {
     if (removed) return;
     removed = true;
-    if (frameWatcher) window.cancelAnimationFrame(frameWatcher);
+    cancelFrameWatcher();
     if (holdTimer) window.clearTimeout(holdTimer);
     if (document.body.contains(intro)) intro.remove();
   };
@@ -220,21 +236,91 @@
   };
 
   if (entryVideo) {
-    entryVideo.play().catch(() => {});
-    const watchVideoFrame = () => {
+    entryVideos.forEach((video) => {
+      video.pause();
+    });
+
+    const scheduleFrameWatch = (watchVideoFrame) => {
+      if (removed || ending) return;
+      if (entryVideo.requestVideoFrameCallback) {
+        frameWatcherIsVideo = true;
+        frameWatcher = entryVideo.requestVideoFrameCallback(watchVideoFrame);
+      } else {
+        frameWatcherIsVideo = false;
+        frameWatcher = window.requestAnimationFrame(watchVideoFrame);
+      }
+    };
+
+    const pauseOnCurrentFrame = () => {
+      entryVideos.forEach((video) => {
+        try {
+          video.pause();
+        } catch (_) {}
+      });
+    };
+
+    const watchVideoFrame = (_, metadata) => {
+      frameWatcher = 0;
       if (removed || ending) return;
       if (entryVideo.readyState > 0) {
-        if (!pausedOnHoldFrame && entryVideo.currentTime >= holdFrameVideoTime) {
+        const mediaTime = metadata && Number.isFinite(metadata.mediaTime)
+          ? metadata.mediaTime
+          : entryVideo.currentTime;
+        if (!pausedOnHoldFrame && mediaTime >= holdFrameVideoTime) {
           pausedOnHoldFrame = true;
-          entryVideo.pause();
+          pauseOnCurrentFrame();
           intro.classList.add('is-holding');
           holdTimer = window.setTimeout(finishIntro, holdAfterPauseMs);
           return;
         }
       }
-      frameWatcher = window.requestAnimationFrame(watchVideoFrame);
+      scheduleFrameWatch(watchVideoFrame);
     };
-    frameWatcher = window.requestAnimationFrame(watchVideoFrame);
+
+    const alignVideoToStart = (video) => {
+      if (!video || video.readyState === 0) return;
+      try {
+        video.currentTime = 0;
+      } catch (_) {}
+    };
+
+    const playVideo = (video) => {
+      if (!video) return;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch(() => {});
+      }
+    };
+
+    const startIntroPlayback = () => {
+      if (started || removed || ending) return;
+      started = true;
+      entryVideos.forEach(alignVideoToStart);
+      intro.classList.add('is-ready');
+      entryVideos.forEach(playVideo);
+      scheduleFrameWatch(watchVideoFrame);
+    };
+
+    const startWhenFrameIsReady = () => {
+      if (entryVideo.readyState >= 2) {
+        startIntroPlayback();
+        return;
+      }
+      entryVideo.addEventListener('loadeddata', startIntroPlayback, { once: true });
+      window.setTimeout(startIntroPlayback, 220);
+    };
+
+    if (glowVideo) {
+      glowVideo.addEventListener('loadeddata', () => {
+        if (!started || removed || ending) return;
+        try {
+          glowVideo.currentTime = entryVideo.currentTime;
+        } catch (_) {}
+        playVideo(glowVideo);
+      }, { once: true });
+    }
+
+    startWhenFrameIsReady();
   }
 
   window.setTimeout(finishIntro, fallbackMs);

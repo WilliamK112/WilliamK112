@@ -6,6 +6,14 @@
       transform-box: fill-box;
       transform-origin: center;
     }
+    .taipei-label {
+      fill: #7f1d1d;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 8.4px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      opacity: 0.78;
+    }
     @keyframes taiwan-bg-breathe {
       0%, 100% { opacity: 0.82; transform: scale(0.992); }
       50% { opacity: 1; transform: scale(1.018); }
@@ -33,9 +41,8 @@
     <g id="taiwan-bg-map" filter="url(#personal-map-shadow)">
       <rect x="250" y="-30" width="320" height="500" fill="#c8a445" opacity="0.2" clip-path="url(#personal-taiwan-outline)" transform="translate(15 17)"/>
       <rect x="250" y="-30" width="320" height="500" fill="url(#personal-taiwan-dots)" clip-path="url(#personal-taiwan-outline)"/>
+      <circle cx="512" cy="50" r="6.25" fill="#d82032" clip-path="url(#personal-taiwan-outline)"/>
     </g>
   </g>
-  <circle cx="209" cy="70" r="4.8" fill="#d82032"/>
-  <circle cx="209" cy="70" r="10.5" fill="none" stroke="#d82032" stroke-opacity="0.2" stroke-width="3.5"/>
-  <circle cx="209" cy="70" r="17" fill="none" stroke="#d82032" stroke-opacity="0.1" stroke-width="4"/>
+  <text class="taipei-label" x="207" y="83" text-anchor="middle">Taipei, Taiwan</text>
 </svg>
