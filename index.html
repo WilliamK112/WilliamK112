@@ -27,6 +27,16 @@
       place-items: center;
       background: #000;
     }
+    .entry-mask-intro video,
+    .entry-mask-title-wrap {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .entry-mask-intro.is-video-ready video,
+    .entry-mask-intro.is-video-ready .entry-mask-title-wrap {
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
   <script>
     (function setupEntryLightMode() {
@@ -50,8 +60,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600;1,700&family=DM+Serif+Display:ital@0;1&family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;700&family=Prata&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=entry-rise-early-cut-2">
-    <script defer src="script.js?v=entry-rise-early-cut-2"></script>
+    <link rel="stylesheet" href="styles.css?v=profile-map-radius-tight-1">
+    <script defer src="script.js?v=profile-map-radius-tight-1"></script>
 </head>
 <body>
     <div class="noise" aria-hidden="true"></div>
@@ -62,12 +72,10 @@
     <div class="entry-mask-intro" data-entry-intro aria-hidden="true">
         <div class="entry-mask-title-wrap">
             <video class="entry-wordmark-glow" data-entry-glow-video muted playsinline preload="auto" poster="assets/gemini-intro/entry-black-poster.png">
-                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-1s-alpha.webm?v=lossless-final-hold-1" type="video/webm">
-                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-05.mp4?v=lossless-final-hold-1" type="video/mp4">
+                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-1s-alpha.webm?v=entry-clean-1" type="video/webm">
             </video>
             <video class="entry-wordmark" data-entry-video muted playsinline preload="auto" poster="assets/gemini-intro/entry-black-poster.png">
-                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-1s-alpha.webm?v=lossless-final-hold-1" type="video/webm">
-                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-05.mp4?v=lossless-final-hold-1" type="video/mp4">
+                <source src="assets/gemini-intro/ching-wei-kang-art-serif-intro-1s-alpha.webm?v=entry-clean-1" type="video/webm">
             </video>
         </div>
     </div>
@@ -109,7 +117,7 @@
             </div>
             <div class="hero-visuals">
                 <figure class="portrait-frame">
-                    <button class="profile-flip-card" type="button" data-flip-card aria-pressed="false" aria-label="Flip to view personal information">
+                    <button class="profile-flip-card profile-proximity-card" type="button" data-flip-card aria-pressed="false" aria-label="Flip to view personal information">
                         <div class="profile-flip-inner">
                             <div class="profile-flip-face profile-flip-front">
                                 <img src="assets/William_Kang-9c2f39ca-aa59-4956-8969-b7e0fa9d303a.png" alt="Portrait of Ching-Wei Kang in a black suit">
@@ -120,7 +128,16 @@
                                 <span class="profile-flip-hint" data-i18n="flipHint">Click to flip</span>
                             </div>
                             <div class="profile-flip-face profile-flip-back">
-                                <img class="profile-origin-bg" src="assets/taiwan-dot-personal-bg.svg?v=taipei-dot-label-1" alt="" aria-hidden="true">
+                                <img class="profile-origin-bg" src="assets/taiwan-dot-personal-bg.svg?v=taiwan-clipped-dots-1" alt="" aria-hidden="true">
+                                <span class="profile-origin-dot-field" data-taiwan-dot-field aria-hidden="true">
+                                    <span class="profile-taipei-marker" aria-hidden="true">
+                                        <span class="profile-taipei-dot"></span>
+                                        <span class="profile-taipei-label">
+                                            <span>Taipei, Taiwan</span>
+                                            <span>台北 · 台湾</span>
+                                        </span>
+                                    </span>
+                                </span>
                                 <strong class="profile-mini-title" data-i18n="profileSnapshotTitle">Personal Info</strong>
                                 <span class="profile-mini-line" data-i18n="profileName">Ching-Wei (William) Kang</span>
                                 <span class="profile-mini-line" data-i18n="profileSchool">Junior, UW-Madison</span>
@@ -168,8 +185,8 @@
             </div>
         </section>
 
-        <section id="about" class="grid-2">
-            <article class="card">
+        <section id="about" class="grid-2 section-3d-board">
+            <article class="card section-3d-subpanel">
                 <h2 data-i18n="snapshotTitle">Snapshot</h2>
                 <div class="recruiter-snapshot">
                     <ul>
@@ -452,7 +469,7 @@
             </div>
         </section>
 
-        <section id="open-source" class="card open-source-section">
+        <section id="open-source" class="card open-source-section section-3d-board">
             <div class="section-heading-row">
                 <div>
                     <h2 data-i18n="openSourceTitle">Open Source PRs</h2>
@@ -558,7 +575,7 @@
             </div>
         </section>
 
-        <section id="contact" class="contact">
+        <section id="contact" class="contact section-3d-board">
             <h2 data-i18n="contactTitle">Contact</h2>
             <div class="contact-actions">
                 <button type="button" class="btn copy-email-btn" data-copy-email="ckang53@wisc.edu" data-i18n="contactEmail">Copy Email</button>
@@ -567,7 +584,7 @@
                 <a href="https://www.linkedin.com/in/kcw2027/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="contactLinkedIn">LinkedIn</a>
                 <a href="https://devpost.com/ckang53" class="btn btn-ghost" target="_blank" rel="noopener noreferrer" data-i18n="contactDevpost">Devpost</a>
             </div>
-            <article class="card message-board">
+            <article class="card message-board section-3d-subpanel">
                 <h3 data-i18n="messageTitle">Leave a Message</h3>
                 <p data-i18n="messageDesc">Open to software engineering internships and project collaboration. End a quick message and I'll follow up.</p>
                 <form class="message-form" novalidate>
@@ -579,7 +596,7 @@
                     <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </article>
-            <article class="card meeting-card">
+            <article class="card meeting-card section-3d-subpanel">
                 <h3 data-i18n="meetingTitle">Schedule a Meeting</h3>
                 <p data-i18n="meetingDesc">Book a 30-minute meeting directly on my calendar.</p>
                 <div class="meeting-actions">

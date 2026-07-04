@@ -199,7 +199,8 @@
     ? requestedHoldFrameVideoTime
     : 0.88;
   const holdAfterPauseMs = 50;
-  const fallbackMs = 1900;
+  const loadFallbackMs = 850;
+  const fallbackMs = 1700;
   const fadeOutMs = 90;
   let removed = false;
   let ending = false;
@@ -208,6 +209,8 @@
   let frameWatcher = 0;
   let frameWatcherIsVideo = false;
   let holdTimer = 0;
+  let loadTimer = 0;
+  let fallbackTimer = 0;
 
   const cancelFrameWatcher = () => {
     if (!frameWatcher) return;
@@ -225,11 +228,17 @@
     removed = true;
     cancelFrameWatcher();
     if (holdTimer) window.clearTimeout(holdTimer);
+    if (loadTimer) window.clearTimeout(loadTimer);
+    if (fallbackTimer) window.clearTimeout(fallbackTimer);
     if (document.body.contains(intro)) intro.remove();
   };
 
   const finishIntro = () => {
     if (ending || removed) return;
+    if (!started) {
+      removeIntro();
+      return;
+    }
     ending = true;
     intro.classList.add('is-fading');
     window.setTimeout(removeIntro, fadeOutMs);
@@ -238,6 +247,7 @@
   if (entryVideo) {
     entryVideos.forEach((video) => {
       video.pause();
+      video.addEventListener('error', removeIntro, { once: true });
     });
 
     const scheduleFrameWatch = (watchVideoFrame) => {
@@ -294,9 +304,11 @@
 
     const startIntroPlayback = () => {
       if (started || removed || ending) return;
+      if (entryVideo.readyState < 2) return;
       started = true;
+      if (loadTimer) window.clearTimeout(loadTimer);
       entryVideos.forEach(alignVideoToStart);
-      intro.classList.add('is-ready');
+      intro.classList.add('is-video-ready', 'is-ready');
       entryVideos.forEach(playVideo);
       scheduleFrameWatch(watchVideoFrame);
     };
@@ -307,7 +319,10 @@
         return;
       }
       entryVideo.addEventListener('loadeddata', startIntroPlayback, { once: true });
-      window.setTimeout(startIntroPlayback, 220);
+      entryVideo.addEventListener('canplay', startIntroPlayback, { once: true });
+      loadTimer = window.setTimeout(() => {
+        if (!started) removeIntro();
+      }, loadFallbackMs);
     };
 
     if (glowVideo) {
@@ -321,9 +336,11 @@
     }
 
     startWhenFrameIsReady();
+  } else {
+    removeIntro();
   }
 
-  window.setTimeout(finishIntro, fallbackMs);
+  fallbackTimer = window.setTimeout(finishIntro, fallbackMs);
 })();
 
 (function setupLanguageToggle() {
@@ -863,11 +880,306 @@
   const flipCards = document.querySelectorAll('[data-flip-card]');
   if (!flipCards.length) return;
 
+  const openCard = (card, mode) => {
+    card.classList.add('is-flipped');
+    card.dataset.flipMode = mode;
+    card.setAttribute('aria-pressed', 'true');
+  };
+
+  const closeCard = (card) => {
+    card.classList.remove('is-flipped');
+    delete card.dataset.flipMode;
+    card.setAttribute('aria-pressed', 'false');
+  };
+
   flipCards.forEach((card) => {
+    const isProjectCard = card.classList.contains('project-flip-card');
+
     card.addEventListener('click', (event) => {
       if (event.target instanceof Element && event.target.closest('a')) return;
-      const isFlipped = card.classList.toggle('is-flipped');
-      card.setAttribute('aria-pressed', isFlipped ? 'true' : 'false');
+
+      if (isProjectCard) {
+        const isPinnedOpen = card.dataset.flipMode === 'click' && card.classList.contains('is-flipped');
+        if (isPinnedOpen) {
+          closeCard(card);
+        } else {
+          openCard(card, 'click');
+        }
+        return;
+      }
+
+      if (card.classList.contains('is-flipped')) {
+        closeCard(card);
+      } else {
+        openCard(card, 'click');
+      }
+    });
+
+    if (!isProjectCard) return;
+
+    card.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'touch') return;
+      if (card.dataset.flipMode === 'click') return;
+      openCard(card, 'hover');
+    }, { passive: true });
+
+    card.addEventListener('pointerleave', () => {
+      if (card.dataset.flipMode === 'hover') closeCard(card);
+    }, { passive: true });
+  });
+})();
+
+(function setupProfileProximityCards() {
+  const cards = document.querySelectorAll('.profile-proximity-card');
+  if (!cards.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const taipeiAnchor = { x: 79.23, y: 27.69 };
+  const taiwanOutlinePath = 'M 504.87 22.68 C 508.51 21.48 511.72 24.71 513.46 27.55 C 516.53 32.53 520.65 36.94 525.92 39.65 C 532.81 41.73 540.74 42.61 546.25 47.73 C 549.39 50.19 550.05 54.40 551.31 57.96 C 547.88 59.41 544.49 61.06 541.49 63.28 C 533.43 77.43 535.64 94.76 541.04 109.47 C 540.83 115.40 535.93 119.92 532.87 124.68 C 529.78 130.55 530.02 137.71 526.35 143.32 C 523.73 148.35 517.85 150.99 516.55 156.83 C 512.64 164.21 513.61 172.86 511.90 180.82 C 509.94 189.18 507.38 197.38 505.15 205.67 C 501.17 216.31 500.42 227.79 498.29 238.87 C 494.58 253.58 484.34 265.83 482.59 281.13 C 476.70 289.79 473.96 300.87 465.48 307.54 C 460.02 311.94 459.31 319.60 454.65 324.68 C 450.58 330.62 442.93 332.99 439.32 339.31 C 435.42 346.09 432.30 353.30 429.39 360.55 C 424.54 375.49 428.98 391.57 425.55 406.76 C 424.45 411.93 420.51 415.79 418.23 420.41 C 413.08 419.78 407.82 419.31 402.75 420.71 C 401.76 412.84 401.45 404.93 400.75 397.04 C 399.76 388.95 395.45 381.87 392.31 374.50 C 388.20 365.88 378.28 363.14 371.00 358.00 C 362.42 353.21 355.90 345.74 349.06 338.87 C 348.90 334.34 352.19 328.52 348.61 324.53 C 343.02 317.96 342.00 309.02 338.32 301.52 C 332.68 296.43 329.53 289.37 326.84 282.42 C 325.78 277.66 324.82 271.99 327.90 267.76 C 334.37 259.61 336.19 248.41 334.93 238.31 C 332.83 231.86 333.51 224.80 335.44 218.38 C 337.70 212.17 338.46 205.15 343.07 200.05 C 346.48 195.20 351.98 192.19 354.82 186.89 C 356.82 183.97 357.31 180.44 358.56 177.21 C 360.84 172.30 366.17 169.82 368.86 165.23 C 371.51 159.41 375.46 154.32 378.20 148.56 C 381.62 137.76 388.58 128.39 396.38 120.33 C 400.68 115.70 400.49 108.54 405.06 104.06 C 407.93 99.84 412.63 97.74 417.12 95.74 C 421.93 92.13 426.58 87.34 427.09 80.96 C 428.48 75.15 432.90 70.80 435.51 65.55 C 438.79 60.94 440.18 54.22 445.86 51.78 C 456.64 46.61 468.22 43.26 479.84 40.54 C 484.15 39.10 486.40 34.68 489.94 32.08 C 494.81 28.79 498.71 23.68 504.87 22.68 Z';
+
+  const toPercentPoint = (x, y) => ({
+    x: ((x * 0.54 - 70) / 260) * 100,
+    y: ((y * 0.54 + 38) / 340) * 100
+  });
+
+  function buildTaiwanDotField(card) {
+    const field = card.querySelector('[data-taiwan-dot-field]');
+    if (!field) return [];
+    const existingDots = field.querySelectorAll('.profile-map-dot');
+    if (existingDots.length) {
+      return Array.from(existingDots).map((dot) => ({
+        element: dot,
+        x: Number(dot.dataset.x || 0),
+        y: Number(dot.dataset.y || 0),
+        isTaipei: dot.classList.contains('is-taipei')
+      }));
+    }
+
+    const svgNamespace = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNamespace, 'svg');
+    const defs = document.createElementNS(svgNamespace, 'defs');
+    const clipPath = document.createElementNS(svgNamespace, 'clipPath');
+    const outline = document.createElementNS(svgNamespace, 'path');
+    const shadow = document.createElementNS(svgNamespace, 'filter');
+    const shadowNode = document.createElementNS(svgNamespace, 'feDropShadow');
+    const mapGroup = document.createElementNS(svgNamespace, 'g');
+    const glow = document.createElementNS(svgNamespace, 'rect');
+    const dotGroup = document.createElementNS(svgNamespace, 'g');
+    const dots = [];
+
+    svg.classList.add('profile-origin-dot-svg');
+    svg.setAttribute('viewBox', '0 0 260 340');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+    svg.setAttribute('aria-hidden', 'true');
+    clipPath.id = `profile-taiwan-outline-${Math.random().toString(36).slice(2)}`;
+    shadow.id = `profile-taiwan-shadow-${Math.random().toString(36).slice(2)}`;
+    outline.setAttribute('d', taiwanOutlinePath);
+    shadow.setAttribute('x', '-40%');
+    shadow.setAttribute('y', '-40%');
+    shadow.setAttribute('width', '180%');
+    shadow.setAttribute('height', '180%');
+    shadowNode.setAttribute('dx', '0');
+    shadowNode.setAttribute('dy', '8');
+    shadowNode.setAttribute('stdDeviation', '6');
+    shadowNode.setAttribute('flood-color', '#5b4520');
+    shadowNode.setAttribute('flood-opacity', '0.18');
+    shadow.appendChild(shadowNode);
+    clipPath.appendChild(outline);
+    defs.appendChild(clipPath);
+    defs.appendChild(shadow);
+
+    mapGroup.classList.add('profile-taiwan-clipped-map');
+    mapGroup.setAttribute('transform', 'matrix(0.54 0 0 0.54 -70 38)');
+    mapGroup.setAttribute('clip-path', `url(#${clipPath.id})`);
+    mapGroup.setAttribute('filter', `url(#${shadow.id})`);
+
+    glow.setAttribute('x', '250');
+    glow.setAttribute('y', '-30');
+    glow.setAttribute('width', '320');
+    glow.setAttribute('height', '500');
+    glow.setAttribute('fill', '#c8a445');
+    glow.setAttribute('opacity', '0.18');
+    glow.setAttribute('transform', 'translate(15 17)');
+    mapGroup.appendChild(glow);
+
+    for (let y = -22; y <= 470; y += 21) {
+      for (let x = 258; x <= 570; x += 21) {
+        const point = toPercentPoint(x, y);
+        dots.push({ originalX: x, originalY: y, x: point.x, y: point.y, isTaipei: false });
+      }
+    }
+
+    let taipeiIndex = 0;
+    let taipeiDistance = Infinity;
+    dots.forEach((dot, index) => {
+      const distance = Math.hypot(dot.x - taipeiAnchor.x, dot.y - taipeiAnchor.y);
+      if (distance < taipeiDistance) {
+        taipeiDistance = distance;
+        taipeiIndex = index;
+      }
+    });
+    dots[taipeiIndex] = { ...dots[taipeiIndex], x: taipeiAnchor.x, y: taipeiAnchor.y, isTaipei: true };
+
+    dots.forEach((dot, index) => {
+      const element = document.createElementNS(svgNamespace, 'circle');
+      const circleX = dot.isTaipei ? (taipeiAnchor.x * 260 / 100 + 70) / 0.54 : dot.originalX;
+      const circleY = dot.isTaipei ? (taipeiAnchor.y * 340 / 100 - 38) / 0.54 : dot.originalY;
+      element.classList.add('profile-map-dot');
+      if (dot.isTaipei) element.classList.add('is-taipei');
+      element.dataset.x = String(dot.x);
+      element.dataset.y = String(dot.y);
+      element.setAttribute('cx', circleX.toFixed(2));
+      element.setAttribute('cy', circleY.toFixed(2));
+      element.setAttribute('r', '6.1');
+      element.style.setProperty('--dot-scale', dot.isTaipei ? '1.08' : '1');
+      element.style.setProperty('--dot-opacity', dot.isTaipei ? '0.98' : '0.86');
+      element.style.setProperty('--dot-delay', `${index * 9}ms`);
+      dotGroup.appendChild(element);
+      dot.element = element;
+    });
+
+    mapGroup.appendChild(dotGroup);
+    svg.appendChild(defs);
+    svg.appendChild(mapGroup);
+    field.appendChild(svg);
+    return dots;
+  }
+
+  cards.forEach((card) => {
+    const mapDots = buildTaiwanDotField(card);
+    if (reduceMotion) return;
+
+    let pendingEvent = null;
+    let frame = 0;
+
+    function updateMapDots(pointerX, pointerY, rect, pixelSpan, force = 1) {
+      if (!mapDots.length) return;
+      mapDots.forEach((dot) => {
+        const distance = Math.hypot(
+          (pointerX - dot.x) * rect.width / 100,
+          (pointerY - dot.y) * rect.height / 100
+        );
+        const localPull = clamp(1 - distance / (pixelSpan * 0.135), 0, 1) * force;
+        const scale = dot.isTaipei
+          ? 1.08 + localPull * 0.46
+          : 0.96 + localPull * 0.82;
+        const opacity = dot.isTaipei
+          ? 0.98
+          : 0.78 + localPull * 0.22;
+
+        dot.element.style.setProperty('--dot-scale', scale.toFixed(3));
+        dot.element.style.setProperty('--dot-opacity', opacity.toFixed(3));
+      });
+    }
+
+    function resetCard() {
+      if (frame) {
+        window.cancelAnimationFrame(frame);
+        frame = 0;
+      }
+      pendingEvent = null;
+      card.classList.remove('is-profile-proximity-active');
+      card.style.setProperty('--profile-map-opacity', '0.6');
+      card.style.setProperty('--profile-map-scale', '1');
+      card.style.setProperty('--profile-map-x', '0px');
+      card.style.setProperty('--profile-map-y', '0px');
+      card.style.setProperty('--profile-map-filter', 'saturate(1) contrast(1)');
+      card.style.setProperty('--taipei-dot-scale', '1');
+      card.style.setProperty('--taipei-ring-scale', '0.72');
+      card.style.setProperty('--taipei-glow-opacity', '0.28');
+      card.style.setProperty('--taipei-label-opacity', '0.88');
+      card.style.setProperty('--taipei-label-y', '0px');
+      card.style.setProperty('--taipei-label-scale', '1');
+      card.style.setProperty('--taipei-line-scale', '1');
+      mapDots.forEach((dot) => {
+        dot.element.style.setProperty('--dot-scale', dot.isTaipei ? '1.08' : '1');
+        dot.element.style.setProperty('--dot-opacity', dot.isTaipei ? '0.98' : '0.86');
+      });
+    }
+
+    function applyProximity(event) {
+      frame = 0;
+      if (!event) return;
+      const rect = card.getBoundingClientRect();
+      const field = card.querySelector('[data-taiwan-dot-field]');
+      const mapRect = field ? field.getBoundingClientRect() : rect;
+      if (!rect.width || !rect.height) return;
+      if (!mapRect.width || !mapRect.height) return;
+
+      const x = clamp((event.clientX - rect.left) / rect.width, 0, 1);
+      const y = clamp((event.clientY - rect.top) / rect.height, 0, 1);
+      const mapXPercent = clamp((event.clientX - mapRect.left) / mapRect.width, 0, 1);
+      const mapYPercent = clamp((event.clientY - mapRect.top) / mapRect.height, 0, 1);
+      const pixelSpan = Math.max(mapRect.width, mapRect.height);
+      const taipeiDistance = Math.hypot((mapXPercent - 0.79) * mapRect.width, (mapYPercent - 0.286) * mapRect.height);
+      const northDistance = Math.hypot((mapXPercent - 0.77) * mapRect.width, (mapYPercent - 0.33) * mapRect.height);
+      const taipeiPull = clamp(1 - taipeiDistance / (pixelSpan * 0.18), 0, 1);
+      const northPull = clamp(1 - northDistance / (pixelSpan * 0.22), 0, 1);
+      const pull = Math.max(taipeiPull, northPull * 0.78);
+      const mapCenterDistance = Math.hypot((mapXPercent - 0.62) * mapRect.width, (mapYPercent - 0.58) * mapRect.height);
+      const mapPull = Math.max(
+        pull * 0.76,
+        clamp(1 - mapCenterDistance / (pixelSpan * 0.42), 0, 1)
+      );
+      const mapScale = 1 + mapPull * 0.045;
+      const mapX = (0.62 - mapXPercent) * mapPull * 2;
+      const mapY = (0.58 - mapYPercent) * mapPull * 2;
+      const dotScale = 1 + pull * 0.3;
+      const ringScale = 0.72 + pull * 0.38;
+      const glowOpacity = 0.2 + pull * 0.24;
+      const labelOpacity = 0.88 + pull * 0.1;
+      const labelY = -0.9 * pull;
+      const labelScale = 1 + pull * 0.024;
+      const lineScale = 1 + pull * 0.08;
+
+      card.classList.add('is-profile-proximity-active');
+      card.style.setProperty('--profile-map-opacity', (0.6 + mapPull * 0.1).toFixed(3));
+      card.style.setProperty('--profile-map-scale', mapScale.toFixed(3));
+      card.style.setProperty('--profile-map-x', `${mapX.toFixed(2)}px`);
+      card.style.setProperty('--profile-map-y', `${mapY.toFixed(2)}px`);
+      card.style.setProperty('--profile-map-filter', `saturate(${(1 + mapPull * 0.08).toFixed(3)}) contrast(${(1 + mapPull * 0.07).toFixed(3)})`);
+      card.style.setProperty('--taipei-dot-scale', dotScale.toFixed(3));
+      card.style.setProperty('--taipei-ring-scale', ringScale.toFixed(3));
+      card.style.setProperty('--taipei-glow-opacity', glowOpacity.toFixed(3));
+      card.style.setProperty('--taipei-label-opacity', labelOpacity.toFixed(3));
+      card.style.setProperty('--taipei-label-y', `${labelY.toFixed(2)}px`);
+      card.style.setProperty('--taipei-label-scale', labelScale.toFixed(3));
+      card.style.setProperty('--taipei-line-scale', lineScale.toFixed(3));
+      updateMapDots(mapXPercent * 100, mapYPercent * 100, mapRect, pixelSpan);
+    }
+
+    card.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'touch') return;
+      pendingEvent = event;
+      if (!frame) {
+        frame = window.requestAnimationFrame(() => applyProximity(pendingEvent));
+      }
+    }, { passive: true });
+
+    card.addEventListener('pointerleave', resetCard, { passive: true });
+
+    card.addEventListener('focusin', () => {
+      card.classList.add('is-profile-proximity-active');
+      card.style.setProperty('--profile-map-opacity', '0.7');
+      card.style.setProperty('--profile-map-scale', '1.045');
+      card.style.setProperty('--profile-map-x', '0px');
+      card.style.setProperty('--profile-map-y', '-1px');
+      card.style.setProperty('--profile-map-filter', 'saturate(1.06) contrast(1.06)');
+      card.style.setProperty('--taipei-dot-scale', '1.38');
+      card.style.setProperty('--taipei-ring-scale', '1.24');
+      card.style.setProperty('--taipei-glow-opacity', '0.5');
+      card.style.setProperty('--taipei-label-opacity', '0.96');
+      card.style.setProperty('--taipei-label-y', '-1px');
+      card.style.setProperty('--taipei-label-scale', '1.03');
+      card.style.setProperty('--taipei-line-scale', '1.1');
+      const rect = card.getBoundingClientRect();
+      updateMapDots(taipeiAnchor.x, taipeiAnchor.y, rect, Math.max(rect.width, rect.height), 0.9);
+    });
+
+    card.addEventListener('focusout', (event) => {
+      if (event.relatedTarget instanceof Node && card.contains(event.relatedTarget)) return;
+      resetCard();
     });
   });
 })();
@@ -1305,26 +1617,21 @@
   z-index: 2;
 }
 .spatial-card::before {
-  background:
-    radial-gradient(circle at var(--glare-x) var(--glare-y),
-      rgba(255, 255, 255, 0.28),
-      rgba(255, 255, 255, 0.1) 18%,
-      transparent 48%);
-  opacity: var(--glare-opacity);
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    transparent 34%,
+    rgba(255, 255, 255, 0.14) 48%,
+    rgba(255, 255, 255, 0.07) 56%,
+    transparent 72%,
+    transparent 100%
+  );
+  opacity: calc(var(--glare-opacity) * 0.55);
   mix-blend-mode: screen;
   transition: opacity 240ms ease;
 }
 .spatial-card::after {
-  padding: 1px;
-  background:
-    linear-gradient(135deg,
-      rgba(255, 255, 255, 0.26),
-      transparent 18%,
-      transparent 72%,
-      color-mix(in srgb, var(--accent) 28%, transparent));
-  opacity: calc(0.2 + (var(--glare-opacity) * 0.28));
-  mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
-  mask-composite: exclude;
+  display: none;
 }
 .spatial-card.is-spatial-active {
   --tilt-lift: -5px;
@@ -1337,9 +1644,6 @@
   position: relative;
   z-index: 3;
 }
-.spatial-card .profile-flip-card,
-.spatial-card .uw-flip-card,
-.spatial-card .project-flip-inner,
 .spatial-card h2,
 .spatial-card h3,
 .spatial-card .big {
@@ -1355,15 +1659,23 @@
   }
 
   const candidates = Array.from(document.querySelectorAll([
-    '.portrait-frame',
-    '.uw-logo-showcase',
+    '.section-3d-board',
+    '.section-3d-subpanel',
+    '#about #certificates',
     '.card:not(.education-card)',
     '.stats > div',
-    '.project-card',
     '.certificate-card',
     '.ability-grid article'
   ].join(',')));
   if (!candidates.length) return;
+
+  document.querySelectorAll('.portrait-frame.spatial-card, .uw-logo-showcase.spatial-card')
+    .forEach((card) => {
+      card.classList.remove('spatial-card', 'is-spatial-active');
+      card.style.removeProperty('--tilt-x');
+      card.style.removeProperty('--tilt-y');
+      card.style.removeProperty('--glare-opacity');
+    });
 
   const maxTilt = 8;
   const resetDelayMs = 120;
@@ -1389,8 +1701,9 @@
 
       const localX = (event.clientX - rect.left) / rect.width;
       const localY = (event.clientY - rect.top) / rect.height;
-      const rotateY = (localX - 0.5) * maxTilt;
-      const rotateX = (0.5 - localY) * maxTilt;
+      const tiltLimit = card.classList.contains('section-3d-board') ? 3.5 : maxTilt;
+      const rotateY = (localX - 0.5) * tiltLimit;
+      const rotateX = (0.5 - localY) * tiltLimit;
 
       card.classList.add('is-spatial-active');
       card.style.setProperty('--tilt-x', `${rotateX.toFixed(2)}deg`);
