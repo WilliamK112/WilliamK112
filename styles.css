@@ -2454,20 +2454,6 @@ body[data-theme="light"] .keyword-highlight {
   background:
     linear-gradient(160deg, rgba(137, 247, 209, 0.12), rgba(142, 167, 255, 0.07) 52%, rgba(255, 255, 255, 0.04) 100%) !important;
 }
-.project-featured::before {
-  content: "Featured";
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.45rem;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--accent) 60%, var(--line));
-  color: var(--accent);
-  background: rgba(0,0,0,0.2);
-}
 .project-grid article:focus-within {
   border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
   box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 18%, transparent);
